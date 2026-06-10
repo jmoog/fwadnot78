@@ -1,0 +1,37 @@
+# Tout ce qui ne doit JAMAIS finir dans l'image Docker
+
+# Node
+node_modules
+npm-debug.log*
+
+# Build output Astro (sera regénéré dans le container)
+dist
+.astro
+
+# Git / éditeurs
+.git
+.gitignore
+.vscode
+.idea
+.DS_Store
+.mise.toml
+
+# Environnement local (les vraies vars viennent de Coolify)
+.env
+.env.*
+!.env.example
+
+# Documentation / dev
+README.md
+AUDIT-SEO.md
+*.md
+.claude
+
+# Anciens artefacts Netlify (sécurité)
+.netlify
+netlify
+netlify.toml
+
+# Fichiers de session/temp
+*.log
+*.swp

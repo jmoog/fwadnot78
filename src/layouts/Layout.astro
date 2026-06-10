@@ -1,0 +1,301 @@
+---
+import { SITE_URL, NOM, TEL, TEL_HREF, EMAIL, ADRESSE_MONTIGNY, ADRESSE_MAGNY, SIRET, SERVICES, SECTEURS, SCHEMA_ORG } from '../data/site';
+
+export interface Props {
+  title       : string;
+  description : string;
+  canonical  ?: string;
+  ogImage    ?: string;
+  schema     ?: object;
+  noindex    ?: boolean;
+  hideDevisCta ?: boolean;   // true sur /devis-gratuit/ : masque les CTA devis du header/footer
+  nap ?: { tel: string; telHref: string; adresse: string };  // NAP local (pages établissements) : header/footer alignés sur la fiche
+}
+
+const {
+  title,
+  description,
+  canonical  = Astro.url.href,
+  ogImage    = "/heroe/pose-velux-yvelines-019.webp",
+  schema,
+  noindex    = false,
+  hideDevisCta = false,
+  nap,
+} = Astro.props;
+
+// NAP affiché dans le header/footer : celui de l'établissement si fourni, sinon le NAP principal
+const NAP_TEL      = nap?.tel      ?? TEL;
+const NAP_TEL_HREF = nap?.telHref  ?? TEL_HREF;
+const NAP_ADRESSE  = nap?.adresse  ?? ADRESSE_MONTIGNY;
+
+const canonicalURL = canonical.startsWith("http") ? canonical : `${SITE_URL}${canonical}`;
+const ogImageURL   = ogImage.startsWith("http")   ? ogImage   : `${SITE_URL}${ogImage}`;
+
+const schemaData = schema ?? SCHEMA_ORG;
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO primaire -->
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url"         content={canonicalURL} />
+  <meta property="og:image"       content={ogImageURL} />
+  <meta property="og:site_name"   content={NOM} />
+  <meta property="og:locale"      content="fr_FR" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image"       content={ogImageURL} />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+  <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Fonts auto-hébergées -->
+  <style>
+    @font-face { font-family:'Montserrat'; src:url('/fonts/montserrat-v31-latin-regular.woff2') format('woff2'); font-weight:400; font-display:swap; }
+    @font-face { font-family:'Montserrat'; src:url('/fonts/montserrat-v31-latin-500.woff2')    format('woff2'); font-weight:500; font-display:swap; }
+    @font-face { font-family:'Montserrat'; src:url('/fonts/montserrat-v31-latin-600.woff2')    format('woff2'); font-weight:600; font-display:swap; }
+    @font-face { font-family:'Montserrat'; src:url('/fonts/montserrat-v31-latin-700.woff2')    format('woff2'); font-weight:700; font-display:swap; }
+    /* Barre info top */
+    .topbar { background: var(--dark); color: rgba(255,255,255,.75); font-size:.78rem; padding:.4rem 0; }
+    .topbar__inner { display:flex; justify-content:space-between; align-items:center; }
+    .topbar a { color:rgba(255,255,255,.85); display:inline-flex; align-items:center; gap:.4rem; }
+    .topbar a:hover { color:#fff; }
+    @media(max-width:600px) { .topbar__addr { display:none; } }
+  </style>
+
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="/css/style.css" />
+
+  <!-- Schema.org -->
+  <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+</head>
+
+<body>
+
+<!-- ═══ BARRE INFO ═══ -->
+<div class="topbar">
+  <div class="container topbar__inner">
+    <span class="topbar__addr">
+      <img src="/icones/pin-map.svg" alt="" width="13" height="13" class="icone icone--white" />
+      {NAP_ADRESSE}
+    </span>
+    <a href={NAP_TEL_HREF}>
+      <img src="/icones/telephone.svg" alt="" width="13" height="13" class="icone icone--white" />
+      {NAP_TEL}
+    </a>
+  </div>
+</div>
+
+<!-- ═══ HEADER ═══ -->
+<header class="hd" id="hd">
+  <div class="hd__inner container">
+    <a href="/" class="logo" aria-label={`${NOM} — accueil`}>
+      <img src="/logo/logo-adnot-couverture.webp" alt={`Logo ${NOM}`} width="128" height="128" />
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Navigation principale">
+      <ul class="nav__list">
+        <li><a href="/">Accueil</a></li>
+        <li class="nav__dd">
+          <a href={SERVICES[0].slug}>
+            Services
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </a>
+          <ul class="nav__sub">
+            {SERVICES.map(s => <li><a href={s.slug}>{s.titre}</a></li>)}
+          </ul>
+        </li>
+        <li class="nav__dd">
+          <a href={SECTEURS[0].slug}>
+            Secteurs
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </a>
+          <ul class="nav__sub">
+            {SECTEURS.map(s => <li><a href={s.slug}>{s.nom}</a></li>)}
+          </ul>
+        </li>
+      </ul>
+      <div class="nav__cta-mobile">
+        <a href={NAP_TEL_HREF} class="btn btn--blue">
+          <img src="/icones/telephone.svg" alt="" width="16" height="16" class="icone icone--white" />
+          {NAP_TEL}
+        </a>
+        {!hideDevisCta && (
+          <a href="/devis-gratuit/" class="btn btn--red">
+            Devis gratuit
+            <img src="/icones/fleche-droite.svg" alt="" width="14" height="14" class="icone icone--white" />
+          </a>
+        )}
+      </div>
+    </nav>
+
+    {!hideDevisCta && (
+      <div class="hd__cta">
+        <a href="/devis-gratuit/" class="btn btn--red">
+          Devis gratuit
+          <img src="/icones/fleche-droite.svg" alt="" width="14" height="14" class="icone icone--white" />
+        </a>
+      </div>
+    )}
+
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ═══ CONTENU DE LA PAGE ═══ -->
+<slot />
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="ft" aria-label={`Pied de page ${NOM}`}>
+  <div class="container">
+    <div class="ft__grid">
+
+      <div class="ft__brand">
+        <a href="/" class="logo logo--ft ft__logo-center" aria-label={NOM}>
+          <img src="/logo/logo-adnot-couverture.webp" alt={NOM} class="logo--img-ft" width="64" height="64" loading="lazy" />
+        </a>
+        <div class="ft__adresse">
+          <img src="/icones/pin-map.svg" alt="" width="13" height="13" class="icone icone--ft" />
+          {NAP_ADRESSE}
+        </div>
+        <div class="ft__cta">
+          {!hideDevisCta && (
+            <a href="/devis-gratuit/" class="ft__btn ft__btn--red">
+              Devis gratuit
+              <small>Déplacement offert</small>
+            </a>
+          )}
+          <a href={NAP_TEL_HREF} class="ft__btn ft__btn--dark">
+            {NAP_TEL}
+            <small>Francky et Warren Adnot</small>
+          </a>
+        </div>
+        <p class="ft__siret">SIRET&nbsp;: {SIRET}</p>
+      </div>
+
+      <div class="ft__col">
+        <h4>Nos services</h4>
+        <ul>
+          {SERVICES.map(s => <li><a href={s.slug}>{s.titre}</a></li>)}
+        </ul>
+      </div>
+
+      <div class="ft__col">
+        <h4>Contact</h4>
+        <ul>
+          <li>
+            <a href={NAP_TEL_HREF} style="display:flex;align-items:center;gap:.4rem;">
+              <img src="/icones/telephone.svg" alt="" width="13" height="13" class="icone icone--ft" />
+              {NAP_TEL}
+            </a>
+          </li>
+          <li>
+            <a href={`mailto:${EMAIL}`} style="display:flex;align-items:center;gap:.4rem;">
+              <img src="/icones/email.svg" alt="" width="13" height="13" class="icone icone--ft" />
+              {EMAIL}
+            </a>
+          </li>
+          {nap ? (
+            <li style="display:flex;align-items:flex-start;gap:.4rem;color:#94A3B8;font-size:.84rem;margin-top:.25rem;">
+              <img src="/icones/pin-map.svg" alt="" width="13" height="13" class="icone icone--ft" style="margin-top:.2rem;flex-shrink:0;" />
+              {NAP_ADRESSE}
+            </li>
+          ) : (
+            <>
+              <li style="display:flex;align-items:flex-start;gap:.4rem;color:#94A3B8;font-size:.84rem;margin-top:.25rem;">
+                <img src="/icones/pin-map.svg" alt="" width="13" height="13" class="icone icone--ft" style="margin-top:.2rem;flex-shrink:0;" />
+                {ADRESSE_MONTIGNY}
+              </li>
+              <li style="display:flex;align-items:flex-start;gap:.4rem;color:#94A3B8;font-size:.84rem;margin-top:.25rem;">
+                <img src="/icones/pin-map.svg" alt="" width="13" height="13" class="icone icone--ft" style="margin-top:.2rem;flex-shrink:0;" />
+                {ADRESSE_MAGNY}
+              </li>
+            </>
+          )}
+        </ul>
+      </div>
+
+      <div class="ft__col">
+        <h4>Nos secteurs</h4>
+        <ul>
+          {SECTEURS.map(s => <li><a href={s.slug}>{s.nom}</a></li>)}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="ft__bottom">
+    <div class="container ft__bottom-inner">
+      <span>© 2026 {NOM} — Yvelines (78)</span>
+      <div class="ft__bottom-links">
+        <a href="/mentions-legales/">Mentions légales</a>
+        <a href="/plan-du-site/">Plan du site</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ BARRE MOBILE ═══ -->
+<nav class="mob-bar" aria-label="Navigation mobile">
+  <a href={NAP_TEL_HREF} class="mob-bar__tel">
+    <img src="/icones/telephone.svg" alt="" width="18" height="18" class="icone icone--white" />
+    Appeler
+  </a>
+  {!hideDevisCta && (
+    <a href="/devis-gratuit/" class="mob-bar__devis">
+      <img src="/icones/devis-gratuit.svg" alt="" width="18" height="18" class="icone icone--white" />
+      Devis gratuit
+    </a>
+  )}
+</nav>
+
+<!-- ═══ SCRIPTS ═══ -->
+<script>
+  const burger = document.getElementById('burger');
+  const nav    = document.getElementById('nav');
+  burger?.addEventListener('click', () => {
+    const open = burger.classList.toggle('open');
+    nav?.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
+  });
+
+  let lastY = 0;
+  const hd      = document.getElementById('hd');
+  const mobBar  = document.querySelector('.mob-bar');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    // Header : disparaît en scrollant vers le bas après 700px
+    if (y > lastY && y > 700) hd?.classList.add('hd--hidden');
+    else                      hd?.classList.remove('hd--hidden');
+    // Barre mobile : apparaît après 750px de scroll
+    if (y > 750) mobBar?.classList.add('visible');
+    else         mobBar?.classList.remove('visible');
+    lastY = y;
+  }, { passive: true });
+</script>
+
+</body>
+</html>

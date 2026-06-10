@@ -1,0 +1,211 @@
+---
+// ── Gabarit commun des pages services (hero + contenu/sidebar + galerie + CTA + secteurs) ──
+import Layout from '../layouts/Layout.astro';
+import { SITE_URL, NOM, TEL, TEL_HREF, ADRESSE_MONTIGNY, ADRESSE_MAGNY, SERVICES, SECTEURS, MAPS_MAGNY } from '../data/site';
+
+export interface Props {
+  title       : string;            // <title>
+  description : string;            // meta description
+  canonical   : string;            // ex: "/refection-de-toiture-78/"
+  serviceType : string;            // schema.org serviceType
+  h1          : string;            // 1re ligne du H1
+  h1Span      : string;            // 2e ligne du H1 (colorée)
+  heroDesc    : string;            // paragraphe du hero
+  heroImg     : { src: string; alt: string };
+  breadcrumb  : string;            // libellé court du fil d'Ariane
+  sidebarTitle: string;
+  ctaTitle    : string;
+  ctaDesc     : string;
+  galerie     : { src: string; alt: string }[];   // 3 photos
+  galerieTitle: string;
+}
+
+const {
+  title, description, canonical, serviceType,
+  h1, h1Span, heroDesc, heroImg, breadcrumb,
+  sidebarTitle, ctaTitle, ctaDesc, galerie, galerieTitle,
+} = Astro.props;
+
+const autresServices = SERVICES.filter(s => s.slug !== canonical);
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": serviceType,
+  "provider": {
+    "@type": "RoofingContractor",
+    "@id": `${SITE_URL}/#organization`,
+    "name": NOM,
+    "url": SITE_URL,
+    "telephone": "+33760817383",
+    "logo": `${SITE_URL}/logo/logo-adnot-couverture.webp`,
+    "image": `${SITE_URL}/logo/logo-adnot-couverture.webp`,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "23 Rue Colbert",
+      "addressLocality": "Montigny-le-Bretonneux",
+      "postalCode": "78180",
+      "addressCountry": "FR"
+    },
+    "priceRange": "€€",
+    "sameAs": [MAPS_MAGNY]
+  },
+  "areaServed": { "@type": "AdministrativeArea", "name": "Yvelines" },
+  "url": `${SITE_URL}${canonical}`
+};
+---
+
+<Layout title={title} description={description} canonical={canonical} ogImage={heroImg.src} schema={schema}>
+
+  <!-- ── HERO ── -->
+  <section class="page-hero" aria-label={breadcrumb}>
+    <div class="container page-hero__inner">
+      <div>
+        <nav class="breadcrumb" aria-label="Fil d'Ariane">
+          <a href="/">Accueil</a>
+          <span>›</span>
+          <span>{breadcrumb}</span>
+        </nav>
+        <span class="hero__badge">Entreprise de couverture — Yvelines (78)</span>
+        <h1>{h1}<br/><span style="color:var(--red-l);">{h1Span}</span></h1>
+        <p class="page-hero__desc" set:html={heroDesc} />
+        <div class="page-hero__btns">
+          <a href="/devis-gratuit/" class="btn btn--red">
+            <img src="/icones/devis-gratuit.svg" alt="" width="16" height="16" class="icone icone--white" />
+            Devis gratuit
+          </a>
+          <a href={TEL_HREF} class="btn btn--outline">
+            <img src="/icones/telephone.svg" alt="" width="16" height="16" class="icone icone--white" />
+            {TEL}
+          </a>
+        </div>
+      </div>
+      <div class="page-hero__img-wrap">
+        <img
+          src={heroImg.src}
+          alt={heroImg.alt}
+          width="520" height="340"
+          loading="eager"
+        />
+        <div class="hero__garantie-band hero__garantie-band--progeas">
+          <img src="/logo/progeas_logo.png" alt="Progeas — assurance garantie décennale d'Adnot Couverture" width="101" height="28" loading="eager" />
+          Notre garantie décennale
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTENU ── -->
+  <section class="content-wrap section--light">
+    <div class="container">
+      <div class="content-grid">
+
+        <article class="content-body">
+          <slot />
+        </article>
+
+        <!-- Sidebar -->
+        <aside>
+          <div class="sidebar__card">
+            <h3>{sidebarTitle}</h3>
+            <p>Devis et déplacement offerts — sans engagement</p>
+            <hr class="sidebar__sep" />
+            <div class="sidebar__tels">
+              <div>
+                <small>Téléphone</small>
+                <a href={TEL_HREF}>
+                  <img src="/icones/telephone.svg" alt="" width="14" height="14" class="icone" />
+                  {TEL}
+                </a>
+              </div>
+            </div>
+            <hr class="sidebar__sep" />
+            <a href="/devis-gratuit/" class="btn btn--red btn--full" style="margin-top:.5rem;">
+              Demander un devis
+            </a>
+            <div class="sidebar__addr">
+              <img src="/icones/pin-map.svg" alt="" width="13" height="13" class="icone" />
+              {ADRESSE_MONTIGNY}
+            </div>
+            <div class="sidebar__addr">
+              <img src="/icones/pin-map.svg" alt="" width="13" height="13" class="icone" />
+              {ADRESSE_MAGNY}
+            </div>
+          </div>
+
+          <div class="sidebar__card" style="margin-top:1.5rem;">
+            <h3 style="font-size:1rem;">Nos autres services</h3>
+            <ul class="sidebar__links">
+              {autresServices.map(s => <li><a href={s.slug}>{s.titre}</a></li>)}
+            </ul>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GALERIE ── -->
+  <section class="section" aria-label={galerieTitle}>
+    <div class="container">
+      <div class="sec-head">
+        <h2>{galerieTitle}</h2>
+      </div>
+      <div class="galerie">
+        {galerie.map(p => (
+          <div class="galerie__item">
+            <img src={p.src} alt={p.alt} loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA (texte gauche + image droite, comme la home) ── -->
+  <section class="cta-split" aria-label={ctaTitle}>
+    <div class="container">
+      <div class="cta-split__grid">
+        <div class="cta-split__text">
+          <h2 style="color:#fff;margin-bottom:1rem;">{ctaTitle}</h2>
+          <p style="color:rgba(255,255,255,.88);font-size:1.05rem;line-height:1.65;text-align:left;margin-bottom:1.8rem;" set:html={ctaDesc} />
+          <div class="hero__btns" style="margin-bottom:0;">
+            <a href={TEL_HREF} class="btn btn--red">
+              <svg class="icone" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.45 2 2 0 0 1 3.59 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+              {TEL}
+            </a>
+            <a href="/devis-gratuit/" class="btn btn--outline">
+              <svg class="icone" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+              Demander un devis gratuit
+            </a>
+          </div>
+        </div>
+        <div class="cta-split__img">
+          <img
+            src="/images/adnot-couvreur-yvelines-020.webp"
+            alt="Couvreur Adnot assis sur le faîtage d'une toiture dans les Yvelines"
+            width="520" height="380"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MAILLAGE INTERNE : SECTEURS ── -->
+  <section class="section section--light" aria-labelledby="sec-secteurs-service">
+    <div class="container">
+      <div class="sec-head">
+        <h2 id="sec-secteurs-service">Nos secteurs d'intervention dans les Yvelines</h2>
+        <p>Deux bureaux, à Montigny-le-Bretonneux et à Magny-les-Hameaux, pour des chantiers menés dans tout le département.</p>
+      </div>
+      <div class="cluster__villes" style="justify-content:center;">
+        {SECTEURS.map(s => (
+          <a href={s.slug} class="ville-pill" title={`Couvreur à ${s.nom} — ${NOM}`}>
+            <strong>{s.nom}</strong>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>

@@ -1,0 +1,338 @@
+---
+// ── Gabarit des pages établissements (NAP propre à chaque fiche Google) ──
+// Note : les pages services affichent les DEUX adresses (couverture départementale) ;
+// ici, chaque page n'affiche que le NAP de son établissement.
+import Layout from '../layouts/Layout.astro';
+import { SITE_URL, NOM, SERVICES, SECTEURS } from '../data/site';
+
+export interface Props {
+  title       : string;
+  description : string;
+  canonical   : string;
+  ville       : string;             // "Montigny-le-Bretonneux"
+  h1          : string;
+  h1Sub       : string;
+  heroDesc    : string;
+  heroImg     : { src: string; alt: string };
+  adresse     : string;             // NAP affiché
+  rue         : string;             // schema streetAddress
+  cp          : string;
+  tel         : string;             // numéro principal affiché sur CETTE page
+  telHref     : string;
+  telFixe    ?: { num: string; href: string };  // second numéro éventuel
+  geo        ?: { lat: number; lng: number };
+  sameAs     ?: string[];
+  galerie     : { src: string; alt: string }[];
+  galerieTitle: string;
+  portraitTitle: string;
+  ctaTitle    : string;
+}
+
+const {
+  title, description, canonical, ville, h1, h1Sub, heroDesc, heroImg,
+  adresse, rue, cp, tel, telHref, telFixe, geo, sameAs,
+  galerie, galerieTitle, portraitTitle, ctaTitle,
+} = Astro.props;
+
+const autreSecteur = SECTEURS.filter(s => s.slug !== canonical);
+
+// ── Cards services contextualisées par ville ──
+const SERVICES_CARDS = [
+  { ...SERVICES[0], photo: { src: "/images/demoussage-toiture-yvelines-002.webp", alt: `Réfection de toiture par Adnot Couverture près de ${ville}` },          signal: `Une toiture en fin de vie à ${ville} ?`,            desc: "Dépose complète, écran de sous-toiture, liteaux neufs et couverture reposée, faîtage compris. Voir le détail de la",  anchor: "réfection de toiture dans les Yvelines" },
+  { ...SERVICES[1], photo: { src: "/images/reparation-toiture-yvelines-041.webp", alt: `Réparation de couverture par un couvreur Adnot près de ${ville}` },     signal: `Une fuite ou des tuiles cassées à ${ville} ?`,      desc: "Recherche de fuite, remplacement des éléments touchés, mise hors d'eau si besoin. Plus d'infos sur la",               anchor: "réparation de toiture dans les Yvelines" },
+  { ...SERVICES[2], photo: { src: "/images/demoussage-toiture-yvelines-005.webp", alt: `Démoussage de toiture par Adnot Couverture près de ${ville}` },         signal: `Des tuiles gagnées par la mousse à ${ville} ?`,     desc: "Brossage, traitement anti-mousse et hydrofuge, photos avant / après remises. Voir le détail du",                      anchor: "démoussage de toiture dans les Yvelines" },
+  { ...SERVICES[3], photo: { src: "/heroe/zinguerie-gouttiere-yvelines-001.webp", alt: `Travaux de zinguerie par Adnot Couverture près de ${ville}` },          signal: `Une gouttière qui déborde à ${ville} ?`,            desc: "Pose et remplacement en zinc, aluminium ou PVC, solins et abergements compris. Voir le détail des",                   anchor: "gouttières et de la zinguerie dans le 78" },
+  { ...SERVICES[4], photo: { src: "/heroe/pose-velux-yvelines-019.webp",          alt: `Pose de Velux par Adnot Couverture près de ${ville}` },                 signal: `Une fenêtre de toit à poser à ${ville} ?`,          desc: "Création d'ouverture ou remplacement, raccords d'étanchéité et finitions. Voir la",                                   anchor: "pose de Velux dans les Yvelines" },
+  { ...SERVICES[5], photo: { src: "/images/refection-toiture-yvelines-037.webp",  alt: `Isolation de toiture par Adnot Couverture près de ${ville}` },          signal: `Des combles à isoler à ${ville} ?`,                 desc: "Sarking, entre chevrons ou soufflage, ventilation de la couverture préservée. Plus d'infos sur l'",                   anchor: "isolation de toiture dans les Yvelines" },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "RoofingContractor",
+  "@id": `${SITE_URL}${canonical}#etablissement`,
+  "name": NOM,
+  "alternateName": [
+    `Couvreur ${ville}`,
+    `Couvreur à ${ville}`,
+    `Entreprise de couverture ${ville}`,
+    `Artisan couvreur ${ville}`,
+    `${NOM} ${ville}`,
+  ],
+  "description": description,
+  "url": `${SITE_URL}${canonical}`,
+  "telephone": telHref.replace('tel:', ''),
+  "email": "contact@fwa-toitures.fr",
+  "image": `${SITE_URL}/logo/logo-adnot-couverture.webp`,
+  "logo": `${SITE_URL}/logo/logo-adnot-couverture.webp`,
+  "parentOrganization": { "@id": `${SITE_URL}/#organization` },
+  "identifier": { "@type": "PropertyValue", "name": "SIRET", "value": "901 688 986 00016" },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": rue,
+    "addressLocality": ville,
+    "postalCode": cp,
+    "addressRegion": "Île-de-France",
+    "addressCountry": "FR"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": ville,
+    "containedInPlace": { "@type": "AdministrativeArea", "name": "Yvelines" }
+  },
+  ...(geo && { "geo": { "@type": "GeoCoordinates", "latitude": geo.lat, "longitude": geo.lng } }),
+  ...(sameAs && { "sameAs": sameAs }),
+  "priceRange": "€€",
+};
+---
+
+<Layout title={title} description={description} canonical={canonical} ogImage={heroImg.src} schema={schema} nap={{ tel, telHref, adresse }}>
+
+  <!-- ── HERO (même structure que la home, photo à la place de la vidéo) ── -->
+  <section class="hero" aria-label={`Couvreur ${ville}`}>
+    <div class="container hero__inner">
+
+      <div class="hero__text">
+        <nav class="breadcrumb" aria-label="Fil d'Ariane">
+          <a href="/">Accueil</a>
+          <span>›</span>
+          <span>Couvreur {ville}</span>
+        </nav>
+
+        <p class="hero__eyebrow">{h1Sub}</p>
+
+        <h1>{h1}</h1>
+
+        <p class="hero__sub" style="text-align:left;" set:html={heroDesc} />
+
+        <ul class="hero__list" style="list-style:none;padding:0;margin:0 0 1.5rem;display:flex;flex-direction:column;gap:.5rem;color:rgba(255,255,255,.92);font-size:.98rem;">
+          <li style="display:flex;align-items:center;gap:.6rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+            {adresse}
+          </li>
+          <li style="display:flex;align-items:center;gap:.6rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+            Devis et déplacement offerts
+          </li>
+          <li style="display:flex;align-items:center;gap:.6rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+            Garantie décennale Progeas
+          </li>
+          <li style="display:flex;align-items:center;gap:.6rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+            Dépannage et rénovation de toitures
+          </li>
+        </ul>
+
+        <div class="hero__btns">
+          <a href="/devis-gratuit/" class="btn btn--red">
+            <svg class="icone" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            Devis gratuit
+          </a>
+          <a href={telHref} class="btn btn--outline">
+            <svg class="icone" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.45 2 2 0 0 1 3.59 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+            {tel}
+          </a>
+        </div>
+      </div>
+
+      <div class="hero__img-wrap">
+        <img
+          src={heroImg.src}
+          alt={heroImg.alt}
+          width="1280" height="720"
+          loading="eager"
+          style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--r) var(--r) 0 0;box-shadow:var(--shadow-lg);display:block;"
+        />
+        <div class="hero__garantie-band hero__garantie-band--progeas">
+          <img src="/logo/progeas_logo.png" alt="Progeas — assurance garantie décennale d'Adnot Couverture" width="101" height="28" loading="eager" />
+          Notre garantie décennale
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── SERVICES ── -->
+  <section class="section" aria-labelledby="sec-services">
+    <div class="container">
+      <div class="sec-head">
+        <h2 id="sec-services">Nos prestations à {ville}</h2>
+        <p style="text-align:left;max-width:780px;margin:.8rem auto 0;">
+          Réfection, réparation, démoussage, zinguerie, Velux et isolation : six prestations réalisées à {ville} et dans les communes voisines, détaillées sur leurs pages dédiées.
+        </p>
+      </div>
+      <div class="silos silos--3">
+        {SERVICES_CARDS.map(s => (
+          <div class="silo-card silo-card--photo" style="text-align:left;">
+            <img class="silo-card__photo" src={s.photo.src} alt={s.photo.alt} width="800" height="600" loading="lazy" />
+            <div class="silo-card__body">
+              <h3 style="text-align:left;">{s.titre}</h3>
+              <p style="font-style:italic;color:var(--red-l);font-size:.92rem;margin-bottom:.6rem;text-align:left;line-height:1.5;hyphens:auto;">
+                {s.signal}
+              </p>
+              <p style="text-align:left;line-height:1.65;hyphens:auto;margin-bottom:0;">
+                {s.desc} <a href={s.slug} style="color:var(--red);font-weight:700;text-decoration:underline;">{s.anchor}</a>.
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTENU SEO ── -->
+  <section class="content-wrap section--light">
+    <div class="container">
+      <div class="content-grid">
+        <article class="content-body">
+          <slot />
+        </article>
+
+        <!-- Sidebar -->
+        <aside>
+          <div class="sidebar__card">
+            <h3>Devis gratuit à {ville}</h3>
+            <p>Devis et déplacement offerts — sans engagement</p>
+            <hr class="sidebar__sep" />
+            <div class="sidebar__tels">
+              <div>
+                <small>Téléphone</small>
+                <a href={telHref}>
+                  <img src="/icones/telephone.svg" alt="" width="14" height="14" class="icone" />
+                  {tel}
+                </a>
+              </div>
+              {telFixe && (
+                <div>
+                  <small>Fixe</small>
+                  <a href={telFixe.href}>
+                    <img src="/icones/telephone.svg" alt="" width="14" height="14" class="icone" />
+                    {telFixe.num}
+                  </a>
+                </div>
+              )}
+            </div>
+            <hr class="sidebar__sep" />
+            <a href="/devis-gratuit/" class="btn btn--red btn--full" style="margin-top:.5rem;">
+              Demander un devis
+            </a>
+            <div class="sidebar__addr">
+              <img src="/icones/pin-map.svg" alt="" width="13" height="13" class="icone" />
+              {adresse}
+            </div>
+            {sameAs && sameAs[0] && (
+              <div style="margin-top:.8rem;">
+                <a href={sameAs[0]} target="_blank" rel="noopener" style="font-size:.85rem;font-weight:600;">Notre fiche Google à {ville} ↗</a>
+              </div>
+            )}
+          </div>
+
+          <div class="sidebar__card" style="margin-top:1.5rem;">
+            <h3 style="font-size:1rem;">Nos services</h3>
+            <ul class="sidebar__links">
+              {SERVICES.map(s => <li><a href={s.slug}>{s.titre}</a></li>)}
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PORTRAIT ── -->
+  <section class="portrait-section" aria-labelledby="sec-portrait">
+    <div class="container">
+      <div class="portrait-grid">
+        <div class="portrait-grid__img">
+          <img
+            src="/images/adnot-couvreur-yvelines-020.webp"
+            alt={`Couvreur Adnot sur une toiture à ${ville}`}
+            width="600" height="800"
+            loading="lazy"
+          />
+        </div>
+        <div class="portrait-grid__content">
+          <h2 id="sec-portrait">{portraitTitle}</h2>
+          <p>
+            Adnot Couverture, c'est deux frères sur les toits : <strong>celui qui
+            établit le devis est celui qui monte sur votre couverture</strong>.
+            Vous suivez le chantier sur les photos prises avant, pendant et
+            après les travaux, complétées au drone pour les vues d'ensemble.
+          </p>
+          <p>
+            Couverture, charpente, ramonage et peinture : un seul interlocuteur,
+            joignable au bureau de {ville} comme sur les chantiers. L'ensemble
+            de nos travaux est couvert par la garantie décennale Progeas.
+          </p>
+          <ul class="portrait-list" style="list-style:none;padding:0;margin:1.5rem 0 0;display:flex;flex-direction:column;gap:.55rem;">
+            <li style="display:flex;align-items:center;gap:.7rem;color:rgba(255,255,255,.92);font-size:.98rem;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+              Deux frères, un seul interlocuteur du devis à la réception
+            </li>
+            <li style="display:flex;align-items:center;gap:.7rem;color:rgba(255,255,255,.92);font-size:.98rem;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+              Un bureau à {ville}, des chantiers suivis sur place
+            </li>
+            <li style="display:flex;align-items:center;gap:.7rem;color:rgba(255,255,255,.92);font-size:.98rem;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+              Couverture, charpente, ramonage et peinture
+            </li>
+            <li style="display:flex;align-items:center;gap:.7rem;color:rgba(255,255,255,.92);font-size:.98rem;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+              Devis et déplacement offerts, garantie décennale Progeas
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GALERIE PHOTOS ── -->
+  <section class="section section--light" aria-label={galerieTitle}>
+    <div class="container">
+      <div class="sec-head">
+        <h2>{galerieTitle}</h2>
+      </div>
+      <div class="galerie">
+        {galerie.map(p => (
+          <div class="galerie__item">
+            <img src={p.src} alt={p.alt} loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="cta" aria-label={ctaTitle}>
+    <div class="container" style="text-align:center;">
+      <h2>{ctaTitle}</h2>
+      <p>Décrivez-nous vos travaux par téléphone ou via le formulaire. Devis et déplacement offerts.</p>
+      <div class="hero__btns" style="justify-content:center;">
+        <a href="/devis-gratuit/" class="btn btn--red">Demander un devis gratuit</a>
+        <a href={telHref} class="btn btn--outline">
+          <img src="/icones/telephone.svg" alt="" width="16" height="16" class="icone icone--white" />
+          {tel}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── AUTRE SECTEUR (maillage interne) ── -->
+  {autreSecteur.length > 0 && (
+    <section class="section" aria-labelledby="sec-voisines">
+      <div class="container">
+        <div class="sec-head">
+          <h2 id="sec-voisines">{NOM} intervient aussi près de {ville}</h2>
+        </div>
+        <div class="cluster__villes" style="justify-content:center;">
+          {autreSecteur.map(s => (
+            <a href={s.slug} class="ville-pill">
+              <strong>{s.nom}</strong>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+</Layout>

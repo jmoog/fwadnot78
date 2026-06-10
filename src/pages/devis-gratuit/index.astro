@@ -1,0 +1,460 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { SITE_URL, NOM, TEL, TEL_HREF, EMAIL, ADRESSE_MONTIGNY, ADRESSE_MAGNY, SERVICES, SECTEURS } from '../../data/site';
+
+// Clé publique Cloudflare Turnstile (variable d'env build-time PUBLIC_TURNSTILE_SITE_KEY).
+// Le widget ne s'affiche que si la clé est définie.
+const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+
+// Photos des cards services (mêmes visuels que la home)
+const SERVICES_PHOTOS: Record<string, { src: string; alt: string }> = {
+  "/refection-de-toiture-78/":  { src: "/images/demoussage-toiture-yvelines-002.webp",  alt: "Couvreurs Adnot intervenant sur une toiture dans les Yvelines" },
+  "/reparation-de-toiture-78/": { src: "/images/reparation-toiture-yvelines-041.webp",  alt: "Couvreur Adnot réparant une couverture en tuiles dans les Yvelines" },
+  "/demoussage-de-toiture-78/": { src: "/images/demoussage-toiture-yvelines-005.webp",  alt: "Toiture à moitié démoussée par Adnot Couverture dans les Yvelines" },
+  "/gouttieres-zinguerie-78/":  { src: "/heroe/zinguerie-gouttiere-yvelines-001.webp",  alt: "Travaux de zinguerie et gouttières sur une maison des Yvelines" },
+  "/velux-fenetre-de-toit-78/": { src: "/heroe/pose-velux-yvelines-019.webp",           alt: "Francky et Warren Adnot remplaçant une fenêtre de toit dans les Yvelines" },
+  "/isolation-de-toiture-78/":  { src: "/images/refection-toiture-yvelines-037.webp",   alt: "Écran de sous-toiture et liteaux posés lors d'une isolation dans les Yvelines" },
+};
+
+// Descriptions courtes des cards services
+const SERVICES_DESCS: Record<string, string> = {
+  "/refection-de-toiture-78/":  "Dépose complète et couverture neuve, écran de sous-toiture compris.",
+  "/reparation-de-toiture-78/": "Fuites, tuiles cassées, solins : remise en état à l'élément près.",
+  "/demoussage-de-toiture-78/": "Brossage, traitement anti-mousse et hydrofuge, photos avant / après.",
+  "/gouttieres-zinguerie-78/":  "Pose et remplacement en zinc, aluminium ou PVC, descentes comprises.",
+  "/velux-fenetre-de-toit-78/": "Création d'ouverture ou remplacement, raccords d'étanchéité compris.",
+  "/isolation-de-toiture-78/":  "Sarking, entre chevrons ou soufflage, selon l'usage de vos combles.",
+};
+
+const FAQ = [
+  {
+    q: "Le devis est-il vraiment gratuit, même si je ne donne pas suite ?",
+    a: "Oui. Le déplacement, le constat et le devis sont offerts, sans engagement. Vous recevez un chiffrage détaillé poste par poste et vous restez libre de le comparer avec d'autres entreprises avant de décider."
+  },
+  {
+    q: "Que contient exactement le devis ?",
+    a: "Les matériaux et leurs quantités, la main-d'œuvre, la dépose et l'évacuation des gravats quand le chantier en demande, et la liste de ce qui est inclus. Les travaux sont couverts par notre garantie décennale Progeas, mentionnée sur le document."
+  },
+  {
+    q: "J'ai une fuite active, comment ça se passe ?",
+    a: "Appelez-nous plutôt que de remplir le formulaire : nous organisons le constat, et si l'eau entre encore, la zone touchée est bâchée et mise hors d'eau le jour du passage. Le devis de réparation définitive suit, photos du défaut à l'appui."
+  },
+  {
+    q: "Faut-il une autorisation de la mairie pour refaire une toiture ?",
+    a: "Une réfection à l'identique ne demande aucune formalité. Un changement de matériau ou de teinte, ou la création d'une fenêtre de toit, passe par une déclaration préalable de travaux : nous préparons le dossier avec vous, y compris dans les périmètres soumis à l'avis des Architectes des Bâtiments de France."
+  },
+  {
+    q: "Dans quelles communes intervenez-vous ?",
+    a: "Dans tout le département des Yvelines, depuis nos deux bureaux de Montigny-le-Bretonneux et de Magny-les-Hameaux. Le déplacement est offert quelle que soit votre commune."
+  },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      "@id": `${SITE_URL}/devis-gratuit/#contact`,
+      "name": `Devis gratuit — ${NOM}`,
+      "url": `${SITE_URL}/devis-gratuit/`,
+      "inLanguage": "fr-FR",
+      "description": "Demandez un devis gratuit à Adnot Couverture, entreprise de couverture dans les Yvelines. Devis et déplacement offerts, sans engagement.",
+      "mainEntity": {
+        "@type": "RoofingContractor",
+        "@id": `${SITE_URL}/#organization`,
+        "name": NOM,
+        "telephone": "+33760817383",
+        "email": EMAIL,
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "23 Rue Colbert",
+          "addressLocality": "Montigny-le-Bretonneux",
+          "postalCode": "78180",
+          "addressCountry": "FR"
+        }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": `${SITE_URL}/` },
+        { "@type": "ListItem", "position": 2, "name": "Devis gratuit", "item": `${SITE_URL}/devis-gratuit/` }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${SITE_URL}/devis-gratuit/#faq`,
+      "mainEntity": FAQ.map(item => ({
+        "@type": "Question",
+        "name": item.q,
+        "acceptedAnswer": { "@type": "Answer", "text": item.a }
+      }))
+    }
+  ]
+};
+---
+
+<Layout
+  title="Devis couvreur offert dans les Yvelines — Adnot Couverture"
+  description="Décrivez vos travaux de toiture, Francky ou Warren vous rappelle pour planifier une visite et un chiffrage gratuits dans le 78. Sans engagement."
+  canonical="/devis-gratuit/"
+  schema={schema}
+  hideDevisCta={true}
+>
+
+  <!-- ── HERO (même structure que la home, photo + bandeau Progeas) ── -->
+  <section class="hero" aria-label={`Devis gratuit ${NOM}`}>
+    <div class="container hero__inner">
+
+      <div class="hero__text">
+        <nav class="breadcrumb" aria-label="Fil d'Ariane">
+          <a href="/">Accueil</a>
+          <span>›</span>
+          <span>Devis gratuit</span>
+        </nav>
+
+        <p class="hero__eyebrow">Devis et déplacement offerts</p>
+
+        <h1>Demandez votre devis gratuit</h1>
+
+        <p class="hero__sub" style="text-align:left;">
+          Décrivez vos travaux en deux minutes : Francky ou Warren vous
+          rappelle, planifie une visite et vous remet un devis détaillé poste
+          par poste. Vous restez libre de comparer — le devis et le
+          déplacement sont offerts.
+        </p>
+
+        <ul class="hero__list" style="list-style:none;padding:0;margin:0 0 1.5rem;display:flex;flex-direction:column;gap:.5rem;color:rgba(255,255,255,.92);font-size:.98rem;">
+          <li style="display:flex;align-items:center;gap:.6rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+            Devis gratuit, détaillé et sans engagement
+          </li>
+          <li style="display:flex;align-items:center;gap:.6rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+            Déplacement offert dans les Yvelines
+          </li>
+          <li style="display:flex;align-items:center;gap:.6rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+            Constat sur place, photos à l'appui
+          </li>
+          <li style="display:flex;align-items:center;gap:.6rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+            Un seul interlocuteur : Francky ou Warren
+          </li>
+        </ul>
+
+        <div class="hero__btns">
+          <a href="#form-devis" class="btn btn--red">
+            <svg class="icone" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            Remplir le formulaire
+          </a>
+          <a href={TEL_HREF} class="btn btn--outline">
+            <svg class="icone" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.45 2 2 0 0 1 3.59 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+            {TEL}
+          </a>
+        </div>
+      </div>
+
+      <div class="hero__img-wrap">
+        <img
+          src="/heroe/adnot-couvreur-yvelines-030.webp"
+          alt="Visite pour devis toiture par Adnot Couverture dans les Yvelines"
+          width="1280" height="720"
+          loading="eager"
+          style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--r) var(--r) 0 0;box-shadow:var(--shadow-lg);display:block;"
+        />
+        <div class="hero__garantie-band hero__garantie-band--progeas">
+          <img src="/logo/progeas_logo.png" alt="Progeas — assurance garantie décennale d'Adnot Couverture" width="101" height="28" loading="eager" />
+          Notre garantie décennale
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── FORMULAIRE + CONTACT DIRECT ── -->
+  <section class="section section--light">
+    <div class="container">
+      <div class="form-grid">
+
+        <!-- Formulaire -->
+        <div class="form-wrap">
+          <div style="margin-bottom:1.5rem;">
+            <h2 style="font-size:1.4rem;color:var(--blue);margin:0 0 .4rem;">Parlons de vos travaux</h2>
+            <p style="margin:0;color:var(--muted);font-size:.95rem;">Remplissez ce formulaire en moins de 2 minutes. Nous vous recontactons rapidement.</p>
+          </div>
+
+          <div id="msg-ok"  class="msg-ok"  style="display:none;background:#D1FAE5;border:1px solid #34D399;color:#065F46;padding:1rem 1.2rem;border-radius:8px;margin-bottom:1rem;">
+            Votre demande a bien été envoyée. Vous allez recevoir un accusé de réception par email, et nous vous recontactons rapidement.
+          </div>
+          <div id="msg-err" class="msg-err" style="display:none;background:#FEE2E2;border:1px solid #FCA5A5;color:#991B1B;padding:1rem 1.2rem;border-radius:8px;margin-bottom:1rem;">
+            Une erreur est survenue lors de l'envoi. Vous pouvez nous appeler directement au {TEL} ou réessayer dans un instant.
+          </div>
+
+          <form id="form-devis" novalidate>
+            <!-- Honeypot anti-spam (invisible) -->
+            <div style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+              <label for="website">Ne pas remplir</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <fieldset style="border:none;padding:0;margin:0 0 1.5rem;">
+              <legend style="font-size:.78rem;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em;padding:0;margin:0 0 .8rem;">Faisons connaissance</legend>
+
+              <div class="fg">
+                <label for="nom">Comment devons-nous vous appeler ? <span style="color:var(--red);">*</span></label>
+                <input type="text" id="nom" name="nom" required placeholder="Prénom et nom" autocomplete="name" />
+              </div>
+
+              <div class="form-row">
+                <div class="fg">
+                  <label for="tel">Sur quel numéro pouvons-nous vous joindre ? <span style="color:var(--red);">*</span></label>
+                  <input type="tel" id="tel" name="tel" required placeholder="Téléphone" autocomplete="tel" />
+                </div>
+                <div class="fg">
+                  <label for="email">Et votre adresse email ? <span style="color:var(--red);">*</span></label>
+                  <input type="email" id="email" name="email" required placeholder="Email" autocomplete="email" />
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset style="border:none;padding:0;margin:0 0 1.5rem;">
+              <legend style="font-size:.78rem;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em;padding:0;margin:0 0 .8rem;">Parlez-nous de votre toiture</legend>
+
+              <div class="fg">
+                <label for="ville">Dans quelle commune se trouve votre maison ? <span style="color:var(--red);">*</span></label>
+                <input type="text" id="ville" name="ville" required placeholder="Nom de votre commune" autocomplete="address-level2" />
+              </div>
+
+              <div class="fg">
+                <label for="prestation">Pour quel type de travaux ? <span style="color:var(--red);">*</span></label>
+                <select id="prestation" name="prestation" required>
+                  <option value="">— Choisissez ce qui correspond le mieux —</option>
+                  <option value="refection">Réfection de toiture</option>
+                  <option value="reparation">Réparation ou entretien de toiture</option>
+                  <option value="demoussage">Démoussage et nettoyage</option>
+                  <option value="gouttieres">Gouttières et zinguerie</option>
+                  <option value="velux">Pose ou remplacement de Velux</option>
+                  <option value="isolation">Isolation de toiture</option>
+                  <option value="autre">Je ne sais pas encore, j'aimerais en discuter</option>
+                </select>
+              </div>
+
+              <div class="fg">
+                <label for="message">Racontez-nous en quelques mots <span style="color:var(--muted);font-weight:400;">(facultatif mais utile)</span></label>
+                <textarea id="message" name="message" rows="5" placeholder="Tout ce que vous savez sur votre toiture nous aide à préparer un devis juste : matériau, surface approximative, ancienneté, problème observé, photos si vous en avez sous la main…"></textarea>
+              </div>
+            </fieldset>
+
+            <div style="font-size:.78rem;color:var(--muted);line-height:1.5;margin-bottom:1rem;">
+              En envoyant ce formulaire, vous acceptez que vos coordonnées soient utilisées uniquement pour traiter votre demande de devis. Aucune donnée n'est partagée avec un tiers.
+            </div>
+
+            {TURNSTILE_SITE_KEY && (
+              <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} style="margin:0 0 1rem"></div>
+            )}
+
+            <button type="submit" class="btn btn--red btn--full" id="btn-submit" style="font-size:1.05rem;padding:1rem;">
+              Envoyer ma demande
+            </button>
+          </form>
+        </div>
+
+        <!-- Contact direct -->
+        <div>
+          <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.6rem;margin-bottom:1.2rem;">
+            <h2 style="font-size:1.2rem;color:var(--blue);margin:0 0 1.2rem;">Vous préférez un contact direct ?</h2>
+
+            <a href={TEL_HREF} style="display:flex;align-items:center;gap:.8rem;text-decoration:none;color:inherit;padding:.8rem 0;border-bottom:1px solid var(--border);">
+              <img src="/icones/telephone.svg" alt="" width="22" height="22" class="icone" style="flex-shrink:0;" />
+              <div>
+                <div style="font-size:.78rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;">Téléphone</div>
+                <div style="font-size:1.15rem;font-weight:800;color:var(--blue);">{TEL}</div>
+                <div style="font-size:.8rem;color:var(--muted);">Francky et Warren Adnot</div>
+              </div>
+            </a>
+
+            <a href={`mailto:${EMAIL}`} style="display:flex;align-items:center;gap:.8rem;text-decoration:none;color:inherit;padding:.8rem 0;border-bottom:1px solid var(--border);">
+              <img src="/icones/email.svg" alt="" width="22" height="22" class="icone" style="flex-shrink:0;" />
+              <div>
+                <div style="font-size:.78rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;">Email</div>
+                <div style="font-size:.95rem;font-weight:600;color:var(--blue);">{EMAIL}</div>
+              </div>
+            </a>
+
+            <div style="display:flex;align-items:flex-start;gap:.8rem;padding:.8rem 0;border-bottom:1px solid var(--border);">
+              <img src="/icones/pin-map.svg" alt="" width="22" height="22" class="icone" style="flex-shrink:0;margin-top:.2rem;" />
+              <div>
+                <div style="font-size:.78rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;">Montigny-le-Bretonneux</div>
+                <div style="font-size:.95rem;color:var(--text);font-weight:600;">{ADRESSE_MONTIGNY}</div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:flex-start;gap:.8rem;padding:.8rem 0;">
+              <img src="/icones/pin-map.svg" alt="" width="22" height="22" class="icone" style="flex-shrink:0;margin-top:.2rem;" />
+              <div>
+                <div style="font-size:.78rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;">Magny-les-Hameaux</div>
+                <div style="font-size:.95rem;color:var(--text);font-weight:600;">{ADRESSE_MAGNY}</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:var(--blue-d);color:#fff;border-radius:var(--r);padding:1.6rem;">
+            <div style="font-size:.78rem;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem;">Une urgence toiture ?</div>
+            <p style="margin:0 0 1rem;font-size:.95rem;line-height:1.6;color:rgba(255,255,255,.92);">
+              Une infiltration active n'attend pas un formulaire : appelez-nous directement, nous organisons le constat et la mise hors d'eau.
+            </p>
+            <a href={TEL_HREF} class="btn btn--red btn--full" style="font-size:1rem;">Appeler maintenant</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── COMMENT ÇA SE PASSE ── -->
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <h2>Comment ça se passe après votre demande&nbsp;?</h2>
+        <p style="text-align:left;max-width:780px;margin:.8rem auto 0;">
+          Trois étapes, sans relance commerciale : vous savez à tout moment où en est votre demande, et qui vous répond.
+        </p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;margin:2rem auto 0;">
+        <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.8rem 1.6rem;box-shadow:var(--shadow);">
+          <div style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;font-size:1.2rem;margin-bottom:1rem;">1</div>
+          <h3 style="color:var(--blue);font-size:1.05rem;margin:0 0 .6rem;line-height:1.35;">Vous recevez un accusé de réception</h3>
+          <p style="color:var(--text);line-height:1.65;font-size:.92rem;margin:0;">Un email récapitule aussitôt ce que vous nous avez décrit, avec nos coordonnées directes pour compléter votre demande ou joindre des photos.</p>
+        </div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.8rem 1.6rem;box-shadow:var(--shadow);">
+          <div style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;font-size:1.2rem;margin-bottom:1rem;">2</div>
+          <h3 style="color:var(--blue);font-size:1.05rem;margin:0 0 .6rem;line-height:1.35;">Nous vous recontactons</h3>
+          <p style="color:var(--text);line-height:1.65;font-size:.92rem;margin:0;">Francky ou Warren vous appelle pour préciser le besoin et convenir d'un passage : constat depuis le sol, sur le toit ou au drone selon l'accès.</p>
+        </div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.8rem 1.6rem;box-shadow:var(--shadow);">
+          <div style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;font-size:1.2rem;margin-bottom:1rem;">3</div>
+          <h3 style="color:var(--blue);font-size:1.05rem;margin:0 0 .6rem;line-height:1.35;">Vous recevez un devis détaillé</h3>
+          <p style="color:var(--text);line-height:1.65;font-size:.92rem;margin:0;">Matériaux, quantités, main-d'œuvre, dépose et évacuation : tout est chiffré poste par poste. Vous savez ce qui est inclus avant de signer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── POUR QUELS TRAVAUX ── -->
+  <section class="section section--light">
+    <div class="container">
+      <div class="sec-head">
+        <h2>Pour quels travaux demander un devis&nbsp;?</h2>
+        <p style="text-align:left;max-width:780px;margin:.8rem auto 0;">
+          Les six prestations ci-dessous couvrent l'essentiel des travaux de couverture. Un doute sur la catégorie ? Choisissez « j'aimerais en discuter » dans le formulaire, nous trancherons ensemble.
+        </p>
+      </div>
+
+      <div class="silos silos--3" style="margin-top:2rem;">
+        {SERVICES.map(s => (
+          <a href={s.slug} class="silo-card silo-card--photo" style="text-align:left;text-decoration:none;color:inherit;display:flex;">
+            <img class="silo-card__photo" src={SERVICES_PHOTOS[s.slug].src} alt={SERVICES_PHOTOS[s.slug].alt} width="800" height="600" loading="lazy" />
+            <div class="silo-card__body">
+              <h3 style="text-align:left;">{s.titre}</h3>
+              <p style="text-align:left;line-height:1.6;margin-bottom:.6rem;">{SERVICES_DESCS[s.slug]}</p>
+              <span style="display:inline-block;color:var(--red);font-weight:700;font-size:.85rem;">Voir la page {s.titre.toLowerCase()} →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTEURS ── -->
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <h2>Nous intervenons dans les Yvelines</h2>
+        <p style="text-align:left;max-width:780px;margin:.8rem auto 0;">
+          Deux bureaux, un même duo : les pages ci-dessous détaillent nos interventions à Montigny-le-Bretonneux et à Magny-les-Hameaux, et le déplacement est offert dans tout le département.
+        </p>
+      </div>
+
+      <div class="cluster__villes" style="max-width:900px;margin:2rem auto 0;justify-content:center;">
+        {SECTEURS.map(s => (
+          <a href={s.slug} class="ville-pill">
+            <strong>{s.nom}</strong>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section class="section section--light">
+    <div class="container">
+      <div class="sec-head">
+        <h2>Questions fréquentes sur le devis</h2>
+      </div>
+
+      <div style="max-width:820px;margin:2rem auto 0;display:flex;flex-direction:column;gap:1.5rem;">
+        {FAQ.map(item => (
+          <article style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:1.4rem 1.6rem;">
+            <h3 style="margin:0 0 .8rem;font-size:1.05rem;color:var(--blue);line-height:1.4;">{item.q}</h3>
+            <p style="margin:0;line-height:1.65;color:var(--text);font-size:.95rem;">{item.a}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<script is:inline>
+(function() {
+  const form     = document.getElementById('form-devis');
+  const msgOk    = document.getElementById('msg-ok');
+  const msgErr   = document.getElementById('msg-err');
+  const btnSub   = document.getElementById('btn-submit');
+  if (!form || !btnSub) return;
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    msgOk.style.display  = 'none';
+    msgErr.style.display = 'none';
+    btnSub.disabled = true;
+    btnSub.textContent = 'Envoi en cours…';
+
+    const fd = new FormData(form);
+    const data = {};
+    fd.forEach(function(v, k) { data[k] = v; });
+
+    try {
+      const res = await fetch('/api/devis/', {
+        method  : 'POST',
+        headers : {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'X-Requested-With': 'fetch',
+        },
+        body    : JSON.stringify(data),
+      });
+      const json = await res.json().catch(function(){ return {}; });
+
+      if (res.ok && json.ok) {
+        // Redirection vers la page merci
+        window.location.href = '/merci/';
+      } else {
+        throw new Error(json.error || 'Erreur ' + res.status);
+      }
+    } catch (err) {
+      console.error(err);
+      msgErr.style.display = 'block';
+      btnSub.disabled = false;
+      btnSub.textContent = 'Envoyer ma demande';
+    }
+  });
+})();
+</script>
+{TURNSTILE_SITE_KEY && (
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer is:inline></script>
+)}

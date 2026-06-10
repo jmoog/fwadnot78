@@ -1,0 +1,125 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { SERVICES, SECTEURS, ADRESSE_MONTIGNY, ADRESSE_MAGNY } from '../../data/site';
+
+const PAGES_PRINCIPALES = [
+  { titre: "Accueil",          slug: "/",                  desc: "Adnot Couverture, entreprise de couverture dans les Yvelines" },
+  { titre: "Devis gratuit",    slug: "/devis-gratuit/",    desc: "Décrivez vos travaux, devis et déplacement offerts" },
+  { titre: "Mentions légales", slug: "/mentions-legales/", desc: "Informations légales et politique de confidentialité" },
+];
+
+const SERVICES_DESC: Record<string, string> = {
+  "/refection-de-toiture-78/":  "Remplacement complet de la couverture",
+  "/reparation-de-toiture-78/": "Tuiles cassées, fuites, entretien courant",
+  "/demoussage-de-toiture-78/": "Nettoyage, antimousse et hydrofuge",
+  "/gouttieres-zinguerie-78/":  "Pose et remplacement, zinc, alu, PVC",
+  "/velux-fenetre-de-toit-78/": "Installation et remplacement de fenêtres de toit",
+  "/isolation-de-toiture-78/":  "Isolation des combles et de la toiture",
+};
+
+const BUREAUX_DESC: Record<string, string> = {
+  "/couvreur-montigny-le-bretonneux/": ADRESSE_MONTIGNY,
+  "/couvreur-magny-les-hameaux/":      ADRESSE_MAGNY,
+};
+---
+
+<Layout
+  title="Plan du site — Adnot Couverture, Yvelines (78)"
+  description="Plan du site fwa-toitures.fr : toutes les pages d'Adnot Couverture — services de couverture et secteurs d'intervention dans les Yvelines."
+  canonical="/plan-du-site/"
+>
+  <section class="section">
+    <div class="container">
+      <div class="sitemap">
+
+        <div class="sec-head" style="text-align:left;margin-bottom:2.5rem;">
+          <h1 style="color:var(--blue);font-size:1.8rem;">Plan du site</h1>
+          <p style="margin-top:.5rem;color:var(--muted);">Toutes les pages de fwa-toitures.fr, organisées par rubrique.</p>
+        </div>
+
+        <!-- Pages principales -->
+        <div class="sitemap__section">
+          <h2>Pages principales</h2>
+          <div class="pds-grid">
+            {PAGES_PRINCIPALES.map(p => (
+              <a href={p.slug} class="pds-card">
+                <strong>{p.titre}</strong>
+                <span>{p.desc}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div class="sitemap__section">
+          <h2>Nos services de couverture</h2>
+          <div class="pds-grid">
+            {SERVICES.map(s => (
+              <a href={s.slug} class="pds-card">
+                <strong>{s.titre}</strong>
+                <span>{SERVICES_DESC[s.slug]}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- Secteurs -->
+        <div class="sitemap__section">
+          <h2>Nos secteurs d'intervention dans les Yvelines</h2>
+          <div class="pds-grid">
+            {SECTEURS.map(s => (
+              <a href={s.slug} class="pds-card">
+                <strong>Couvreur {s.nom}</strong>
+                <span>{BUREAUX_DESC[s.slug]}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .pds-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .pds-card {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    padding: 1.1rem 1.3rem;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    text-decoration: none;
+    transition: border-color .2s, transform .2s, box-shadow .2s;
+  }
+  .pds-card:hover {
+    border-color: var(--blue);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+  .pds-card strong {
+    color: var(--blue);
+    font-size: .95rem;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+  }
+  .pds-card strong::before {
+    content: '›';
+    color: var(--red);
+    font-weight: 700;
+  }
+  .pds-card span {
+    color: var(--muted);
+    font-size: .84rem;
+    line-height: 1.5;
+  }
+  @media (max-width: 900px) { .pds-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .pds-grid { grid-template-columns: 1fr; } }
+</style>

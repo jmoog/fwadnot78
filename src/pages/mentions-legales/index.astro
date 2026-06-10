@@ -1,0 +1,108 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { TEL, EMAIL, ADRESSE_MONTIGNY, ADRESSE_MAGNY, SIRET, SIREN } from '../../data/site';
+---
+
+<Layout
+  title="Mentions légales — Adnot Couverture, Yvelines (78)"
+  description="Mentions légales du site fwa-toitures.fr — Adnot Couverture, entreprise de couverture dans les Yvelines (78)."
+  canonical="/mentions-legales/"
+  noindex={true}
+>
+  <section class="section">
+    <div class="container">
+      <div class="static-wrap">
+        <h1 style="color:var(--blue);margin-bottom:2rem;">Mentions légales</h1>
+
+        <p>
+          Le site accessible à l'adresse <a href="https://fwa-toitures.fr/">https://fwa-toitures.fr/</a>
+          est édité par Francky et Warren ADNOT, entrepreneurs individuels exerçant sous
+          le nom commercial <strong>Adnot Couverture</strong>.
+        </p>
+
+        <h2>Éditeur du site</h2>
+        <p>
+          <strong>Nom commercial :</strong> Adnot Couverture<br />
+          <strong>Exploitants :</strong> Francky et Warren ADNOT<br />
+          <strong>Statut juridique :</strong> Entreprise individuelle<br />
+          <strong>SIREN :</strong> {SIREN}<br />
+          <strong>SIRET :</strong> {SIRET}<br />
+          <strong>Activité :</strong> Travaux de couverture<br />
+          <strong>Directeurs de la publication :</strong> Francky et Warren ADNOT
+        </p>
+
+        <h2>Coordonnées</h2>
+        <p>
+          <strong>Bureau de Montigny-le-Bretonneux :</strong> {ADRESSE_MONTIGNY}<br />
+          <strong>Bureau de Magny-les-Hameaux :</strong> {ADRESSE_MAGNY}<br />
+          <strong>Adresse postale :</strong> 86 Chemin de la Croix Rouge Fer, 91310 Longpont-sur-Orge<br />
+          <strong>Téléphone :</strong> <a href="tel:+33760817383">{TEL}</a><br />
+          <strong>Email :</strong> <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        </p>
+
+        <h2>Hébergement</h2>
+        <p>
+          Ce site est hébergé par <strong>O2switch</strong> (SAS au capital de 100 000 €)<br />
+          Chemin des Pardiaux, 63000 Clermont-Ferrand — France<br />
+          Téléphone : 04 44 44 60 40 —
+          <a href="https://www.o2switch.fr" target="_blank" rel="noopener noreferrer">www.o2switch.fr</a>
+        </p>
+
+        <h2>Assurance professionnelle</h2>
+        <p>
+          L'entreprise est couverte par une assurance de responsabilité civile professionnelle
+          et une garantie décennale souscrites auprès de <strong>Progeas</strong>, pour des
+          interventions en France métropolitaine.
+        </p>
+
+        <h2>Propriété intellectuelle</h2>
+        <p>
+          L'ensemble du contenu de ce site (textes, photographies de chantiers, logo, vidéos,
+          icônes) est la propriété exclusive de Francky et Warren ADNOT ou de leurs partenaires,
+          protégé par le Code de la propriété intellectuelle. Toute reproduction, représentation
+          ou diffusion, même partielle, est interdite sans autorisation préalable écrite.
+        </p>
+
+        <h2>Données personnelles (RGPD)</h2>
+        <p>
+          <strong>Responsables de traitement :</strong> Francky et Warren ADNOT.
+        </p>
+        <p>
+          Les données transmises via le formulaire de devis ou par email (nom, téléphone,
+          email, commune, description des travaux) sont utilisées uniquement pour répondre
+          à votre demande et établir un devis. Elles ne font l'objet d'aucune exploitation
+          commerciale, ne sont transmises à aucun tiers et ne sont pas transférées hors de
+          l'Union Européenne. Elles sont conservées au maximum 3 ans après le dernier contact.
+        </p>
+        <p>
+          Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi
+          Informatique et Libertés, vous disposez d'un droit d'accès, de rectification,
+          d'effacement et d'opposition sur vos données. Pour l'exercer, écrivez-nous à
+          <a href={`mailto:${EMAIL}`}>{EMAIL}</a>. Si vous estimez que vos droits ne sont pas
+          respectés, vous pouvez adresser une réclamation à la
+          <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer">CNIL</a>.
+        </p>
+
+        <h2>Cookies</h2>
+        <p>
+          Ce site n'utilise ni cookies de traçage, ni cookies publicitaires, ni outil de mesure
+          d'audience. Seuls des cookies techniques strictement nécessaires au fonctionnement du
+          site peuvent être déposés ; ils ne requièrent pas de consentement.
+        </p>
+
+        <h2>Responsabilité</h2>
+        <p>
+          Adnot Couverture s'efforce d'assurer l'exactitude et la mise à jour des informations
+          publiées sur ce site. Sa responsabilité ne saurait toutefois être engagée en cas
+          d'erreur, d'omission ou d'indisponibilité temporaire du site. Les liens externes
+          présents sur le site ne sauraient engager la responsabilité de l'éditeur quant à
+          leur contenu.
+        </p>
+
+        <p style="margin-top:2rem;font-size:.85rem;color:var(--muted);">
+          Dernière mise à jour : juin 2026
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

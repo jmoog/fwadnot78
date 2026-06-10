@@ -1,0 +1,392 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE_URL, NOM, TEL, TEL_HREF, SECTEURS, SCHEMA_ORG } from '../data/site';
+
+// ── Cards bureaux (photo + adresse de chaque établissement) ──
+const BUREAUX = [
+  {
+    ...SECTEURS[0],
+    photo: { src: "/heroe/adnot-couvreur-yvelines-022.webp", alt: "Camionnette Adnot Couverture à Montigny-le-Bretonneux" },
+    desc : "Notre bureau de la rue Colbert dessert Saint-Quentin-en-Yvelines et ses environs : Guyancourt, Voisins-le-Bretonneux, Trappes, Élancourt.",
+  },
+  {
+    ...SECTEURS[1],
+    photo: { src: "/heroe/toiture-drone-yvelines-003.webp", alt: "Chantier de toiture vu du ciel près de Magny-les-Hameaux" },
+    desc : "Depuis la rue Joseph Lemarchand, nous rayonnons sur la vallée de Chevreuse : Chevreuse, Saint-Rémy-lès-Chevreuse, Le Mesnil-Saint-Denis, Châteaufort.",
+  },
+];
+
+// ── Cards services de la home (signal d'intention → page service) ──
+const SERVICES_HOME = [
+  {
+    titre : "Réfection de toiture",
+    slug  : "/refection-de-toiture-78/",
+    photo : { src: "/images/demoussage-toiture-yvelines-002.webp", alt: "Couvreurs Adnot intervenant sur une toiture dans les Yvelines" },
+    signal: "Votre couverture arrive en fin de vie, les tuiles cassent les unes après les autres ?",
+    desc  : "Dépose complète, écran de sous-toiture, liteaux neufs et couverture reposée rang par rang, faîtage compris. Plus d'infos sur la",
+    anchor: "réfection de toiture dans les Yvelines (78)",
+  },
+  {
+    titre : "Réparation et entretien de toiture",
+    slug  : "/reparation-de-toiture-78/",
+    photo : { src: "/images/reparation-toiture-yvelines-041.webp", alt: "Couvreur Adnot réparant une couverture en tuiles dans les Yvelines" },
+    signal: "Une fuite au plafond, des tuiles glissées, un solin qui se décolle ?",
+    desc  : "Nous localisons l'origine de l'infiltration puis remplaçons les éléments touchés : tuiles, noues, abergements, raccords d'étanchéité. Plus d'infos sur la",
+    anchor: "réparation de toiture dans les Yvelines (78)",
+  },
+  {
+    titre : "Démoussage et nettoyage de toiture",
+    slug  : "/demoussage-de-toiture-78/",
+    photo : { src: "/images/demoussage-toiture-yvelines-005.webp", alt: "Toiture à moitié démoussée par Adnot Couverture dans les Yvelines" },
+    signal: "Mousses, lichens et traces noires s'installent sur vos tuiles ?",
+    desc  : "Brossage, traitement anti-mousse et hydrofuge : nos photos avant / après montrent le résultat, versant par versant. Plus d'infos sur le",
+    anchor: "démoussage de toiture dans les Yvelines (78)",
+  },
+  {
+    titre : "Gouttières et zinguerie",
+    slug  : "/gouttieres-zinguerie-78/",
+    photo : { src: "/heroe/zinguerie-gouttiere-yvelines-001.webp", alt: "Travaux de zinguerie et gouttières sur une maison des Yvelines" },
+    signal: "Une gouttière qui déborde, une descente qui se décroche ?",
+    desc  : "Pose et remplacement de gouttières en zinc ou en aluminium, descentes, abergements de cheminée et habillages de rives. Plus d'infos sur les",
+    anchor: "gouttières et la zinguerie dans les Yvelines (78)",
+  },
+  {
+    titre : "Velux et fenêtres de toit",
+    slug  : "/velux-fenetre-de-toit-78/",
+    photo : { src: "/heroe/pose-velux-yvelines-019.webp", alt: "Francky et Warren Adnot remplaçant une fenêtre de toit dans les Yvelines" },
+    signal: "Des combles sombres à éclairer, une fenêtre de toit d'origine à remplacer ?",
+    desc  : "Création d'ouverture, pose et remplacement toutes dimensions, raccords d'étanchéité sur tuiles ou ardoises, volets et stores compris. Plus d'infos sur la",
+    anchor: "pose de Velux dans les Yvelines (78)",
+  },
+  {
+    titre : "Isolation de toiture",
+    slug  : "/isolation-de-toiture-78/",
+    photo : { src: "/images/refection-toiture-yvelines-037.webp", alt: "Écran de sous-toiture et liteaux posés lors d'une isolation dans les Yvelines" },
+    signal: "Une maison difficile à chauffer, une isolation de combles dépassée ?",
+    desc  : "Isolation par sarking ou entre chevrons, écran de sous-toiture posé dans le même temps, ventilation de la couverture préservée. Plus d'infos sur l'",
+    anchor: "isolation de toiture dans les Yvelines (78)",
+  },
+];
+
+const schema = {
+  ...SCHEMA_ORG,
+  "alternateName": [
+    "Couvreur 78",
+    "Couvreur Yvelines",
+    "Couvreur dans les Yvelines",
+    "Entreprise de couverture Yvelines",
+    "Artisan couvreur 78",
+    "Couvreur zingueur Yvelines",
+    "FWA Toitures",
+    "Adnot Couverture 78",
+  ],
+  "description": "Adnot Couverture — entreprise de couverture dans les Yvelines fondée par Francky et Warren Adnot. Réfection, réparation, démoussage, zinguerie et Velux. Devis et déplacement offerts.",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": `Prestations ${NOM}`,
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Réfection de toiture", "url": `${SITE_URL}/refection-de-toiture-78/` } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Réparation et entretien de toiture", "url": `${SITE_URL}/reparation-de-toiture-78/` } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Démoussage et nettoyage de toiture", "url": `${SITE_URL}/demoussage-de-toiture-78/` } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Gouttières et zinguerie", "url": `${SITE_URL}/gouttieres-zinguerie-78/` } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pose et remplacement de Velux", "url": `${SITE_URL}/velux-fenetre-de-toit-78/` } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Isolation de toiture", "url": `${SITE_URL}/isolation-de-toiture-78/` } },
+    ],
+  },
+};
+---
+
+<Layout
+  title="Couvreur dans les Yvelines (78) — Adnot Couverture"
+  description="Francky et Warren Adnot réalisent vos travaux de toiture dans les Yvelines : réfection, réparation, démoussage, zinguerie, velux. Devis et déplacement offerts."
+  canonical="/"
+  schema={schema}
+>
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section class="hero" aria-label={`Présentation ${NOM}`}>
+  <div class="container hero__inner">
+
+    <div class="hero__text">
+      <p class="hero__eyebrow">Couverture — Charpente — Zinguerie</p>
+
+      <h1>Adnot Couverture, entreprise de couverture dans les Yvelines</h1>
+
+      <p class="hero__sub" style="text-align:left;">
+        <strong>Francky et Warren Adnot</strong>, deux frères couvreurs, réalisent
+        vos travaux de toiture dans tout le département depuis leurs bureaux de
+        Montigny-le-Bretonneux et de Magny-les-Hameaux&nbsp;: réfection, recherche
+        de fuite, démoussage, zinguerie, pose de Velux et isolation.
+      </p>
+
+      <ul class="hero__list" style="list-style:none;padding:0;margin:0 0 1.5rem;display:flex;flex-direction:column;gap:.5rem;color:rgba(255,255,255,.92);font-size:.98rem;">
+        <li style="display:flex;align-items:center;gap:.6rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+          Devis et déplacement offerts
+        </li>
+        <li style="display:flex;align-items:center;gap:.6rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+          Garantie décennale Progeas
+        </li>
+        <li style="display:flex;align-items:center;gap:.6rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+          Inspection des toitures par drone
+        </li>
+        <li style="display:flex;align-items:center;gap:.6rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+          Chantiers photographiés avant / après
+        </li>
+      </ul>
+
+      <div class="hero__btns">
+        <a href="/devis-gratuit/" class="btn btn--red">
+          <svg class="icone" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          Devis Gratuit
+        </a>
+        <a href={TEL_HREF} class="btn btn--outline">
+          <svg class="icone" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.45 2 2 0 0 1 3.59 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+          {TEL}
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__img-wrap">
+      <!-- Vidéo drone (boucle muette, lancée après le load pour préserver le LCP) -->
+      <video
+        class="hero__video"
+        muted loop playsinline
+        preload="none"
+        width="1280" height="720"
+        poster="/videos/vue-drone-toiture-yvelines-poster.webp"
+        aria-label="Vue aérienne d'un chantier de toiture Adnot Couverture dans les Yvelines"
+      >
+        <source src="/videos/vue-drone-toiture-yvelines.mp4" type="video/mp4" />
+      </video>
+      <div class="hero__garantie-band hero__garantie-band--progeas">
+        <img src="/logo/progeas_logo.png" alt="Progeas — assurance garantie décennale d'Adnot Couverture" width="101" height="28" loading="eager" />
+        Notre garantie décennale
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script is:inline>
+  // Démarre la vidéo du hero après le chargement complet de la page,
+  // sauf si l'utilisateur préfère réduire les animations.
+  (function () {
+    var v = document.querySelector('.hero__video');
+    if (!v) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var start = function () { v.load(); v.play().catch(function () {}); };
+    if (document.readyState === 'complete') start();
+    else window.addEventListener('load', start);
+  })();
+</script>
+
+<!-- ═══════════════════════════════════════════════
+     PRESTATIONS — signal d'intention → service
+═══════════════════════════════════════════════ -->
+<section class="section" aria-labelledby="sec-prestations">
+  <div class="container">
+    <div class="sec-head">
+      <h2 id="sec-prestations">Nos services de couverture dans les Yvelines</h2>
+      <p style="text-align:left;max-width:720px;margin:.8rem auto 0;">
+        <strong>De la tuile à remplacer à la réfection complète</strong>, nous
+        prenons en charge l'ensemble de la toiture&nbsp;: couverture, faîtage,
+        solins, gouttières, fenêtres de toit et isolation des combles. Six
+        prestations détaillées, du diagnostic à la réception du chantier.
+      </p>
+    </div>
+    <div class="silos silos--3">
+      {SERVICES_HOME.map(s => (
+        <div class="silo-card silo-card--photo" style="text-align:left;">
+          <img class="silo-card__photo" src={s.photo.src} alt={s.photo.alt} width="800" height="600" loading="lazy" />
+          <div class="silo-card__body">
+            <h3 style="text-align:left;">{s.titre}</h3>
+            <p style="font-style:italic;color:var(--red-l);font-size:.92rem;margin-bottom:.6rem;text-align:left;line-height:1.5;hyphens:auto;">
+              {s.signal}
+            </p>
+            <p style="text-align:left;line-height:1.65;hyphens:auto;margin-bottom:0;">
+              {s.desc} <a href={s.slug} style="color:var(--red);font-weight:700;text-decoration:underline;">{s.anchor}</a>.
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     CTA INTERVENTION — texte gauche + image droite
+═══════════════════════════════════════════════ -->
+<section class="cta-split" aria-labelledby="sec-cta-intervention">
+  <div class="container">
+    <div class="cta-split__grid">
+      <div class="cta-split__text">
+        <h2 id="sec-cta-intervention" style="color:#fff;margin-bottom:1rem;">
+          Besoin d'un couvreur dans les Yvelines ?
+        </h2>
+        <p style="color:rgba(255,255,255,.88);font-size:1.05rem;line-height:1.65;text-align:left;margin-bottom:1.8rem;">
+          Décrivez-nous votre toiture par téléphone : nous venons la voir, au
+          besoin nous la survolons au drone, puis nous chiffrons les travaux
+          poste par poste. <strong>Le devis et le déplacement sont offerts</strong>,
+          pour un dépannage comme pour une réfection complète.
+        </p>
+        <div class="hero__btns" style="margin-bottom:0;">
+          <a href={TEL_HREF} class="btn btn--red">
+            <svg class="icone" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.45 2 2 0 0 1 3.59 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+            {TEL}
+          </a>
+          <a href="/devis-gratuit/" class="btn btn--outline">
+            <svg class="icone" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            Demander une intervention
+          </a>
+        </div>
+      </div>
+      <div class="cta-split__img">
+        <img
+          src="/heroe/adnot-couvreur-yvelines-009.webp"
+          alt="Camionnette Adnot Couverture devant une maison des Yvelines"
+          width="520" height="380"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SECTEURS — 2 établissements
+═══════════════════════════════════════════════ -->
+<section class="section section--light" aria-labelledby="sec-zones">
+  <div class="container">
+    <div class="sec-head">
+      <h2 id="sec-zones">Nos deux bureaux dans les Yvelines (78)</h2>
+      <p style="text-align:left;max-width:720px;margin:.8rem auto 0;">
+        Une adresse au cœur de Saint-Quentin-en-Yvelines, une seconde aux portes
+        de la vallée de Chevreuse : où que se trouve votre toiture dans le 78,
+        l'un de nos deux bureaux est tout proche.
+      </p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;max-width:980px;margin:0 auto;" class="bureaux-grid">
+      {BUREAUX.map(s => (
+        <div class="silo-card silo-card--photo" style="text-align:left;">
+          <img class="silo-card__photo" src={s.photo.src} alt={s.photo.alt} width="800" height="600" loading="lazy" />
+          <div class="silo-card__body">
+            <h3 style="text-align:left;font-size:1.1rem;">{s.nom}</h3>
+
+            <div class="bureau-row">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue-l)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>{s.adresse}</span>
+            </div>
+
+            <p style="text-align:left;line-height:1.65;hyphens:auto;margin:.8rem 0 0;">
+              {s.desc} <a href={s.slug} style="color:var(--red);font-weight:700;text-decoration:underline;">Couvreur à {s.nom}</a>.
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FRANCKY & WARREN ADNOT — portrait
+═══════════════════════════════════════════════ -->
+<section class="portrait-section" aria-labelledby="sec-portrait">
+  <div class="container">
+    <div class="portrait-grid">
+      <div class="portrait-grid__img">
+        <img
+          src="/images/adnot-couvreur-yvelines-017.webp"
+          alt="Couvreur Adnot sur une toiture dans les Yvelines"
+          width="600" height="800"
+          loading="lazy"
+        />
+      </div>
+      <div class="portrait-grid__content">
+        <h2 id="sec-portrait">Francky et Warren Adnot, couvreurs dans les Yvelines</h2>
+        <p>
+          Adnot Couverture, c'est nous : deux frères, <strong>présents sur tous
+          nos chantiers</strong> du premier rendez-vous à la réception. Celui qui
+          monte sur votre toit est celui qui a établi le devis, et vous suivez
+          l'avancement sur les photos prises avant, pendant et après les travaux.
+        </p>
+        <p>
+          <strong>La couverture est notre cœur de métier</strong>, et nous prenons
+          aussi en charge la charpente, le ramonage et la peinture : un seul
+          interlocuteur pour toute l'enveloppe de la maison. L'ensemble de nos
+          chantiers est couvert par la garantie décennale Progeas.
+        </p>
+        <ul class="portrait-list" style="list-style:none;padding:0;margin:1.5rem 0 0;display:flex;flex-direction:column;gap:.55rem;">
+          <li style="display:flex;align-items:center;gap:.7rem;color:rgba(255,255,255,.92);font-size:.98rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+            Inspection par drone avant chiffrage
+          </li>
+          <li style="display:flex;align-items:center;gap:.7rem;color:rgba(255,255,255,.92);font-size:.98rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+            Bureaux à Montigny-le-Bretonneux et Magny-les-Hameaux
+          </li>
+          <li style="display:flex;align-items:center;gap:.7rem;color:rgba(255,255,255,.92);font-size:.98rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+            Devis et déplacement offerts
+          </li>
+          <li style="display:flex;align-items:center;gap:.7rem;color:rgba(255,255,255,.92);font-size:.98rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+            Couverture, charpente, ramonage et peinture
+          </li>
+        </ul>
+        <div style="margin-top:1.8rem;">
+          <a href={TEL_HREF} class="btn btn--red" style="font-size:1.15rem;padding:1rem 1.8rem;">
+            <svg class="icone" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.45 2 2 0 0 1 3.59 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+            {TEL}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     RÉALISATIONS
+═══════════════════════════════════════════════ -->
+<section class="section section--light" aria-labelledby="sec-galerie">
+  <div class="container">
+    <div class="sec-head">
+      <h2 id="sec-galerie">Quelques chantiers réalisés dans les Yvelines</h2>
+      <p>Réfections, démoussages, zinguerie et poses de Velux, photographiés au sol et au drone.</p>
+    </div>
+    <div class="galerie-grid">
+      <div class="galerie-item">
+        <img src="/images/refection-toiture-yvelines-025.webp" alt="Réfection de toiture en cours dans les Yvelines — Adnot Couverture" loading="lazy" />
+      </div>
+      <div class="galerie-item">
+        <img src="/images/refection-toiture-yvelines-057.webp" alt="Pose de tuiles sur une toiture dans les Yvelines" loading="lazy" />
+      </div>
+      <div class="galerie-item">
+        <img src="/images/demoussage-toiture-yvelines-010.webp" alt="Démoussage de toiture par Adnot Couverture — Yvelines (78)" loading="lazy" />
+      </div>
+      <div class="galerie-item">
+        <img src="/images/pose-velux-yvelines-004.webp" alt="Pose d'une fenêtre de toit Velux dans les Yvelines" loading="lazy" />
+      </div>
+      <div class="galerie-item">
+        <img src="/images/zinguerie-gouttiere-yvelines-010.webp" alt="Travaux de zinguerie et gouttières — Adnot Couverture (78)" loading="lazy" />
+      </div>
+      <div class="galerie-item">
+        <img src="/images/faitage-aretier-yvelines-010.webp" alt="Réfection d'un faîtage par Adnot Couverture dans les Yvelines" loading="lazy" />
+      </div>
+      <div class="galerie-item">
+        <img src="/images/toiture-drone-yvelines-002.webp" alt="Chantier de couverture vu du ciel — Yvelines (78)" loading="lazy" />
+      </div>
+      <div class="galerie-item">
+        <img src="/images/adnot-couvreur-yvelines-046.webp" alt="Camion-grue Adnot Couverture sur un chantier dans les Yvelines" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+</Layout>

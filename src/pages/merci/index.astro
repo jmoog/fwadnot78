@@ -1,0 +1,117 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { TEL, TEL_HREF, SERVICES, SIRET } from '../../data/site';
+---
+
+<Layout
+  title="Demande envoyée — Adnot Couverture, Yvelines (78)"
+  description="Votre demande de devis a bien été envoyée à Adnot Couverture. Nous vous recontacterons rapidement."
+  canonical="/merci/"
+  noindex={true}
+>
+
+  <!-- MESSAGE CONFIRMATION -->
+  <section class="section" style="padding-top:4rem;padding-bottom:3rem;">
+    <div class="container" style="max-width:800px;text-align:center;">
+
+      <div style="width:64px;height:64px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+
+      <h1 style="font-size:2.4rem;margin-bottom:.5rem;color:var(--blue);">
+        Demande bien reçue !
+      </h1>
+
+      <p style="font-size:1.1rem;color:#475569;max-width:560px;margin:0 auto 1rem;">
+        Un accusé de réception vient de partir vers votre adresse email,
+        avec le récapitulatif de votre demande. Francky ou Warren vous
+        rappelle pour préciser votre projet et convenir d'une visite.
+      </p>
+
+      <p style="font-size:1rem;color:#475569;max-width:560px;margin:0 auto 2rem;">
+        En attendant, vous pouvez joindre directement Adnot Couverture par téléphone.
+      </p>
+
+      <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem;">
+        <a href="/" class="btn btn--blue">Retour à l'accueil</a>
+        <a href={TEL_HREF} class="btn btn--red">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icone icone--white"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.45 2 2 0 0 1 3.59 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+          {TEL}
+        </a>
+      </div>
+
+      <!-- Services -->
+      <h2 style="font-size:1.3rem;margin-bottom:1.5rem;color:var(--blue);">Nos prestations</h2>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;text-align:left;">
+        {SERVICES.map(s => (
+          <a href={s.slug} class="card-merci">
+            {s.titre}
+          </a>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PORTRAIT FRANCKY & WARREN -->
+  <section class="portrait-section">
+    <div class="container">
+      <div class="portrait-grid">
+        <div class="portrait-grid__img">
+          <img
+            src="/images/adnot-couvreur-yvelines-020.webp"
+            alt="Couvreur Adnot assis sur le faîtage d'une toiture dans les Yvelines"
+            width="380" height="480"
+            loading="lazy"
+          />
+        </div>
+        <div class="portrait-grid__content">
+          <span style="font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--red-l);display:block;margin-bottom:.6rem;">Vos couvreurs dans les Yvelines</span>
+          <h2>Francky et Warren Adnot<br/>Adnot Couverture</h2>
+          <p>
+            Deux frères couvreurs, deux bureaux — Montigny-le-Bretonneux et
+            Magny-les-Hameaux — et des chantiers menés dans tout le
+            département : réfection, réparation, démoussage, zinguerie,
+            fenêtres de toit et isolation.
+          </p>
+          <p>
+            Celui qui vous rappellera est celui qui montera sur votre toit :
+            vous gardez le même interlocuteur du devis à la réception du
+            chantier.
+          </p>
+          <div class="portrait-badges">
+            <span class="portrait-badge">Devis et déplacement offerts</span>
+            <span class="portrait-badge">Garantie décennale Progeas</span>
+            <span class="portrait-badge">Couverture, charpente, ramonage, peinture</span>
+          </div>
+          <div style="margin-top:1.8rem;display:flex;gap:1rem;flex-wrap:wrap;">
+            <a href="/devis-gratuit/" class="btn btn--red">Nouveau devis</a>
+            <a href={TEL_HREF} class="btn btn--outline">{TEL}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .card-merci {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    padding: 1rem 1.2rem;
+    background: #fff;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--blue);
+    font-weight: 600;
+    transition: box-shadow .2s, border-color .2s;
+  }
+  .card-merci:hover {
+    border-color: var(--blue);
+    box-shadow: 0 2px 8px rgba(66,97,173,.15);
+  }
+</style>
