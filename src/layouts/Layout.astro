@@ -1,5 +1,6 @@
 ---
-import { SITE_URL, NOM, TEL, TEL_HREF, EMAIL, ADRESSE_MONTIGNY, ADRESSE_MAGNY, SIRET, SERVICES, SECTEURS, SCHEMA_ORG } from '../data/site';
+import '../../public/css/style.css';
+import { SITE_URL, NOM, TEL, TEL_HREF, EMAIL, ADRESSE_MONTIGNY, ADRESSE_MAGNY, SIRET, SERVICES, SECTEURS, VILLES, SCHEMA_ORG } from '../data/site';
 
 export interface Props {
   title       : string;
@@ -10,6 +11,7 @@ export interface Props {
   noindex    ?: boolean;
   hideDevisCta ?: boolean;   // true sur /devis-gratuit/ : masque les CTA devis du header/footer
   nap ?: { tel: string; telHref: string; adresse: string };  // NAP local (pages établissements) : header/footer alignés sur la fiche
+  preloadImage ?: string;    // image LCP à précharger (fetchpriority=high)
 }
 
 const {
@@ -21,6 +23,7 @@ const {
   noindex    = false,
   hideDevisCta = false,
   nap,
+  preloadImage,
 } = Astro.props;
 
 // NAP affiché dans le header/footer : celui de l'établissement si fourni, sinon le NAP principal
@@ -86,8 +89,7 @@ const schemaData = schema ?? SCHEMA_ORG;
     @media(max-width:600px) { .topbar__addr { display:none; } }
   </style>
 
-  <!-- CSS principal -->
-  <link rel="stylesheet" href="/css/style.css" />
+  {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
 
   <!-- Schema.org -->
   <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
@@ -113,7 +115,7 @@ const schemaData = schema ?? SCHEMA_ORG;
 <header class="hd" id="hd">
   <div class="hd__inner container">
     <a href="/" class="logo" aria-label={`${NOM} — accueil`}>
-      <img src="/logo/logo-adnot-couverture.webp" alt={`Logo ${NOM}`} width="128" height="128" />
+      <img src="/logo/logo-adnot-couverture-256.webp" alt={`Logo ${NOM}`} width="128" height="128" />
     </a>
 
     <nav class="nav" id="nav" aria-label="Navigation principale">
@@ -177,7 +179,7 @@ const schemaData = schema ?? SCHEMA_ORG;
 
       <div class="ft__brand">
         <a href="/" class="logo logo--ft ft__logo-center" aria-label={NOM}>
-          <img src="/logo/logo-adnot-couverture.webp" alt={NOM} class="logo--img-ft" width="128" height="128" loading="lazy" />
+          <img src="/logo/logo-adnot-couverture-256.webp" alt={NOM} class="logo--img-ft" width="128" height="128" loading="lazy" />
         </a>
         <div class="ft__adresse">
           <img src="/icones/pin-map.svg" alt="" width="13" height="13" class="icone icone--ft" />
@@ -248,6 +250,7 @@ const schemaData = schema ?? SCHEMA_ORG;
         <h4>Nos secteurs</h4>
         <ul>
           {SECTEURS.map(s => <li><a href={s.slug}>{s.nom}</a></li>)}
+          {VILLES.map(v => <li><a href={v.slug}>{v.nom}</a></li>)}
         </ul>
       </div>
 

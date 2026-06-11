@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { SERVICES, SECTEURS, ADRESSE_MONTIGNY, ADRESSE_MAGNY } from '../../data/site';
+import { SERVICES, SECTEURS, VILLES, ADRESSE_MONTIGNY, ADRESSE_MAGNY } from '../../data/site';
 
 const PAGES_PRINCIPALES = [
   { titre: "Accueil",          slug: "/",                  desc: "Adnot Couverture, entreprise de couverture dans les Yvelines" },
@@ -65,12 +65,25 @@ const BUREAUX_DESC: Record<string, string> = {
 
         <!-- Secteurs -->
         <div class="sitemap__section">
-          <h2>Nos secteurs d'intervention dans les Yvelines</h2>
+          <h2>Nos deux établissements</h2>
           <div class="pds-grid">
             {SECTEURS.map(s => (
               <a href={s.slug} class="pds-card">
                 <strong>Couvreur {s.nom}</strong>
                 <span>{BUREAUX_DESC[s.slug]}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- Villes desservies -->
+        <div class="sitemap__section">
+          <h2>Les villes où nous intervenons</h2>
+          <div class="pds-grid">
+            {VILLES.map(v => (
+              <a href={v.slug} class="pds-card">
+                <strong>Couvreur {v.nom}</strong>
+                <span>Travaux de couverture à {v.nom} ({v.cp})</span>
               </a>
             ))}
           </div>

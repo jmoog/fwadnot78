@@ -36,6 +36,22 @@ export const SECTEURS = [
   { nom: "Magny-les-Hameaux",      slug: "/couvreur-magny-les-hameaux/",      adresse: ADRESSE_MAGNY },
 ];
 
+// ── Villes desservies (zone des fiches Google, une page chacune) ─────────
+export const VILLES = [
+  { nom: "Voisins-le-Bretonneux",  slug: "/couvreur-voisins-le-bretonneux/",  cp: "78960", bureau: "montigny" },
+  { nom: "Versailles",             slug: "/couvreur-versailles/",             cp: "78000", bureau: "montigny" },
+  { nom: "Châteaufort",            slug: "/couvreur-chateaufort/",            cp: "78117", bureau: "magny" },
+  { nom: "Saint-Lambert-des-Bois", slug: "/couvreur-saint-lambert-des-bois/", cp: "78470", bureau: "magny" },
+  { nom: "Milon-la-Chapelle",      slug: "/couvreur-milon-la-chapelle/",      cp: "78470", bureau: "magny" },
+  { nom: "Dampierre-en-Yvelines",  slug: "/couvreur-dampierre-en-yvelines/",  cp: "78720", bureau: "magny" },
+  { nom: "Cernay-la-Ville",        slug: "/couvreur-cernay-la-ville/",        cp: "78720", bureau: "magny" },
+  { nom: "Gif-sur-Yvette",         slug: "/couvreur-gif-sur-yvette/",         cp: "91190", bureau: "magny" },
+  { nom: "Saclay",                 slug: "/couvreur-saclay/",                 cp: "91400", bureau: "magny" },
+  { nom: "Villiers-le-Bâcle",      slug: "/couvreur-villiers-le-bacle/",      cp: "91190", bureau: "magny" },
+  { nom: "Limours",                slug: "/couvreur-limours/",                cp: "91470", bureau: "magny" },
+  { nom: "Les Molières",           slug: "/couvreur-les-molieres/",           cp: "91470", bureau: "magny" },
+];
+
 // ── Schéma de base (RoofingContractor, 2 établissements) ─────────────────
 export const SCHEMA_ORG = {
   "@context": "https://schema.org",

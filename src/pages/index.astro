@@ -98,6 +98,7 @@ const schema = {
   description="Francky et Warren Adnot réalisent vos travaux de toiture dans les Yvelines : réfection, réparation, démoussage, zinguerie, velux. Devis et déplacement offerts."
   canonical="/"
   schema={schema}
+  preloadImage="/videos/vue-drone-toiture-yvelines-poster.webp"
 >
 
 <!-- ═══════════════════════════════════════════════
@@ -198,7 +199,7 @@ const schema = {
     <div class="silos silos--3">
       {SERVICES_HOME.map(s => (
         <div class="silo-card silo-card--photo" style="text-align:left;">
-          <img class="silo-card__photo" src={s.photo.src} alt={s.photo.alt} width="800" height="600" loading="lazy" />
+          <img class="silo-card__photo" src={s.photo.src.replace('.webp', '-800.webp')} srcset={`${s.photo.src.replace('.webp', '-800.webp')} 800w, ${s.photo.src} 1600w`} sizes="(min-width: 900px) 756px, 100vw" alt={s.photo.alt} width="800" height="600" loading="lazy" />
           <div class="silo-card__body">
             <h3 style="text-align:left;">{s.titre}</h3>
             <p style="font-style:italic;color:var(--red-l);font-size:.92rem;margin-bottom:.6rem;text-align:left;line-height:1.5;hyphens:auto;">
@@ -278,7 +279,7 @@ const schema = {
     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;max-width:980px;margin:0 auto;" class="bureaux-grid">
       {BUREAUX.map(s => (
         <div class="silo-card silo-card--photo" style="text-align:left;">
-          <img class="silo-card__photo" src={s.photo.src} alt={s.photo.alt} width="800" height="600" loading="lazy" />
+          <img class="silo-card__photo" src={s.photo.src.replace('.webp', '-800.webp')} srcset={`${s.photo.src.replace('.webp', '-800.webp')} 800w, ${s.photo.src} 1600w`} sizes="(min-width: 900px) 480px, 100vw" alt={s.photo.alt} width="800" height="600" loading="lazy" />
           <div class="silo-card__body">
             <h3 style="text-align:left;font-size:1.1rem;">{s.nom}</h3>
 

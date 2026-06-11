@@ -21,4 +21,11 @@ export default defineConfig({
   security: {
     checkOrigin: false,
   },
+  vite: {
+    cacheDir: 'node_modules/.vite-build',
+  },
+  // CSS importé par le Layout, inliné dans chaque page (zéro requête bloquante)
+  build: {
+    inlineStylesheets: 'always',
+  },
 });

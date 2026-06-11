@@ -29,6 +29,7 @@ export interface Props {
   avisTitle    ?: string;             // titre de la section avis
   avisAfficheTotal ?: boolean;        // false = masque « — X avis sur notre fiche... »
   avisPosition ?: 'hero' | 'services'; // emplacement du carrousel (défaut : sous les prestations)
+  villesProches?: { nom: string; slug: string }[]; // pages villes desservies par ce bureau (maillage)
   galerie     : { src: string; alt: string }[];
   galerieTitle: string;
   portraitTitle: string;
@@ -38,7 +39,7 @@ export interface Props {
 const {
   title, description, canonical, ville, h1, h1Sub, heroDesc, heroImg,
   adresse, rue, cp, tel, telHref, telFixe, geo, sameAs,
-  servicesTitle, servicesIntro, cardsTexts, avisTitle, avisAfficheTotal, avisPosition,
+  servicesTitle, servicesIntro, cardsTexts, avisTitle, avisAfficheTotal, avisPosition, villesProches,
   galerie, galerieTitle, portraitTitle, ctaTitle,
 } = Astro.props;
 
@@ -186,6 +187,7 @@ const schema = {
           alt={heroImg.alt}
           width="1280" height="720"
           loading="eager"
+          fetchpriority="high"
           style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--r) var(--r) 0 0;box-shadow:var(--shadow-lg);display:block;"
         />
         <div class="hero__garantie-band hero__garantie-band--progeas">
@@ -213,7 +215,7 @@ const schema = {
       <div class="silos silos--3">
         {SERVICES_CARDS.map(s => (
           <div class="silo-card silo-card--photo" style="text-align:left;">
-            <img class="silo-card__photo" src={s.photo.src} alt={s.photo.alt} width="800" height="600" loading="lazy" />
+            <img class="silo-card__photo" src={s.photo.src.replace('.webp', '-800.webp')} srcset={`${s.photo.src.replace('.webp', '-800.webp')} 800w, ${s.photo.src} 1600w`} sizes="(min-width: 900px) 756px, 100vw" alt={s.photo.alt} width="800" height="600" loading="lazy" />
             <div class="silo-card__body">
               <h3 style="text-align:left;">{s.titre}</h3>
               <p style="font-style:italic;color:var(--red-l);font-size:.92rem;margin-bottom:.6rem;text-align:left;line-height:1.5;hyphens:auto;">
@@ -390,6 +392,9 @@ const schema = {
             <a href={s.slug} class="ville-pill">
               <strong>{s.nom}</strong>
             </a>
+          ))}
+          {(villesProches ?? []).map(v => (
+            <a href={v.slug} class="ville-pill">{v.nom}</a>
           ))}
         </div>
       </div>
