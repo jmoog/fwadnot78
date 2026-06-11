@@ -10,10 +10,37 @@ import VillePage from '../../components/VillePage.astro';
   cp="91190"
   dept="Essonne"
   bureau="magny"
-  h1="Votre couvreur à Villiers-le-Bâcle, sur le plateau de Saclay"
+  h1="Artisan couvreur à Villiers-le-Bâcle"
   heroDesc="Un coup de vent a déplacé des tuiles, la pluie suit le conduit de cheminée, le toit du garage verdit ? Faites venir un <strong>couvreur</strong>. Nous réparons et entretenons les <strong>couvertures de Villiers-le-Bâcle</strong>, du village aux fermes du plateau."
-  heroImg={{ src: "/images/zinguerie-gouttiere-yvelines-013.webp", alt: "Noue en zinc raccordant deux pans de toiture en tuiles" }}
-  avisNoms={["Jody Chatelain", "Marina Bedrous"]}
+  heroImg={{ src: "/heroe/demoussage-toiture-yvelines-007.webp", alt: "Couvreur Adnot nettoyant la toiture d'une maison bordée d'arbres" }}
+  servicesTitle="Nos prestations de couverture à Villiers-le-Bâcle"
+  cards={[
+    { signal: "Un toit de ferme qui a passé le demi-siècle ?",
+      desc: "Charpente vérifiée puis couverture reposée dans les règles. Le détail du",
+      anchor: "remplacement de toiture",
+      alt: "Grande toiture en cours de remplacement" },
+    { signal: "Les rafales du plateau ont encore frappé ?",
+      desc: "Tuiles remises en ligne, rives et faîtage resserrés après chaque épisode. La",
+      anchor: "réparation de toiture après tempête",
+      alt: "Couvreur resserrant des tuiles déplacées par le vent" },
+    { signal: "Un moutonnement vert sur les pentes nord ?",
+      desc: "Traitement professionnel et hydrofuge pour espacer les reprises. Notre page",
+      anchor: "démoussage de toiture",
+      alt: "Versant nord d'une toiture en cours de traitement" },
+    { signal: "Une zinguerie d'origine sur le bâti ancien ?",
+      desc: "Gouttières et noues du village remplacées en zinc, posées au cordeau. Les",
+      anchor: "travaux de gouttières et de zinguerie",
+      alt: "Zinguerie neuve sur une maison de village" },
+    { signal: "Un comble agricole devenu pièce à vivre ?",
+      desc: "Lumière naturelle créée dans la pente, étanchéité garantie. La",
+      anchor: "pose de Velux et de fenêtres de toit",
+      alt: "Fenêtre de toit posée dans un comble aménagé" },
+    { signal: "Un vent de plateau qui glace les chambres ?",
+      desc: "Isolation posée sous la couverture, étanchéité à l'air soignée. L'",
+      anchor: "isolation des toitures",
+      alt: "Isolation de toiture en cours de pose" },
+  ]}
+  avisNoms={["Jody Chatelain", "Marina Bedrous", "Stéphane Shalaby", "Maxime Gregoire"]}
   avisTitle="Les avis de nos clients sur le plateau"
 >
   <h2>Le plateau expose les toits au vent, le village les garde anciens</h2>

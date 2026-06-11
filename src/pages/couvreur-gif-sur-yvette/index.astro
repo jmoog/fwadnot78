@@ -10,10 +10,37 @@ import VillePage from '../../components/VillePage.astro';
   cp="91190"
   dept="Essonne"
   bureau="magny"
-  h1="Travaux de couverture à Gif-sur-Yvette et Chevry"
+  h1="Vos couvreurs à Gif-sur-Yvette"
   heroDesc="Une ardoise glissée sur la meulière familiale, des tuiles ternies à Chevry, une gouttière qui déborde sur la véranda ? Confiez le toit à un <strong>couvreur</strong>. Nous entretenons et rénovons les <strong>toitures de Gif-sur-Yvette</strong>, de la vallée de l'Yvette au plateau."
   heroImg={{ src: "/images/cheminee-yvelines-009.webp", alt: "Échelles montées jusqu'à la souche de cheminée d'un pavillon" }}
-  avisNoms={["Maxime Gregoire", "Arsene Khalil"]}
+  servicesTitle="Nos services de couvreur à Gif-sur-Yvette"
+  cards={[
+    { signal: "Une meulière dont le toit n'a jamais été refait ?",
+      desc: "Forte pente, lucarnes, épis : nous refaisons dans le style d'origine. La",
+      anchor: "réfection de toiture ancienne",
+      alt: "Toit à forte pente en cours de réfection" },
+    { signal: "Une ardoise glissée, un solin décollé ?",
+      desc: "Les points singuliers sont la première cause de fuite ; nous les reprenons. La page",
+      anchor: "réparation de toiture",
+      alt: "Reprise d'un solin de cheminée au zinc" },
+    { signal: "Un versant nord verdi côté Yvette ?",
+      desc: "L'humidité de la vallée nourrit la mousse ; le traitement la stoppe. Notre",
+      anchor: "démoussage de toiture (91 et 78)",
+      alt: "Toiture débarrassée de sa mousse après traitement" },
+    { signal: "Un chéneau de meulière qui marque le mur ?",
+      desc: "Chéneaux, gouttières et descentes refaits en zinc façonné. Voir la",
+      anchor: "zinguerie et les gouttières",
+      alt: "Couvreur sur échelle au niveau de la gouttière d'une maison à étage" },
+    { signal: "Des combles à Chevry qui méritent la lumière ?",
+      desc: "Pose ou remplacement, du châssis simple à la verrière de toit. La",
+      anchor: "pose de fenêtres de toit Velux",
+      alt: "Pose d'une fenêtre de toit sur un pavillon" },
+    { signal: "Une facture de chauffage qui grimpe chaque hiver ?",
+      desc: "Le toit concentre les déperditions ; nous l'isolons sans refaire vos plafonds. L'",
+      anchor: "isolation de toiture",
+      alt: "Matériau isolant posé sous couverture" },
+  ]}
+  avisNoms={["Maxime Gregoire", "Arsene Khalil", "Jody Chatelain", "Garry Vogel"]}
   avisTitle="Les avis de nos clients autour de Gif"
 >
   <h2>Les meulières de la vallée demandent un travail à l'ancienne</h2>

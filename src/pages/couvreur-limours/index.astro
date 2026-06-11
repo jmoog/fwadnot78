@@ -13,7 +13,34 @@ import VillePage from '../../components/VillePage.astro';
   h1="Artisan couvreur pour vos toitures à Limours"
   heroDesc="Une tache au plafond qui s'élargit, des tuiles au sol après un orage, des gouttières qui n'évacuent plus ? Il vous faut un <strong>couvreur</strong>. Nous réparons, nettoyons et remplaçons les <strong>toits de Limours</strong>, des maisons de bourg aux lotissements."
   heroImg={{ src: "/images/reparation-toiture-yvelines-051.webp", alt: "Ligne de faîtage rénovée sur une toiture en tuiles" }}
-  avisNoms={["Naomy Demestre", "Stéphane Shalaby"]}
+  servicesTitle="Nos services de couvreur à Limours"
+  cards={[
+    { signal: "Des reprises qui se succèdent sur un toit fatigué ?",
+      desc: "À un moment, remplacer coûte moins que rafistoler. Comparez avec la",
+      anchor: "réfection complète de toiture",
+      alt: "Toiture entièrement déposée, liteaux neufs en place" },
+    { signal: "Une gouttière pleine qui déborde au premier orage ?",
+      desc: "Localisation du point d'entrée, remplacement des pièces, remise hors d'eau. Notre",
+      anchor: "service de réparation de toiture",
+      alt: "Couvreur en intervention sur une couverture en tuiles" },
+    { signal: "Des traces noires et des lichens sur les tuiles ?",
+      desc: "Nettoyage en trois passes et hydrofuge qui retarde la reprise. Voir le",
+      anchor: "démoussage de toiture dans l'Essonne et les Yvelines",
+      alt: "Brossage d'une toiture chargée de mousse" },
+    { signal: "Une zinguerie d'origine sur une maison de bourg ?",
+      desc: "Remplacement en zinc, aluminium ou PVC selon le bâti. Le détail des",
+      anchor: "gouttières et zinguerie",
+      alt: "Travaux sur les gouttières d'une grande maison" },
+    { signal: "Envie de lumière naturelle à l'étage ?",
+      desc: "Pose toutes dimensions, volets et stores compris. Notre page",
+      anchor: "Velux et fenêtres de toit",
+      alt: "Deux fenêtres de toit posées sur un même versant" },
+    { signal: "Des combles aménagés jamais isolés correctement ?",
+      desc: "Sarking ou isolation entre chevrons selon la charpente. Tout sur l'",
+      anchor: "isolation des combles par la toiture",
+      alt: "Chantier d'isolation de toiture en cours" },
+  ]}
+  avisNoms={["Naomy Demestre", "Stéphane Shalaby", "Bryton Hug", "Sa N"]}
   avisTitle="Les avis de nos clients autour de Limours"
 >
   <h2>Maisons de bourg et pavillons : deux générations de couvertures</h2>

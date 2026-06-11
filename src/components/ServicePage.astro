@@ -3,7 +3,7 @@
 import Layout from '../layouts/Layout.astro';
 import AvisCarrousel from './AvisCarrousel.astro';
 import type { Avis } from '../data/avis';
-import { SITE_URL, NOM, TEL, TEL_HREF, ADRESSE_MONTIGNY, ADRESSE_MAGNY, SERVICES, SECTEURS, MAPS_MAGNY } from '../data/site';
+import { SITE_URL, NOM, TEL, TEL_HREF, ADRESSE_MONTIGNY, ADRESSE_MAGNY, SERVICES, SECTEURS, VILLES, MAPS_MAGNY } from '../data/site';
 
 export interface Props {
   title       : string;            // <title>
@@ -214,6 +214,9 @@ const schema = {
           <a href={s.slug} class="ville-pill" title={`Couvreur à ${s.nom} — ${NOM}`}>
             <strong>{s.nom}</strong>
           </a>
+        ))}
+        {VILLES.map(v => (
+          <a href={v.slug} class="ville-pill" title={`Couvreur à ${v.nom}`}>{v.nom}</a>
         ))}
       </div>
     </div>

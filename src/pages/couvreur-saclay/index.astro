@@ -10,10 +10,37 @@ import VillePage from '../../components/VillePage.astro';
   cp="91400"
   dept="Essonne"
   bureau="magny"
-  h1="Travaux de couverture à Saclay et au Val d'Albian"
+  h1="Entreprise de couverture à Saclay"
   heroDesc="Des tuiles soulevées par le vent du plateau, une gouttière qui cède sous les feuilles, une couverture qui n'a jamais été revue ? Faites passer un <strong>couvreur</strong>. Nous entretenons, réparons et rénovons les <strong>toitures à Saclay</strong>, du bourg au Val d'Albian."
   heroImg={{ src: "/images/refection-toiture-yvelines-085.webp", alt: "Maison à la couverture refaite à neuf par Adnot Couverture" }}
-  avisNoms={["Maxime Gregoire", "Dayaf 75"]}
+  servicesTitle="Nos services de couverture à Saclay"
+  cards={[
+    { signal: "Une couverture d'origine qui a fait son temps sur le plateau ?",
+      desc: "Dépose complète, écran neuf, liteaux recalibrés et tuiles posées rang par rang. Le détail de la",
+      anchor: "réfection de toiture dans les Yvelines",
+      alt: "Deux couvreurs posant les tuiles faîtières d'une couverture neuve" },
+    { signal: "Le vent a couché des tuiles cette nuit ?",
+      desc: "Remplacement des éléments touchés, remise hors d'eau et chiffrage détaillé. Voir la",
+      anchor: "réparation de toiture (78)",
+      alt: "Couvreur remplaçant les tuiles d'un pan de toiture" },
+    { signal: "Des plaques de mousse sur le versant nord ?",
+      desc: "Brossage, anti-mousse et hydrofuge appliqués aux dosages du fabricant. Détails du",
+      anchor: "démoussage de toiture",
+      alt: "Démoussage d'une toiture en tuiles depuis une échelle de toit" },
+    { signal: "Une descente qui fuit le long du mur ?",
+      desc: "Gouttières, noues et abergements posés en zinc ou en aluminium. Voir les",
+      anchor: "gouttières et la zinguerie dans le 78",
+      alt: "Couvreurs reprenant la gouttière d'un pavillon" },
+    { signal: "Des combles à éclairer au Val d'Albian ?",
+      desc: "Création d'ouverture ou remplacement, raccords d'étanchéité compris. La",
+      anchor: "pose de Velux",
+      alt: "Fenêtre de toit intégrée à une couverture en tuiles" },
+    { signal: "Un étage brûlant l'été, glacial l'hiver ?",
+      desc: "Sarking ou entre chevrons, ventilation de la couverture préservée. L'",
+      anchor: "isolation de toiture dans les Yvelines",
+      alt: "Liteaux et écran de sous-toiture posés avant la couverture" },
+  ]}
+  avisNoms={["Maxime Gregoire", "Dayaf 75", "Jody Chatelain", "Marina Bedrous"]}
   avisTitle="Les avis de nos clients autour de Saclay"
 >
   <h2>Le vent du plateau met les couvertures à l'épreuve</h2>

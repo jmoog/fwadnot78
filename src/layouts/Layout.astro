@@ -119,6 +119,9 @@ const schemaData = schema ?? SCHEMA_ORG;
     </a>
 
     <nav class="nav" id="nav" aria-label="Navigation principale">
+      <a href="/" class="nav__logo-mobile" aria-label={`${NOM} — accueil`}>
+        <img src="/logo/logo-adnot-couverture-256.webp" alt={`Logo ${NOM}`} width="110" height="110" loading="lazy" />
+      </a>
       <ul class="nav__list">
         <li><a href="/">Accueil</a></li>
         <li class="nav__dd">
@@ -128,15 +131,6 @@ const schemaData = schema ?? SCHEMA_ORG;
           </a>
           <ul class="nav__sub">
             {SERVICES.map(s => <li><a href={s.slug}>{s.titre}</a></li>)}
-          </ul>
-        </li>
-        <li class="nav__dd">
-          <a href={SECTEURS[0].slug}>
-            Secteurs
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-          </a>
-          <ul class="nav__sub">
-            {SECTEURS.map(s => <li><a href={s.slug}>{s.nom}</a></li>)}
           </ul>
         </li>
       </ul>

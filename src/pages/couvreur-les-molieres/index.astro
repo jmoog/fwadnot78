@@ -10,10 +10,37 @@ import VillePage from '../../components/VillePage.astro';
   cp="91470"
   dept="Essonne"
   bureau="magny"
-  h1="Vos travaux de toiture aux Molières"
+  h1="Votre artisan couvreur aux Molières"
   heroDesc="De la mousse qui déborde des gouttières, une tuile fendue repérée depuis le jardin, un toit qui a passé les quarante ans ? C'est l'affaire d'un <strong>couvreur</strong>. Nous entretenons et rénovons les <strong>couvertures des Molières</strong> et de ses fermes."
   heroImg={{ src: "/images/demoussage-toiture-yvelines-028.webp", alt: "Toiture en tuiles en cours de démoussage" }}
-  avisNoms={["Jody Chatelain", "Sa N"]}
+  servicesTitle="Nos prestations de couverture aux Molières"
+  cards={[
+    { signal: "Une longère dont le toit ondule ?",
+      desc: "Charpente contrôlée, couverture refaite dans les règles des DTU. La page",
+      anchor: "refaire sa toiture dans le 78 et l'Essonne",
+      alt: "Réfection en cours sur une grande toiture ancienne" },
+    { signal: "Quelques tuiles fendues repérées du jardin ?",
+      desc: "Remplacées à l'identique avant que l'eau ne touche les liteaux. Voir",
+      anchor: "la réparation et l'entretien de toiture",
+      alt: "Tuiles remplacées sur un versant ancien" },
+    { signal: "Un toit verdi à l'ombre des arbres ?",
+      desc: "Produits professionnels appliqués aux dosages du fabricant. Notre",
+      anchor: "prestation de démoussage",
+      alt: "Application d'un traitement anti-mousse sur tuiles" },
+    { signal: "Des eaux de pluie qui ravinent le pied de mur ?",
+      desc: "Gouttières et descentes redimensionnées et reposées. La page",
+      anchor: "zinguerie et gouttières (78)",
+      alt: "Pose d'une gouttière en zinc sur un pavillon" },
+    { signal: "Un grenier à transformer en pièce claire ?",
+      desc: "Ouverture créée, raccords d'étanchéité sur tuiles anciennes. Voir la",
+      anchor: "pose de Velux et fenêtres de toit",
+      alt: "Fenêtre de toit posée dans une couverture en tuiles plates" },
+    { signal: "Une toiture refaite sans isolation repensée ?",
+      desc: "L'occasion d'isoler par l'extérieur sans toucher aux plafonds. L'",
+      anchor: "isolation de toiture par sarking",
+      alt: "Panneaux isolants posés sur chevrons" },
+  ]}
+  avisNoms={["Jody Chatelain", "Sa N", "Garry Vogel", "Dayaf 75"]}
   avisTitle="Les avis de nos clients près des Molières"
 >
   <h2>Meulières et longères : des toitures qui méritent l'existant</h2>

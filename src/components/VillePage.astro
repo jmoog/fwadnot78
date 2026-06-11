@@ -24,12 +24,30 @@ export interface Props {
   bureau      : 'magny' | 'montigny';
   avisNoms    : string[];          // noms des avis à afficher (rotation entre pages)
   avisTitle  ?: string;
+  servicesTitle: string;           // H2 de la section prestations (unique par page)
+  cards       : { signal: string; desc: string; anchor: string; alt: string }[]; // 6 cards, textes uniques
 }
 
 const {
   title, description, canonical, ville, cp, dept,
   h1, heroDesc, heroImg, bureau, avisNoms, avisTitle,
+  servicesTitle, cards,
 } = Astro.props;
+
+// Photos des cards (variantes -800 générées, srcset retina)
+const CARD_PHOTOS = [
+  "/images/refection-toiture-yvelines-025.webp",
+  "/images/reparation-toiture-yvelines-001.webp",
+  "/images/demoussage-toiture-yvelines-005.webp",
+  "/images/zinguerie-gouttiere-yvelines-010.webp",
+  "/images/pose-velux-yvelines-004.webp",
+  "/images/refection-toiture-yvelines-021.webp",
+];
+const SERVICES_CARDS = SERVICES.map((s, i) => ({
+  ...s,
+  photo: CARD_PHOTOS[i],
+  ...cards[i],
+}));
 
 const BUREAUX = {
   magny: {
@@ -116,6 +134,31 @@ const schema = {
           <img src="/logo/progeas_logo.png" alt="Progeas — assurance garantie décennale d'Adnot Couverture" width="101" height="28" loading="eager" />
           Notre garantie décennale
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRESTATIONS (cards, textes uniques par ville) ── -->
+  <section class="section" aria-labelledby="sec-services-ville">
+    <div class="container">
+      <div class="sec-head">
+        <h2 id="sec-services-ville">{servicesTitle}</h2>
+      </div>
+      <div class="silos silos--3">
+        {SERVICES_CARDS.map(s => (
+          <div class="silo-card silo-card--photo" style="text-align:left;">
+            <img class="silo-card__photo" src={s.photo.replace('.webp', '-800.webp')} srcset={`${s.photo.replace('.webp', '-800.webp')} 800w, ${s.photo} 1600w`} sizes="(min-width: 900px) 756px, 100vw" alt={s.alt} width="800" height="600" loading="lazy" />
+            <div class="silo-card__body">
+              <h3 style="text-align:left;">{s.titre}</h3>
+              <p style="font-style:italic;color:var(--red-l);font-size:.92rem;margin-bottom:.6rem;text-align:left;line-height:1.5;hyphens:auto;">
+                {s.signal}
+              </p>
+              <p style="text-align:left;line-height:1.65;hyphens:auto;margin-bottom:0;">
+                {s.desc} <a href={s.slug} style="color:var(--red);font-weight:700;text-decoration:underline;">{s.anchor}</a>.
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </section>

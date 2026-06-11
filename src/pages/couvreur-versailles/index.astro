@@ -13,7 +13,34 @@ import VillePage from '../../components/VillePage.astro';
   h1="Entreprise de couverture intervenant à Versailles"
   heroDesc="Une ardoise tombée dans la cour, un chéneau qui déborde, des combles qui prennent l'eau ? Versailles a besoin d'un <strong>couvreur</strong> qui connaît ses règles. Nous réparons et entretenons les <strong>toitures versaillaises</strong> — maisons de ville, immeubles et pavillons."
   heroImg={{ src: "/images/toiture-drone-yvelines-001.webp", alt: "Toiture en tuiles d'un pavillon photographiée au drone" }}
-  avisNoms={["Ashak Paul", "Aliya"]}
+  servicesTitle="Nos prestations de couverture à Versailles"
+  cards={[
+    { signal: "Une toiture d'immeuble à reprendre en site protégé ?",
+      desc: "Ardoise, zinc ou tuile plate refaits sous avis ABF quand il s'impose. La",
+      anchor: "réfection de toiture dans le 78",
+      alt: "Chantier de réfection sur une toiture à forte pente" },
+    { signal: "Une fuite signalée par un locataire ?",
+      desc: "Mise hors d'eau sous 24 h, rapport photo transmis au propriétaire ou au syndic. La",
+      anchor: "réparation de toiture en urgence",
+      alt: "Bâchage d'urgence sur une zone de toiture" },
+    { signal: "Des toits anciens noircis par le temps ?",
+      desc: "Nettoyage adapté au matériau — jamais de haute pression sur l'ancien. Le",
+      anchor: "nettoyage de toiture",
+      alt: "Toiture ancienne nettoyée par brossage" },
+    { signal: "Chéneaux encaissés et descentes d'immeuble ?",
+      desc: "Le zinc versaillais se façonne sur mesure, dans les règles de l'art. Nos",
+      anchor: "travaux de gouttières et zinguerie",
+      alt: "Couvreurs intervenant en rive de toiture d'une grande maison" },
+    { signal: "Un appartement sous combles à éclairer ?",
+      desc: "Châssis de toit posé avec déclaration préalable et avis ABF si requis. La",
+      anchor: "pose de Velux en zone protégée",
+      alt: "Fenêtre de toit posée sur un toit en tuiles plates" },
+    { signal: "Des combles qui ruinent le DPE de l'immeuble ?",
+      desc: "Isolation par la toiture lors d'une réfection, sans toucher aux intérieurs. L'",
+      anchor: "isolation de toiture (78)",
+      alt: "Isolation posée au niveau de la toiture" },
+  ]}
+  avisNoms={["Ashak Paul", "Aliya", "Sa N", "Arsene Khalil"]}
   avisTitle="Les avis de nos clients, particuliers et syndics"
 >
   <h2>Un patrimoine où l'aspect des toits ne se négocie pas</h2>
