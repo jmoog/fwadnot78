@@ -466,7 +466,7 @@ p  { line-height: 1.75; }
 .ft__btn--dark { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); color: #fff !important; }
 .ft__btn--dark:hover { background: rgba(255,255,255,.14); color: #fff !important; }
 .ft__logo-center { justify-content: center; margin-bottom: 1rem; }
-.ft__logo-center img { height: 64px; }
+.ft__logo-center img { height: 128px; }
 .ft__adresse { display: flex; align-items: center; gap: .4rem; font-size: .78rem; color: #64748B; margin-bottom: 1.25rem; }
 
 /* ── Icônes SVG ── */

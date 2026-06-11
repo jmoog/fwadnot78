@@ -1,5 +1,12 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
+import { AVIS } from '../../data/avis';
+import { MAPS_MONTIGNY } from '../../data/site';
+
+// Avis liés aux travaux planifiés (inspection avant devis, suivi d'immeubles)
+const avisRefection = AVIS.filter(a =>
+  a.ville === 'Montigny-le-Bretonneux' && ['Maxime Gregoire', 'Ashak Paul'].includes(a.nom)
+);
 ---
 
 <ServicePage
@@ -15,6 +22,9 @@ import ServicePage from '../../components/ServicePage.astro';
   sidebarTitle="Devis réfection gratuit"
   ctaTitle="Votre toiture arrive en fin de vie ?"
   ctaDesc="Envoyez-nous quelques photos ou laissez-nous monter constater l'état de la couverture, au besoin par drone. Nous chiffrons la réfection poste par poste, dépose et évacuation comprises. <strong>Devis et déplacement offerts.</strong>"
+  avis={avisRefection}
+  avisTitle="Les avis de nos clients sur leurs travaux de toiture"
+  avisMapsUrl={MAPS_MONTIGNY}
   galerieTitle="Les chantiers de réfection de toiture dans les Yvelines"
   galerie={[
     { src: "/images/refection-toiture-yvelines-005.webp",  alt: "Toiture en cours de réfection dans les Yvelines" },

@@ -3,7 +3,8 @@
 // Note : les pages services affichent les DEUX adresses (couverture départementale) ;
 // ici, chaque page n'affiche que le NAP de son établissement.
 import Layout from '../layouts/Layout.astro';
-import { SITE_URL, NOM, SERVICES, SECTEURS } from '../data/site';
+import { SITE_URL, NOM, FONDATEURS, EMAIL, SIRET, SERVICES, SECTEURS } from '../data/site';
+import AvisCarrousel from './AvisCarrousel.astro';
 
 export interface Props {
   title       : string;
@@ -22,6 +23,12 @@ export interface Props {
   telFixe    ?: { num: string; href: string };  // second numéro éventuel
   geo        ?: { lat: number; lng: number };
   sameAs     ?: string[];
+  servicesTitle?: string;
+  servicesIntro?: string;
+  cardsTexts   ?: { signal?: string; desc?: string; alt?: string }[];  // textes uniques par page (anti-duplication)
+  avisTitle    ?: string;             // titre de la section avis
+  avisAfficheTotal ?: boolean;        // false = masque « — X avis sur notre fiche... »
+  avisPosition ?: 'hero' | 'services'; // emplacement du carrousel (défaut : sous les prestations)
   galerie     : { src: string; alt: string }[];
   galerieTitle: string;
   portraitTitle: string;
@@ -31,8 +38,12 @@ export interface Props {
 const {
   title, description, canonical, ville, h1, h1Sub, heroDesc, heroImg,
   adresse, rue, cp, tel, telHref, telFixe, geo, sameAs,
+  servicesTitle, servicesIntro, cardsTexts, avisTitle, avisAfficheTotal, avisPosition,
   galerie, galerieTitle, portraitTitle, ctaTitle,
 } = Astro.props;
+
+const secServicesTitle = servicesTitle ?? `Nos prestations à ${ville}`;
+const secServicesIntro = servicesIntro ?? `Réfection, réparation, démoussage, zinguerie, Velux et isolation : six prestations réalisées à ${ville} et dans les communes voisines, détaillées sur leurs pages dédiées.`;
 
 const autreSecteur = SECTEURS.filter(s => s.slug !== canonical);
 
@@ -42,23 +53,23 @@ const CARD_PHOTOS: Record<string, string[]> = {
   "Montigny-le-Bretonneux": [
     "/images/refection-toiture-yvelines-025.webp",
     "/images/reparation-toiture-yvelines-021.webp",
-    "/images/demoussage-toiture-yvelines-010.webp",
     "/images/zinguerie-gouttiere-yvelines-004.webp",
-    "/images/pose-velux-yvelines-001.webp",
+    "/images/zinguerie-gouttiere-yvelines-010.webp",
+    "/images/pose-velux-yvelines-004.webp",
     "/images/refection-toiture-yvelines-009.webp",
   ],
   "Magny-les-Hameaux": [
-    "/images/refection-toiture-yvelines-057.webp",
+    "/images/refection-toiture-yvelines-025.webp",
     "/images/reparation-toiture-yvelines-001.webp",
-    "/images/demoussage-toiture-yvelines-028.webp",
-    "/images/zinguerie-gouttiere-yvelines-013.webp",
-    "/images/pose-velux-yvelines-022.webp",
+    "/images/demoussage-toiture-yvelines-005.webp",
+    "/heroe/zinguerie-gouttiere-yvelines-001.webp",
+    "/heroe/pose-velux-yvelines-019.webp",
     "/images/refection-toiture-yvelines-021.webp",
   ],
 };
 const cardPhotos = CARD_PHOTOS[ville] ?? CARD_PHOTOS["Montigny-le-Bretonneux"];
 
-const SERVICES_CARDS = [
+const DEFAULT_CARDS = [
   { ...SERVICES[0], photo: { src: cardPhotos[0], alt: `Réfection de toiture par Adnot Couverture près de ${ville}` },          signal: `Une toiture en fin de vie à ${ville} ?`,            desc: "Dépose complète, écran de sous-toiture, liteaux neufs et couverture reposée, faîtage compris. Voir le détail de la",  anchor: "réfection de toiture dans les Yvelines" },
   { ...SERVICES[1], photo: { src: cardPhotos[1], alt: `Réparation de couverture par un couvreur Adnot près de ${ville}` },     signal: `Une fuite ou des tuiles cassées à ${ville} ?`,      desc: "Recherche de fuite, remplacement des éléments touchés, mise hors d'eau si besoin. Plus d'infos sur la",               anchor: "réparation de toiture dans les Yvelines" },
   { ...SERVICES[2], photo: { src: cardPhotos[2], alt: `Démoussage de toiture par Adnot Couverture près de ${ville}` },         signal: `Des tuiles gagnées par la mousse à ${ville} ?`,     desc: "Brossage, traitement anti-mousse et hydrofuge, photos avant / après remises. Voir le détail du",                      anchor: "démoussage de toiture dans les Yvelines" },
@@ -67,26 +78,35 @@ const SERVICES_CARDS = [
   { ...SERVICES[5], photo: { src: cardPhotos[5], alt: `Isolation de toiture par Adnot Couverture près de ${ville}` },          signal: `Des combles à isoler à ${ville} ?`,                 desc: "Sarking, entre chevrons ou soufflage, ventilation de la couverture préservée. Plus d'infos sur l'",                   anchor: "isolation de toiture dans les Yvelines" },
 ];
 
+// Textes par page si fournis (contenu unique), photos et ancres conservées
+const SERVICES_CARDS = DEFAULT_CARDS.map((c, i) => {
+  const t = cardsTexts?.[i];
+  return {
+    ...c,
+    signal: t?.signal ?? c.signal,
+    desc: t?.desc ?? c.desc,
+    photo: { ...c.photo, alt: t?.alt ?? c.photo.alt },
+  };
+});
+
 const schema = {
   "@context": "https://schema.org",
   "@type": "RoofingContractor",
   "@id": `${SITE_URL}${canonical}#etablissement`,
-  "name": NOM,
-  "alternateName": [
-    `Couvreur ${ville}`,
-    `Couvreur à ${ville}`,
-    `Entreprise de couverture ${ville}`,
-    `Artisan couvreur ${ville}`,
-    `${NOM} ${ville}`,
-  ],
+  "name": `${NOM} — ${ville}`,
+  "alternateName": `${FONDATEURS}, couvreurs à ${ville}`,
   "description": description,
   "url": `${SITE_URL}${canonical}`,
   "telephone": telHref.replace('tel:', ''),
-  "email": "adnot.couvertureidf@gmail.com",
-  "image": `${SITE_URL}/logo/logo-adnot-couverture.webp`,
-  "logo": `${SITE_URL}/logo/logo-adnot-couverture.webp`,
+  "email": EMAIL,
+  "image": `${SITE_URL}${heroImg.src}`,
+  "logo": `${SITE_URL}/logo/logo-adnot-couverture-couvreur-dans-les-yvelines.png`,
   "parentOrganization": { "@id": `${SITE_URL}/#organization` },
-  "identifier": { "@type": "PropertyValue", "name": "SIRET", "value": "901 688 986 00016" },
+  "founder": [
+    { "@type": "Person", "name": "Francky Adnot", "jobTitle": "Couvreur" },
+    { "@type": "Person", "name": "Warren Adnot",  "jobTitle": "Couvreur" },
+  ],
+  "identifier": { "@type": "PropertyValue", "name": "SIRET", "value": SIRET },
   "address": {
     "@type": "PostalAddress",
     "streetAddress": rue,
@@ -101,7 +121,15 @@ const schema = {
     "containedInPlace": { "@type": "AdministrativeArea", "name": "Yvelines" }
   },
   ...(geo && { "geo": { "@type": "GeoCoordinates", "latitude": geo.lat, "longitude": geo.lng } }),
-  ...(sameAs && { "sameAs": sameAs }),
+  ...(sameAs && { "sameAs": sameAs, "hasMap": sameAs[0] }),
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": `Travaux de couverture à ${ville}`,
+    "itemListElement": SERVICES.map((s) => ({
+      "@type": "Offer",
+      "itemOffered": { "@type": "Service", "name": s.titre, "url": `${SITE_URL}${s.slug}` },
+    })),
+  },
   "priceRange": "€€",
 };
 ---
@@ -125,22 +153,18 @@ const schema = {
 
         <p class="hero__sub" style="text-align:left;" set:html={heroDesc} />
 
-        <ul class="hero__list" style="list-style:none;padding:0;margin:0 0 1.5rem;display:flex;flex-direction:column;gap:.5rem;color:rgba(255,255,255,.92);font-size:.98rem;">
+        <ul class="hero__list" style="list-style:none;padding:0;margin:0 0 1.5rem;grid-template-columns:1fr;gap:.5rem;color:rgba(255,255,255,.92);font-size:.98rem;">
           <li style="display:flex;align-items:center;gap:.6rem;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
-            {adresse}
+            Devis gratuit et déplacement offert
           </li>
           <li style="display:flex;align-items:center;gap:.6rem;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
-            Devis et déplacement offerts
+            Garantie décennale
           </li>
           <li style="display:flex;align-items:center;gap:.6rem;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
-            Garantie décennale Progeas
-          </li>
-          <li style="display:flex;align-items:center;gap:.6rem;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
-            Dépannage et rénovation de toitures
+            Assurance responsabilité civile
           </li>
         </ul>
 
@@ -173,13 +197,17 @@ const schema = {
     </div>
   </section>
 
+  {avisPosition === 'hero' && (
+    <AvisCarrousel ville={ville} titre={avisTitle} afficheTotal={avisAfficheTotal} mapsUrl={sameAs?.[0]} />
+  )}
+
   <!-- ── SERVICES ── -->
   <section class="section" aria-labelledby="sec-services">
     <div class="container">
       <div class="sec-head">
-        <h2 id="sec-services">Nos prestations à {ville}</h2>
+        <h2 id="sec-services">{secServicesTitle}</h2>
         <p style="text-align:left;max-width:780px;margin:.8rem auto 0;">
-          Réfection, réparation, démoussage, zinguerie, Velux et isolation : six prestations réalisées à {ville} et dans les communes voisines, détaillées sur leurs pages dédiées.
+          {secServicesIntro}
         </p>
       </div>
       <div class="silos silos--3">
@@ -200,6 +228,10 @@ const schema = {
       </div>
     </div>
   </section>
+
+  {avisPosition !== 'hero' && (
+    <AvisCarrousel ville={ville} titre={avisTitle} afficheTotal={avisAfficheTotal} mapsUrl={sameAs?.[0]} />
+  )}
 
   <!-- ── CONTENU SEO ── -->
   <section class="content-wrap section--light">
@@ -282,7 +314,7 @@ const schema = {
           <p>
             Couverture, charpente, ramonage et peinture : un seul interlocuteur,
             joignable au bureau de {ville} comme sur les chantiers. L'ensemble
-            de nos travaux est couvert par la garantie décennale Progeas.
+            de nos travaux est couvert par la garantie décennale.
           </p>
           <ul class="portrait-list" style="list-style:none;padding:0;margin:1.5rem 0 0;display:flex;flex-direction:column;gap:.55rem;">
             <li style="display:flex;align-items:center;gap:.7rem;color:rgba(255,255,255,.92);font-size:.98rem;">
@@ -299,9 +331,13 @@ const schema = {
             </li>
             <li style="display:flex;align-items:center;gap:.7rem;color:rgba(255,255,255,.92);font-size:.98rem;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
-              Devis et déplacement offerts, garantie décennale Progeas
+              Devis et déplacement offerts, garantie décennale
             </li>
           </ul>
+          <p style="margin:1.6rem 0 0;display:flex;align-items:center;gap:.7rem;color:#fff;font-size:1.3rem;font-weight:800;line-height:1.4;">
+            <img src="/icones/pin-map.svg" alt="" width="24" height="24" class="icone icone--white" style="flex-shrink:0;" />
+            {adresse}
+          </p>
         </div>
       </div>
     </div>
@@ -327,7 +363,7 @@ const schema = {
   <section class="cta" aria-label={ctaTitle}>
     <div class="container" style="text-align:center;">
       <h2>{ctaTitle}</h2>
-      <p>Décrivez-nous vos travaux par téléphone ou via le formulaire. Devis et déplacement offerts.</p>
+      <p>Un toit qui prend de l'âge, des tuiles à remplacer, une couverture à entretenir : décrivez vos travaux par téléphone ou via le formulaire, un couvreur vient examiner la toiture et chiffre poste par poste.</p>
       <div class="hero__btns" style="justify-content:center;">
         <a href="/devis-gratuit/" class="btn btn--red">Demander un devis gratuit</a>
         <a href={telHref} class="btn btn--outline">
@@ -335,6 +371,10 @@ const schema = {
           {tel}
         </a>
       </div>
+      <p style="margin:1.4rem 0 0;display:flex;align-items:center;justify-content:center;gap:.6rem;font-size:.98rem;opacity:.92;">
+        <img src="/icones/pin-map.svg" alt="" width="18" height="18" class="icone icone--white" style="flex-shrink:0;" />
+        Notre bureau&nbsp;: {adresse}
+      </p>
     </div>
   </section>
 

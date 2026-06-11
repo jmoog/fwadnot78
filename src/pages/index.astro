@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { SITE_URL, NOM, TEL, TEL_HREF, SECTEURS, SCHEMA_ORG } from '../data/site';
+import AvisCarrousel from '../components/AvisCarrousel.astro';
+import { SITE_URL, NOM, TEL, TEL_HREF, SECTEURS, SCHEMA_ORG, MAPS_MONTIGNY } from '../data/site';
+import { AVIS_ACCUEIL } from '../data/avis';
 
 // ── Cards bureaux (photo + adresse de chaque établissement) ──
 const BUREAUX = [
@@ -218,6 +220,11 @@ const schema = {
     </div>
   </div>
 </section>
+
+<!-- ═══════════════════════════════════════════════
+     AVIS GOOGLE — sélection dédiée à l'accueil
+═══════════════════════════════════════════════ -->
+<AvisCarrousel avis={AVIS_ACCUEIL} titre="Les avis de nos clients dans les Yvelines" mapsUrl={MAPS_MONTIGNY} />
 
 <!-- ═══════════════════════════════════════════════
      CTA INTERVENTION — texte gauche + image droite

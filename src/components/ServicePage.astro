@@ -1,6 +1,8 @@
 ---
 // ── Gabarit commun des pages services (hero + contenu/sidebar + galerie + CTA + secteurs) ──
 import Layout from '../layouts/Layout.astro';
+import AvisCarrousel from './AvisCarrousel.astro';
+import type { Avis } from '../data/avis';
 import { SITE_URL, NOM, TEL, TEL_HREF, ADRESSE_MONTIGNY, ADRESSE_MAGNY, SERVICES, SECTEURS, MAPS_MAGNY } from '../data/site';
 
 export interface Props {
@@ -18,12 +20,16 @@ export interface Props {
   ctaDesc     : string;
   galerie     : { src: string; alt: string }[];   // 3 photos
   galerieTitle: string;
+  avis       ?: Avis[];            // avis Google liés au service (optionnel)
+  avisTitle  ?: string;
+  avisMapsUrl?: string;            // fiche Google vers laquelle pointe « voir tous les avis »
 }
 
 const {
   title, description, canonical, serviceType,
   h1, h1Span, heroDesc, heroImg, breadcrumb,
   sidebarTitle, ctaTitle, ctaDesc, galerie, galerieTitle,
+  avis, avisTitle, avisMapsUrl,
 } = Astro.props;
 
 const autresServices = SERVICES.filter(s => s.slug !== canonical);
@@ -160,6 +166,10 @@ const schema = {
       </div>
     </div>
   </section>
+
+  {avis && avis.length > 0 && (
+    <AvisCarrousel avis={avis} titre={avisTitle} afficheTotal={false} mapsUrl={avisMapsUrl} />
+  )}
 
   <!-- ── CTA (texte gauche + image droite, comme la home) ── -->
   <section class="cta-split" aria-label={ctaTitle}>

@@ -1,5 +1,12 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
+import { AVIS } from '../../data/avis';
+import { MAPS_MAGNY } from '../../data/site';
+
+// Avis liés au dépannage / à la réparation (tempête, infiltrations, réactivité)
+const avisReparation = AVIS.filter(a =>
+  a.ville === 'Magny-les-Hameaux' && ['Garry Vogel', 'Naomy Demestre', 'Jody Chatelain'].includes(a.nom)
+);
 ---
 
 <ServicePage
@@ -15,6 +22,9 @@ import ServicePage from '../../components/ServicePage.astro';
   sidebarTitle="Devis réparation gratuit"
   ctaTitle="Un problème sur votre toiture ?"
   ctaDesc="Décrivez-nous ce que vous constatez, envoyez quelques photos si vous le pouvez : nous venons voir la toiture et nous chiffrons la remise en état. <strong>Devis et déplacement offerts.</strong>"
+  avis={avisReparation}
+  avisTitle="Les avis de nos clients après une réparation de toiture"
+  avisMapsUrl={MAPS_MAGNY}
   galerieTitle="Les chantiers de réparation de toiture dans les Yvelines"
   galerie={[
     { src: "/images/reparation-toiture-yvelines-001.webp",  alt: "Couvreur Adnot réparant une toiture dans les Yvelines" },

@@ -160,9 +160,18 @@ function notifTemplate(d: DevisData) {
 
         <!-- Header -->
         <tr><td style="background:${COLOR_BLUE};padding:24px 32px;color:#fff;">
-          <div style="font-size:12px;text-transform:uppercase;letter-spacing:.1em;opacity:.7;font-weight:700;">Nouvelle demande de devis</div>
-          <div style="font-size:22px;font-weight:800;margin-top:6px;">${escapeHtml(presta)}</div>
-          <div style="font-size:14px;opacity:.85;margin-top:4px;">à ${escapeHtml(d.ville)}</div>
+          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+            <tr>
+              <td valign="middle">
+                <div style="font-size:12px;text-transform:uppercase;letter-spacing:.1em;opacity:.7;font-weight:700;">Nouvelle demande de devis</div>
+                <div style="font-size:22px;font-weight:800;margin-top:6px;">${escapeHtml(presta)}</div>
+                <div style="font-size:14px;opacity:.85;margin-top:4px;">à ${escapeHtml(d.ville)}</div>
+              </td>
+              <td valign="middle" align="right" width="72">
+                <img src="https://fwatoitures.fr/logo/logo-adnot-couverture-email.png" width="64" height="64" alt="Adnot Couverture" style="display:block;width:64px;height:64px;border:0;">
+              </td>
+            </tr>
+          </table>
         </td></tr>
 
         <!-- Identité client -->
@@ -248,9 +257,10 @@ function ackTemplate(d: DevisData) {
       <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="max-width:600px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.06);">
 
         <!-- Header -->
-        <tr><td style="background:${COLOR_BLUE};padding:32px 32px 28px;color:#fff;text-align:center;">
-          <img src="https://fwatoitures.fr/logo/logo-adnot-couverture.webp" width="64" height="64" alt="Adnot Couverture" style="display:block;margin:0 auto 12px;border-radius:50%;background:#fff;padding:6px;">
-          <div style="font-size:20px;font-weight:800;">Adnot Couverture</div>
+        <tr><td style="background:${COLOR_BLUE};padding:36px 32px 28px;color:#fff;text-align:center;">
+          <img src="https://fwatoitures.fr/logo/logo-adnot-couverture-email.png" width="88" height="88" alt="Adnot Couverture" style="display:block;margin:0 auto 14px;width:88px;height:88px;border:0;">
+          <div style="font-size:22px;font-weight:800;letter-spacing:.02em;">Adnot Couverture</div>
+          <div style="font-size:14px;font-weight:600;margin-top:4px;">Francky et Warren Adnot</div>
           <div style="font-size:13px;opacity:.85;margin-top:2px;">Couvreurs dans les Yvelines (78)</div>
         </td></tr>
 
@@ -306,7 +316,9 @@ function ackTemplate(d: DevisData) {
         <!-- Footer -->
         <tr><td style="background:${COLOR_BLUE};padding:20px 32px;color:#fff;text-align:center;font-size:12px;line-height:1.6;">
           <strong style="font-size:14px;">Adnot Couverture</strong><br>
+          Francky et Warren Adnot<br>
           23 Rue Colbert, 78180 Montigny-le-Bretonneux<br>
+          1 Rue Joseph Lemarchand, 78114 Magny-les-Hameaux<br>
           <a href="https://fwatoitures.fr" style="color:#fff;text-decoration:underline;opacity:.85;">fwatoitures.fr</a> &nbsp;·&nbsp; <a href="tel:+33760817383" style="color:#fff;text-decoration:underline;opacity:.85;">07 60 81 73 83</a>
         </td></tr>
 

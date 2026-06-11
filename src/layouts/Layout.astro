@@ -61,6 +61,9 @@ const schemaData = schema ?? SCHEMA_ORG;
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image"       content={ogImageURL} />
 
+  <!-- Vérification Google Search Console -->
+  <meta name="google-site-verification" content="p5ntTI2_JkKg38UUb0olU5lVNmG_fgHhg7jFSEB0U3o" />
+
   <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
@@ -174,7 +177,7 @@ const schemaData = schema ?? SCHEMA_ORG;
 
       <div class="ft__brand">
         <a href="/" class="logo logo--ft ft__logo-center" aria-label={NOM}>
-          <img src="/logo/logo-adnot-couverture.webp" alt={NOM} class="logo--img-ft" width="64" height="64" loading="lazy" />
+          <img src="/logo/logo-adnot-couverture.webp" alt={NOM} class="logo--img-ft" width="128" height="128" loading="lazy" />
         </a>
         <div class="ft__adresse">
           <img src="/icones/pin-map.svg" alt="" width="13" height="13" class="icone icone--ft" />
@@ -200,6 +203,10 @@ const schemaData = schema ?? SCHEMA_ORG;
         <ul>
           {SERVICES.map(s => <li><a href={s.slug}>{s.titre}</a></li>)}
         </ul>
+        <div style="display:flex;align-items:center;gap:1rem;margin-top:1rem;">
+          <img src="/logo/logo_applicateur-de-solutions.png" alt="Applicateur agréé des solutions Dalep" width="80" height="80" loading="lazy" />
+          <img src="/logo/logo-velux.png" alt="Velux" width="110" height="38" loading="lazy" style="height:auto;" />
+        </div>
       </div>
 
       <div class="ft__col">
