@@ -6,8 +6,8 @@ export const prerender = false;
 // ────────────────────────────────────────────────────────────────────────
 // Variables d'environnement (à configurer dans Coolify) :
 //   BREVO_API_KEY      → Clé API Brevo (commence par xkeysib-...)
-//   ADMIN_EMAILS       → contact@fwa-toitures.fr,jmoog27@gmail.com
-//   FROM_EMAIL         → contact@fwa-toitures.fr (domaine vérifié sur Brevo)
+//   ADMIN_EMAILS       → adnot.couvertureidf@gmail.com,jmoog27@gmail.com
+//   FROM_EMAIL         → contact@fwatoitures.fr (domaine vérifié sur Brevo)
 //   FROM_NAME          → Adnot Couverture (optionnel, défaut "Adnot Couverture")
 // ────────────────────────────────────────────────────────────────────────
 
@@ -214,7 +214,7 @@ function notifTemplate(d: DevisData) {
         <!-- Footer -->
         <tr><td style="background:${COLOR_LIGHT};padding:16px 32px;border-top:1px solid ${COLOR_BORDER};font-size:12px;color:${COLOR_MUTED};text-align:center;">
           Demande reçue le ${new Date().toLocaleString('fr-FR', { dateStyle: 'long', timeStyle: 'short', timeZone: 'Europe/Paris' })}<br>
-          via <a href="https://fwa-toitures.fr/devis-gratuit/" style="color:${COLOR_BLUE};text-decoration:none;">fwa-toitures.fr/devis-gratuit/</a>
+          via <a href="https://fwatoitures.fr/devis-gratuit/" style="color:${COLOR_BLUE};text-decoration:none;">fwatoitures.fr/devis-gratuit/</a>
         </td></tr>
 
       </table>
@@ -249,7 +249,7 @@ function ackTemplate(d: DevisData) {
 
         <!-- Header -->
         <tr><td style="background:${COLOR_BLUE};padding:32px 32px 28px;color:#fff;text-align:center;">
-          <img src="https://fwa-toitures.fr/logo/logo-adnot-couverture.webp" width="64" height="64" alt="Adnot Couverture" style="display:block;margin:0 auto 12px;border-radius:50%;background:#fff;padding:6px;">
+          <img src="https://fwatoitures.fr/logo/logo-adnot-couverture.webp" width="64" height="64" alt="Adnot Couverture" style="display:block;margin:0 auto 12px;border-radius:50%;background:#fff;padding:6px;">
           <div style="font-size:20px;font-weight:800;">Adnot Couverture</div>
           <div style="font-size:13px;opacity:.85;margin-top:2px;">Couvreurs dans les Yvelines (78)</div>
         </td></tr>
@@ -307,7 +307,7 @@ function ackTemplate(d: DevisData) {
         <tr><td style="background:${COLOR_BLUE};padding:20px 32px;color:#fff;text-align:center;font-size:12px;line-height:1.6;">
           <strong style="font-size:14px;">Adnot Couverture</strong><br>
           23 Rue Colbert, 78180 Montigny-le-Bretonneux<br>
-          <a href="https://fwa-toitures.fr" style="color:#fff;text-decoration:underline;opacity:.85;">fwa-toitures.fr</a> &nbsp;·&nbsp; <a href="tel:+33760817383" style="color:#fff;text-decoration:underline;opacity:.85;">07 60 81 73 83</a>
+          <a href="https://fwatoitures.fr" style="color:#fff;text-decoration:underline;opacity:.85;">fwatoitures.fr</a> &nbsp;·&nbsp; <a href="tel:+33760817383" style="color:#fff;text-decoration:underline;opacity:.85;">07 60 81 73 83</a>
         </td></tr>
 
       </table>
@@ -396,7 +396,7 @@ export const POST: APIRoute = async ({ request }) => {
     return jsonResponse(500, { ok: false, error: 'Configuration serveur incomplète.' });
   }
 
-  const fromEmail = process.env.FROM_EMAIL || 'contact@fwa-toitures.fr';
+  const fromEmail = process.env.FROM_EMAIL || 'contact@fwatoitures.fr';
   const fromName = process.env.FROM_NAME || 'Adnot Couverture';
 
   // 1) Notification admins

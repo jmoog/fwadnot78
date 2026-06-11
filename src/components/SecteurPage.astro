@@ -37,13 +37,34 @@ const {
 const autreSecteur = SECTEURS.filter(s => s.slug !== canonical);
 
 // ── Cards services contextualisées par ville ──
+// Jeux de photos distincts par établissement (et différents des cards de la home)
+const CARD_PHOTOS: Record<string, string[]> = {
+  "Montigny-le-Bretonneux": [
+    "/images/refection-toiture-yvelines-025.webp",
+    "/images/reparation-toiture-yvelines-021.webp",
+    "/images/demoussage-toiture-yvelines-010.webp",
+    "/images/zinguerie-gouttiere-yvelines-004.webp",
+    "/images/pose-velux-yvelines-001.webp",
+    "/images/refection-toiture-yvelines-009.webp",
+  ],
+  "Magny-les-Hameaux": [
+    "/images/refection-toiture-yvelines-057.webp",
+    "/images/reparation-toiture-yvelines-001.webp",
+    "/images/demoussage-toiture-yvelines-028.webp",
+    "/images/zinguerie-gouttiere-yvelines-013.webp",
+    "/images/pose-velux-yvelines-022.webp",
+    "/images/refection-toiture-yvelines-021.webp",
+  ],
+};
+const cardPhotos = CARD_PHOTOS[ville] ?? CARD_PHOTOS["Montigny-le-Bretonneux"];
+
 const SERVICES_CARDS = [
-  { ...SERVICES[0], photo: { src: "/images/demoussage-toiture-yvelines-002.webp", alt: `Réfection de toiture par Adnot Couverture près de ${ville}` },          signal: `Une toiture en fin de vie à ${ville} ?`,            desc: "Dépose complète, écran de sous-toiture, liteaux neufs et couverture reposée, faîtage compris. Voir le détail de la",  anchor: "réfection de toiture dans les Yvelines" },
-  { ...SERVICES[1], photo: { src: "/images/reparation-toiture-yvelines-041.webp", alt: `Réparation de couverture par un couvreur Adnot près de ${ville}` },     signal: `Une fuite ou des tuiles cassées à ${ville} ?`,      desc: "Recherche de fuite, remplacement des éléments touchés, mise hors d'eau si besoin. Plus d'infos sur la",               anchor: "réparation de toiture dans les Yvelines" },
-  { ...SERVICES[2], photo: { src: "/images/demoussage-toiture-yvelines-005.webp", alt: `Démoussage de toiture par Adnot Couverture près de ${ville}` },         signal: `Des tuiles gagnées par la mousse à ${ville} ?`,     desc: "Brossage, traitement anti-mousse et hydrofuge, photos avant / après remises. Voir le détail du",                      anchor: "démoussage de toiture dans les Yvelines" },
-  { ...SERVICES[3], photo: { src: "/heroe/zinguerie-gouttiere-yvelines-001.webp", alt: `Travaux de zinguerie par Adnot Couverture près de ${ville}` },          signal: `Une gouttière qui déborde à ${ville} ?`,            desc: "Pose et remplacement en zinc, aluminium ou PVC, solins et abergements compris. Voir le détail des",                   anchor: "gouttières et de la zinguerie dans le 78" },
-  { ...SERVICES[4], photo: { src: "/heroe/pose-velux-yvelines-019.webp",          alt: `Pose de Velux par Adnot Couverture près de ${ville}` },                 signal: `Une fenêtre de toit à poser à ${ville} ?`,          desc: "Création d'ouverture ou remplacement, raccords d'étanchéité et finitions. Voir la",                                   anchor: "pose de Velux dans les Yvelines" },
-  { ...SERVICES[5], photo: { src: "/images/refection-toiture-yvelines-037.webp",  alt: `Isolation de toiture par Adnot Couverture près de ${ville}` },          signal: `Des combles à isoler à ${ville} ?`,                 desc: "Sarking, entre chevrons ou soufflage, ventilation de la couverture préservée. Plus d'infos sur l'",                   anchor: "isolation de toiture dans les Yvelines" },
+  { ...SERVICES[0], photo: { src: cardPhotos[0], alt: `Réfection de toiture par Adnot Couverture près de ${ville}` },          signal: `Une toiture en fin de vie à ${ville} ?`,            desc: "Dépose complète, écran de sous-toiture, liteaux neufs et couverture reposée, faîtage compris. Voir le détail de la",  anchor: "réfection de toiture dans les Yvelines" },
+  { ...SERVICES[1], photo: { src: cardPhotos[1], alt: `Réparation de couverture par un couvreur Adnot près de ${ville}` },     signal: `Une fuite ou des tuiles cassées à ${ville} ?`,      desc: "Recherche de fuite, remplacement des éléments touchés, mise hors d'eau si besoin. Plus d'infos sur la",               anchor: "réparation de toiture dans les Yvelines" },
+  { ...SERVICES[2], photo: { src: cardPhotos[2], alt: `Démoussage de toiture par Adnot Couverture près de ${ville}` },         signal: `Des tuiles gagnées par la mousse à ${ville} ?`,     desc: "Brossage, traitement anti-mousse et hydrofuge, photos avant / après remises. Voir le détail du",                      anchor: "démoussage de toiture dans les Yvelines" },
+  { ...SERVICES[3], photo: { src: cardPhotos[3], alt: `Travaux de zinguerie par Adnot Couverture près de ${ville}` },          signal: `Une gouttière qui déborde à ${ville} ?`,            desc: "Pose et remplacement en zinc, aluminium ou PVC, solins et abergements compris. Voir le détail des",                   anchor: "gouttières et de la zinguerie dans le 78" },
+  { ...SERVICES[4], photo: { src: cardPhotos[4], alt: `Pose de Velux par Adnot Couverture près de ${ville}` },                 signal: `Une fenêtre de toit à poser à ${ville} ?`,          desc: "Création d'ouverture ou remplacement, raccords d'étanchéité et finitions. Voir la",                                   anchor: "pose de Velux dans les Yvelines" },
+  { ...SERVICES[5], photo: { src: cardPhotos[5], alt: `Isolation de toiture par Adnot Couverture près de ${ville}` },          signal: `Des combles à isoler à ${ville} ?`,                 desc: "Sarking, entre chevrons ou soufflage, ventilation de la couverture préservée. Plus d'infos sur l'",                   anchor: "isolation de toiture dans les Yvelines" },
 ];
 
 const schema = {
@@ -61,7 +82,7 @@ const schema = {
   "description": description,
   "url": `${SITE_URL}${canonical}`,
   "telephone": telHref.replace('tel:', ''),
-  "email": "contact@fwa-toitures.fr",
+  "email": "adnot.couvertureidf@gmail.com",
   "image": `${SITE_URL}/logo/logo-adnot-couverture.webp`,
   "logo": `${SITE_URL}/logo/logo-adnot-couverture.webp`,
   "parentOrganization": { "@id": `${SITE_URL}/#organization` },

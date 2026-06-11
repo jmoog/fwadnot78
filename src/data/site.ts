@@ -1,5 +1,5 @@
-// ── Identité Adnot Couverture / fwa-toitures.fr ──────────────────────────
-export const SITE_URL = "https://fwa-toitures.fr";
+// ── Identité Adnot Couverture / fwatoitures.fr ──────────────────────────
+export const SITE_URL = "https://fwatoitures.fr";
 export const NOM      = "Adnot Couverture";
 export const FONDATEURS = "Francky et Warren Adnot";
 
@@ -8,7 +8,7 @@ export const TEL_HREF  = "tel:+33760817383";
 export const TEL_MAGNY      = "01 69 01 64 26";
 export const TEL_MAGNY_HREF = "tel:+33169016426";
 
-export const EMAIL = "contact@fwa-toitures.fr";
+export const EMAIL = "adnot.couvertureidf@gmail.com";
 
 export const ADRESSE_MONTIGNY = "23 Rue Colbert, 78180 Montigny-le-Bretonneux";
 export const ADRESSE_MAGNY    = "1 Rue Joseph Lemarchand, 78114 Magny-les-Hameaux";
