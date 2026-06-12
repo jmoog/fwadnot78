@@ -495,7 +495,7 @@ p  { line-height: 1.75; }
     .hero h1            { order: 2; text-align: center; }
     .hero__img-wrap     { order: 4; max-width: 480px; margin: .5rem auto; }
     .hero__sub          { order: 5; margin-left: auto; margin-right: auto; text-align: left; }
-    .hero__list         { order: 6; max-width: 480px; margin-left: auto; margin-right: auto; grid-template-columns: 1fr; }
+    .hero__list         { order: 6; width: 100%; max-width: 480px; margin: 0 auto 1.5rem !important; grid-template-columns: 1fr; }
     .hero__btns         { order: 7; }
     /* Page-hero mobile : flatten + reorder = breadcrumb → coq → h1 → tagline → photo → paragraphe → liste/pills → boutons */
     .page-hero__inner   { display: flex; flex-direction: column; grid-template-columns: 1fr; gap: 1.2rem; }
@@ -508,7 +508,7 @@ p  { line-height: 1.75; }
     .page-hero__img-wrap          { order: 4; max-width: 480px; margin: .5rem auto; }
     .page-hero__img-wrap > img    { height: 260px; }
     .page-hero__desc              { order: 5; text-align: left !important; margin-left: auto; margin-right: auto; }
-    .page-hero__list              { order: 6; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .page-hero__list              { order: 6; width: 100%; max-width: 480px; margin: 0 auto 1.5rem !important; }
     .page-hero__tags              { order: 6; justify-content: center; }
     .page-hero__btns              { order: 7; }
     .sitemap__silos     { grid-template-columns: repeat(2,1fr); }
