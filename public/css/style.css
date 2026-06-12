@@ -166,7 +166,7 @@ p  { line-height: 1.75; }
 .hero__garantie-band .icone { filter: brightness(0) invert(1); }
 /* Variante bandeau assurance décennale Progeas (fond blanc pour le logo couleur) */
 .hero__garantie-band--progeas { background: #fff; color: var(--dark); font-weight: 700; }
-.hero__garantie-band--progeas img { height: 28px; width: auto; }
+.hero__garantie-band--progeas img { height: 36px; width: auto; }
 .badge-urg { background: var(--red); color: #fff; font-size: .58rem; font-weight: 800; text-transform: uppercase; padding: .1rem .45rem; border-radius: 3px; margin-left: .3rem; vertical-align: middle; }
 
 /* ── Page hero ville ── */
@@ -450,6 +450,8 @@ p  { line-height: 1.75; }
 .ft__col li a { color: #94A3B8; font-size: .84rem; }
 .ft__col li a:hover { color: #fff; }
 .ft__siret { font-size: .8rem; color: #64748B; margin-top: 1rem; }
+.ft__garantie { display: inline-flex; align-items: center; gap: .6rem; background: #fff; color: var(--dark); font-weight: 700; font-size: .82rem; padding: .55rem .9rem; border-radius: var(--r-sm); margin-top: .25rem; }
+.ft__garantie img { height: 24px; width: auto; }
 .ft__bottom { border-top: 1px solid rgba(255,255,255,0.1); padding: 1.4rem 0; font-size: .79rem; color: #64748B; }
 .ft__bottom-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .5rem; }
 .ft__bottom-links { display: flex; gap: 1.5rem; }
