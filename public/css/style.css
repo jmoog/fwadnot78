@@ -449,7 +449,7 @@ p  { line-height: 1.75; }
 .ft__col li { margin-bottom: .4rem; }
 .ft__col li a { color: #94A3B8; font-size: .84rem; }
 .ft__col li a:hover { color: #fff; }
-.ft__siret { font-size: .8rem; color: #64748B; margin-top: 1rem; }
+.ft__siret { font-size: .85rem; color: #94A3B8; margin-top: 1rem; }
 .ft__garantie { display: inline-flex; align-items: center; gap: .6rem; background: #fff; color: var(--dark); font-weight: 700; font-size: .82rem; padding: .55rem .9rem; border-radius: var(--r-sm); margin-top: .25rem; }
 .ft__garantie img { height: 24px; width: auto; }
 .ft__bottom { border-top: 1px solid rgba(255,255,255,0.1); padding: 1.4rem 0; font-size: .79rem; color: #64748B; }
@@ -496,6 +496,10 @@ p  { line-height: 1.75; }
     .hero__img-wrap     { order: 4; max-width: 480px; margin: .5rem auto; }
     .hero__sub          { order: 5; margin-left: auto; margin-right: auto; text-align: left; }
     .hero__list         { order: 6; width: 100%; max-width: 480px; margin: 0 auto 1.5rem !important; grid-template-columns: 1fr; }
+    .hero__list li,
+    .page-hero__list li { font-size: clamp(.6rem, 3vw, .98rem); white-space: nowrap; }
+    .hero__list li svg,
+    .page-hero__list li svg { width: 15px; height: 15px; }
     .hero__btns         { order: 7; }
     /* Page-hero mobile : flatten + reorder = breadcrumb → coq → h1 → tagline → photo → paragraphe → liste/pills → boutons */
     .page-hero__inner   { display: flex; flex-direction: column; grid-template-columns: 1fr; gap: 1.2rem; }
@@ -555,6 +559,7 @@ p  { line-height: 1.75; }
     .ft__col li a[style]  { justify-content: center !important; }
     .ft__col ul           { display: inline-block; text-align: center; }
     .ft__brand          { text-align: center; }
+    .ft__siret          { text-align: center !important; }
     .ft__logo-center    { justify-content: center; }
     .ft__adresse        { justify-content: center; }
     .ft__google         { justify-content: center; }
