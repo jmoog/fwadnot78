@@ -490,7 +490,7 @@ p  { line-height: 1.75; }
     .hero__text         { display: contents; text-align: center; }
     /* Logo masqué : déjà présent dans le header juste au-dessus */
     .hero__logo         { display: none; }
-    .hero .breadcrumb   { position: static; order: 0; justify-content: flex-end; width: 100%; margin-bottom: .25rem; }
+    .hero .breadcrumb   { position: static; order: 0; justify-content: flex-start; width: 100%; margin-bottom: .25rem; }
     .hero__eyebrow      { order: 1; margin: 0 auto .2rem; text-align: center; white-space: nowrap; font-size: clamp(.58rem, 2.6vw, .82rem); letter-spacing: .1em; }
     .hero h1            { order: 2; text-align: center; }
     .hero__img-wrap     { order: 4; max-width: 480px; margin: .5rem auto; }
@@ -504,7 +504,7 @@ p  { line-height: 1.75; }
     /* Page-hero mobile : flatten + reorder = breadcrumb → coq → h1 → tagline → photo → paragraphe → liste/pills → boutons */
     .page-hero__inner   { display: flex; flex-direction: column; grid-template-columns: 1fr; gap: 1.2rem; }
     .page-hero__inner > div:first-child { display: contents; }
-    .page-hero__inner .breadcrumb { position: static; order: 0; justify-content: flex-end; width: 100%; margin-bottom: .25rem; }
+    .page-hero__inner .breadcrumb { position: static; order: 0; justify-content: flex-start; width: 100%; margin-bottom: .25rem; }
     .page-hero__inner .hero__logo { display: none; }
     .page-hero__inner .hero__badge { order: 1; text-align: center; white-space: nowrap; font-size: clamp(.52rem, 2.5vw, .78rem); letter-spacing: .1em; margin: 0 0 .2rem; }
     .page-hero__inner h1          { order: 2; text-align: center; }
@@ -529,7 +529,7 @@ p  { line-height: 1.75; }
     .topbar         { display: none; }
     p, .content-body p, .seo-grid__text p, .artisan__intro p { text-align: left !important; }
     .page-hero__desc { text-align: left !important; }
-    .breadcrumb { justify-content: flex-end; }
+    .breadcrumb { justify-content: flex-start; }
     .mob-bar        { display: flex; }
     .burger         { display: flex; }
     .hd__cta        { display: none; } /* Devis gratuit masqué dans le header mobile (présent dans le menu burger et la barre mobile) */
