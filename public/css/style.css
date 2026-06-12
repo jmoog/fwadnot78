@@ -172,7 +172,8 @@ p  { line-height: 1.75; }
 /* ── Page hero ville ── */
 .page-hero { background: linear-gradient(135deg, var(--blue-d) 0%, var(--dark) 100%); padding: 3.5rem 0 3rem; }
 .page-hero__inner { display: grid; grid-template-columns: 55% 45%; gap: 3rem; align-items: center; }
-.breadcrumb { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: 1rem; font-size: .8rem; color: rgba(255,255,255,.5); }
+.hero, .page-hero { position: relative; }
+.breadcrumb { display: flex; gap: .4rem; flex-wrap: wrap; justify-content: flex-end; margin: 0; font-size: .8rem; color: rgba(255,255,255,.5); position: absolute; top: 1.2rem; right: max(1.5rem, calc((100% - 1160px) / 2 + 1.5rem)); }
 .breadcrumb a { color: rgba(255,255,255,.7); }
 .breadcrumb a:hover { color: #fff; }
 .page-hero__desc { color: rgba(255,255,255,.85); max-width: 640px; margin: .8rem 0 1rem; }
@@ -487,8 +488,8 @@ p  { line-height: 1.75; }
     .hero__text         { display: contents; text-align: center; }
     /* Logo masqué : déjà présent dans le header juste au-dessus */
     .hero__logo         { display: none; }
-    .hero .breadcrumb   { order: 0; justify-content: center; }
-    .hero__eyebrow      { order: 1; margin: 0 auto .2rem; text-align: center; }
+    .hero .breadcrumb   { position: static; order: 0; justify-content: flex-end; width: 100%; margin-bottom: .25rem; }
+    .hero__eyebrow      { order: 1; margin: 0 auto .2rem; text-align: center; white-space: nowrap; font-size: clamp(.58rem, 2.6vw, .82rem); letter-spacing: .1em; }
     .hero h1            { order: 2; text-align: center; }
     .hero__img-wrap     { order: 4; max-width: 480px; margin: .5rem auto; }
     .hero__sub          { order: 5; margin-left: auto; margin-right: auto; text-align: left; }
@@ -497,10 +498,11 @@ p  { line-height: 1.75; }
     /* Page-hero mobile : flatten + reorder = breadcrumb → coq → h1 → tagline → photo → paragraphe → liste/pills → boutons */
     .page-hero__inner   { display: flex; flex-direction: column; grid-template-columns: 1fr; gap: 1.2rem; }
     .page-hero__inner > div:first-child { display: contents; }
-    .page-hero__inner .breadcrumb { order: 0; justify-content: center; }
+    .page-hero__inner .breadcrumb { position: static; order: 0; justify-content: flex-end; width: 100%; margin-bottom: .25rem; }
     .page-hero__inner .hero__logo { display: none; }
+    .page-hero__inner .hero__badge { order: 1; text-align: center; white-space: nowrap; font-size: clamp(.52rem, 2.5vw, .78rem); letter-spacing: .1em; margin: 0 0 .2rem; }
     .page-hero__inner h1          { order: 2; text-align: center; }
-    .page-hero__inner h1 + p      { order: 3; text-align: center; margin: 0 auto; }
+    .page-hero__inner h1 + p      { order: 3; text-align: left; margin: 0 auto; }
     .page-hero__img-wrap          { order: 4; max-width: 480px; margin: .5rem auto; }
     .page-hero__img-wrap > img    { height: 260px; }
     .page-hero__desc              { order: 5; text-align: left !important; margin-left: auto; margin-right: auto; }
@@ -520,8 +522,8 @@ p  { line-height: 1.75; }
 @media(max-width:768px) {
     .topbar         { display: none; }
     p, .content-body p, .seo-grid__text p, .artisan__intro p { text-align: left !important; }
-    .page-hero__desc { text-align: center !important; }
-    .breadcrumb { justify-content: center; }
+    .page-hero__desc { text-align: left !important; }
+    .breadcrumb { justify-content: flex-end; }
     .mob-bar        { display: flex; }
     .burger         { display: flex; }
     .hd__cta        { display: none; } /* Devis gratuit masqué dans le header mobile (présent dans le menu burger et la barre mobile) */
@@ -548,6 +550,8 @@ p  { line-height: 1.75; }
     .ft__col li a       { display: inline-block; padding: .15rem 0; }
     .ft__col > div      { justify-content: center; }
     .ft__col ul li[style] { justify-content: center !important; }
+    .ft__col li a[style]  { justify-content: center !important; }
+    .ft__col ul           { display: inline-block; text-align: center; }
     .ft__brand          { text-align: center; }
     .ft__logo-center    { justify-content: center; }
     .ft__adresse        { justify-content: center; }
