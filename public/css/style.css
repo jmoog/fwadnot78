@@ -166,7 +166,7 @@ p  { line-height: 1.75; }
 .hero__garantie-band .icone { filter: brightness(0) invert(1); }
 /* Variante bandeau assurance décennale Progeas (fond blanc pour le logo couleur) */
 .hero__garantie-band--progeas { background: #fff; color: var(--dark); font-weight: 700; }
-.hero__garantie-band--progeas img { height: 36px; width: auto; }
+.hero__garantie-band--progeas img { height: 52px; width: auto; }
 .badge-urg { background: var(--red); color: #fff; font-size: .58rem; font-weight: 800; text-transform: uppercase; padding: .1rem .45rem; border-radius: 3px; margin-left: .3rem; vertical-align: middle; }
 
 /* ── Page hero ville ── */
