@@ -65,7 +65,16 @@ const schemaData = schema ?? SCHEMA_ORG;
   <meta name="twitter:image"       content={ogImageURL} />
 
   <!-- Vérification Google Search Console -->
-  <meta name="google-site-verification" content="p5ntTI2_JkKg38UUb0olU5lVNmG_fgHhg7jFSEB0U3o" />
+  <meta name="google-site-verification" content="fF8Kir_WF7R_ov4zOYTYGqI5iArLKd9_j1iz3H8v_CM" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async is:inline src="https://www.googletagmanager.com/gtag/js?id=G-4Q7SECWHC5"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4Q7SECWHC5');
+  </script>
 
   <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" sizes="any" />

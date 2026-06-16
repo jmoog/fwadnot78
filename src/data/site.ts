@@ -43,6 +43,7 @@ export const VILLES = [
   { nom: "Châteaufort",            slug: "/couvreur-chateaufort/",            cp: "78117", bureau: "magny" },
   { nom: "Saint-Lambert-des-Bois", slug: "/couvreur-saint-lambert-des-bois/", cp: "78470", bureau: "magny" },
   { nom: "Milon-la-Chapelle",      slug: "/couvreur-milon-la-chapelle/",      cp: "78470", bureau: "magny" },
+  { nom: "Saint-Rémy-lès-Chevreuse", slug: "/couvreur-saint-remy-les-chevreuse/", cp: "78470", bureau: "magny" },
   { nom: "Dampierre-en-Yvelines",  slug: "/couvreur-dampierre-en-yvelines/",  cp: "78720", bureau: "magny" },
   { nom: "Cernay-la-Ville",        slug: "/couvreur-cernay-la-ville/",        cp: "78720", bureau: "magny" },
   { nom: "Gif-sur-Yvette",         slug: "/couvreur-gif-sur-yvette/",         cp: "91190", bureau: "magny" },

@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { SITE_URL } from '../../data/site';
+
+const canonical = "/realisations/";
+
+const REALISATIONS = [
+  {
+    titre: "Traitement ardoise et étanchéité à Saint-Rémy-lès-Chevreuse",
+    slug: "/realisations/traitement-ardoise-saint-remy-les-chevreuse/",
+    desc: "Traitement anti-mousse Dalep PE sans traces sur une toiture ardoise et vérification de l'étanchéité des couvre-joints.",
+    img: "/images/toiture-ardoise-saint-remy-yvelines-001-800.webp",
+    alt: "Toiture en ardoise sous échafaudage à Saint-Rémy-lès-Chevreuse",
+  },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Nos réalisations",
+  "url": `${SITE_URL}${canonical}`,
+  "isPartOf": { "@id": `${SITE_URL}/#organization` },
+};
+---
+
+<Layout
+  title="Nos réalisations — Adnot Couverture, Yvelines (78)"
+  description="Chantiers de couverture réalisés par Adnot Couverture dans les Yvelines : traitement de toiture, ardoise, étanchéité, démoussage. Photos avant / après."
+  canonical={canonical}
+  schema={schema}
+>
+  <section class="section">
+    <div class="container">
+      <div class="sec-head" style="text-align:left;margin-bottom:2rem;">
+        <h1 style="color:var(--blue);">Nos réalisations</h1>
+        <p style="margin-top:.6rem;color:var(--muted);max-width:760px;">
+          Quelques chantiers menés dans les Yvelines et la vallée de Chevreuse,
+          photos à l'appui. Couverture, traitement, étanchéité et zinguerie.
+        </p>
+      </div>
+
+      <div class="silos silos--3">
+        {REALISATIONS.map(r => (
+          <a href={r.slug} class="silo-card silo-card--photo" style="text-align:left;text-decoration:none;">
+            <img class="silo-card__photo" src={r.img} alt={r.alt} width="800" height="600" loading="lazy" />
+            <div class="silo-card__body">
+              <h3 style="text-align:left;">{r.titre}</h3>
+              <p style="text-align:left;line-height:1.65;margin-bottom:0;">{r.desc}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

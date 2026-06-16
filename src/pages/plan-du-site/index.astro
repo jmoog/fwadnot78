@@ -21,6 +21,10 @@ const BUREAUX_DESC: Record<string, string> = {
   "/couvreur-montigny-le-bretonneux/": ADRESSE_MONTIGNY,
   "/couvreur-magny-les-hameaux/":      ADRESSE_MAGNY,
 };
+
+const REALISATIONS = [
+  { titre: "Traitement ardoise à Saint-Rémy-lès-Chevreuse", slug: "/realisations/traitement-ardoise-saint-remy-les-chevreuse/", desc: "Dalep PE sans traces + vérification d'étanchéité des couvre-joints" },
+];
 ---
 
 <Layout
@@ -71,6 +75,23 @@ const BUREAUX_DESC: Record<string, string> = {
               <a href={s.slug} class="pds-card">
                 <strong>Couvreur {s.nom}</strong>
                 <span>{BUREAUX_DESC[s.slug]}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- Réalisations -->
+        <div class="sitemap__section">
+          <h2>Nos réalisations</h2>
+          <div class="pds-grid">
+            <a href="/realisations/" class="pds-card">
+              <strong>Toutes nos réalisations</strong>
+              <span>Chantiers de couverture dans les Yvelines</span>
+            </a>
+            {REALISATIONS.map(r => (
+              <a href={r.slug} class="pds-card">
+                <strong>{r.titre}</strong>
+                <span>{r.desc}</span>
               </a>
             ))}
           </div>

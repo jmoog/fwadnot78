@@ -1,0 +1,356 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import {
+  SITE_URL, NOM,
+  TEL_MAGNY, TEL_MAGNY_HREF, ADRESSE_MAGNY, MAPS_MAGNY,
+} from '../../../data/site';
+
+const canonical = "/realisations/traitement-ardoise-saint-remy-les-chevreuse/";
+const title = "Traitement ardoise Dalep PE à Saint-Rémy-lès-Chevreuse";
+const description = "Chantier Adnot Couverture à Saint-Rémy-lès-Chevreuse : traitement anti-mousse Dalep PE sans traces sur une toiture ardoise et vérification de l'étanchéité des couvre-joints.";
+const h1 = "Traitement d'une toiture ardoise et vérification d'étanchéité à Saint-Rémy-lès-Chevreuse";
+
+const img1 = "/images/toiture-ardoise-saint-remy-yvelines-001.webp";
+const img1_800 = "/images/toiture-ardoise-saint-remy-yvelines-001-800.webp";
+const img2 = "/images/chantier-couvreur-saint-remy-yvelines-002.webp";
+const img2_800 = "/images/chantier-couvreur-saint-remy-yvelines-002-800.webp";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": h1,
+  "description": description,
+  "image": [`${SITE_URL}${img1}`, `${SITE_URL}${img2}`],
+  "datePublished": "2026-06-16",
+  "author": { "@id": `${SITE_URL}/#organization` },
+  "publisher": { "@id": `${SITE_URL}/#organization` },
+  "locationCreated": { "@type": "Place", "name": "Saint-Rémy-lès-Chevreuse" },
+  "mainEntityOfPage": `${SITE_URL}${canonical}`,
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogImage={img1}
+  schema={schema}
+  nap={{ tel: TEL_MAGNY, telHref: TEL_MAGNY_HREF, adresse: ADRESSE_MAGNY }}
+>
+
+  <!-- ── EN-TÊTE + PHOTO PRINCIPALE ── -->
+  <section class="section chantier-head">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="/">Accueil</a>
+        <span>›</span>
+        <a href="/realisations/">Réalisations</a>
+        <span>›</span>
+        <span>Traitement ardoise à Saint-Rémy-lès-Chevreuse</span>
+      </nav>
+
+      <span class="chantier-eyebrow">Réalisation — {NOM}</span>
+      <h1 class="chantier-h1" style="color:var(--blue);">{h1}</h1>
+      <p class="chantier-lede">
+        Une couverture en ardoise traitée sans laisser de traces, et des
+        couvre-joints contrôlés pour bloquer les infiltrations : retour sur un
+        chantier mené sous échafaudage à Saint-Rémy-lès-Chevreuse.
+      </p>
+
+      <ul class="chantier-meta">
+        <li><img src="/icones/pin-map.svg" alt="" width="14" height="14" class="icone" /> Saint-Rémy-lès-Chevreuse (78470)</li>
+        <li>Couverture ardoise</li>
+        <li>Anti-mousse Dalep PE</li>
+        <li>Étanchéité des couvre-joints</li>
+      </ul>
+
+      <figure class="chantier-hero">
+        <img
+          src={img1}
+          srcset={`${img1_800} 800w, ${img1} 1600w`}
+          sizes="(min-width: 1160px) 1100px, 100vw"
+          alt="Maison à toiture ardoise sous échafaudage Adnot Couverture à Saint-Rémy-lès-Chevreuse"
+          width="1600" height="1200"
+          loading="eager" fetchpriority="high"
+        />
+      </figure>
+    </div>
+  </section>
+
+  <!-- ── CONTENU + SIDEBAR ── -->
+  <section class="content-wrap section--light">
+    <div class="container">
+      <div class="content-grid">
+        <article class="content-body">
+
+          <h2>Le contexte : une couverture ardoise à entretenir</h2>
+          <div class="media-row">
+            <div>
+              <p>
+                Le chantier se situe à <strong>Saint-Rémy-lès-Chevreuse</strong>,
+                sur une maison couverte en <strong>ardoise</strong>. Mousses et
+                lichens s'étaient installés sur les versants les moins exposés, et
+                la question de l'étanchéité des couvre-joints se posait sur les
+                rangs en partie haute.
+              </p>
+              <p>
+                Nous sommes intervenus sous échafaudage, avec deux objectifs :
+                traiter la couverture sans la marquer, et contrôler les points par
+                où l'eau peut s'infiltrer.
+              </p>
+            </div>
+            <figure class="media-figure">
+              <img
+                src={img2}
+                srcset={`${img2_800} 800w, ${img2} 1600w`}
+                sizes="(min-width: 780px) 360px, 100vw"
+                alt="Camionnette et équipe Adnot Couverture devant le chantier de Saint-Rémy-lès-Chevreuse"
+                width="800" height="600" loading="lazy"
+              />
+              <figcaption>Notre équipe sur place, à Saint-Rémy-lès-Chevreuse.</figcaption>
+            </figure>
+          </div>
+
+          <h2>Le traitement anti-mousse Dalep PE, choisi pour ne pas laisser de traces</h2>
+          <img
+            class="dalep-badge"
+            src="/logo/logo_applicateur-de-solutions.png"
+            alt="Badge applicateur agréé des solutions Dalep"
+            width="120" height="120" loading="lazy"
+          />
+          <p>
+            Sur l'ardoise, le rendu compte autant que le résultat technique :
+            un traitement mal choisi dépose un voile blanchâtre qui reste visible
+            des mois. Nous avons appliqué le
+            <a href="https://www.dalep.net/produits/traiter/dalep-pe-traitement-pret-a-lemploi/" target="_blank" rel="noopener"><strong>Dalep PE</strong></a>,
+            un anti-mousse professionnel prêt à l'emploi qui élimine lichens,
+            algues et champignons sans laisser de film blanc sur le matériau —
+            là où un produit comme le Dalep 2100 marque davantage l'ardoise.
+          </p>
+          <p>
+            Ce traitement curatif et préventif s'utilise sans rinçage et garde
+            son effet dans le temps. Applicateurs agréés des solutions Dalep, nous
+            l'appliquons aux dosages prévus par la fiche technique, après brossage
+            et sans jet haute pression qui fragiliserait la surface des ardoises.
+            Le détail de cette prestation figure sur notre page
+            <a href="/demoussage-de-toiture-78/">démoussage et nettoyage de toiture</a>.
+          </p>
+          <ul class="chantier-points">
+            <li>anti-mousse professionnel Dalep PE, prêt à l'emploi et sans rinçage ;</li>
+            <li>action curative et préventive sur lichens, algues et champignons ;</li>
+            <li>pas de film blanc résiduel sur l'ardoise, rendu net ;</li>
+            <li>application par brossage, sans nettoyeur haute pression.</li>
+          </ul>
+
+          <h2>La vérification de l'étanchéité des couvre-joints</h2>
+          <p>
+            Le traitement de surface ne sert à rien si l'eau passe par les
+            jonctions. Nous avons donc contrôlé l'<strong>étanchéité des
+            couvre-joints</strong> : état des recouvrements, tenue des fixations,
+            reprise des points faibles repérés. Sur une couverture ardoise, ce
+            sont souvent ces raccords qui laissent entrer les premières
+            infiltrations, bien avant que l'ardoise elle-même ne soit en cause.
+          </p>
+          <p>
+            Les versants ont été survolés au drone pour une vue d'ensemble, et les
+            photos avant / après remises avec la facture. Une infiltration qui
+            s'aggrave est traitée en
+            <a href="/couvreur-saint-remy-les-chevreuse/">dépannage en moins de 24 heures</a>
+            sur la commune.
+          </p>
+
+          <h2>Nous protégeons les toitures en ardoise dans toutes les Yvelines</h2>
+          <p>
+            Traitement de l'ardoise sans trace et contrôle des couvre-joints :
+            nous réalisons cette intervention sur les
+            <a href="/couvreur-saint-remy-les-chevreuse/">toitures de Saint-Rémy-lès-Chevreuse</a>
+            et partout dans les Yvelines. Au-delà de l'entretien, nous intervenons
+            aussi en couverture, charpente, ramonage et peinture.
+          </p>
+          <p>
+            Pour faire entretenir ou contrôler votre couverture, appelez-nous ou
+            décrivez vos travaux dans le formulaire de devis : l'estimation et le
+            déplacement sont offerts, et les travaux sont couverts par la garantie
+            décennale.
+          </p>
+
+          <p style="margin-top:1.5rem;">
+            <a href="/devis-gratuit/" class="btn btn--red">Demander un devis gratuit</a>
+          </p>
+        </article>
+
+        <aside>
+          <div class="sidebar__card">
+            <h3>Devis gratuit à Saint-Rémy</h3>
+            <p>Devis et déplacement offerts — sans engagement</p>
+            <hr class="sidebar__sep" />
+            <div class="sidebar__tels">
+              <div>
+                <small>Téléphone</small>
+                <a href={TEL_MAGNY_HREF}>
+                  <img src="/icones/telephone.svg" alt="" width="14" height="14" class="icone" />
+                  {TEL_MAGNY}
+                </a>
+              </div>
+            </div>
+            <hr class="sidebar__sep" />
+            <a href="/devis-gratuit/" class="btn btn--red btn--full" style="margin-top:.5rem;">
+              Demander un devis
+            </a>
+            <div class="sidebar__addr">
+              <img src="/icones/pin-map.svg" alt="" width="13" height="13" class="icone" />
+              {ADRESSE_MAGNY}
+            </div>
+            <div style="margin-top:.8rem;">
+              <a href={MAPS_MAGNY} target="_blank" rel="noopener" style="font-size:.85rem;font-weight:600;">Notre fiche Google ↗</a>
+            </div>
+          </div>
+
+          <div class="sidebar__card sidebar__card--dalep">
+            <img src="/logo/logo_applicateur-de-solutions.png" alt="Applicateur agréé des solutions Dalep" width="84" height="84" loading="lazy" />
+            <p>Applicateurs agréés des <strong>solutions Dalep</strong> — traitements professionnels anti-mousse et hydrofuge.</p>
+          </div>
+
+          <div class="sidebar__card" style="margin-top:1.5rem;">
+            <h3 style="font-size:1rem;">À voir aussi</h3>
+            <ul class="sidebar__links">
+              <li><a href="/couvreur-saint-remy-les-chevreuse/">Couvreur à Saint-Rémy-lès-Chevreuse</a></li>
+              <li><a href="/demoussage-de-toiture-78/">Démoussage &amp; nettoyage</a></li>
+              <li><a href="/reparation-de-toiture-78/">Réparation de toiture</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="cta" aria-label="Devis couvreur Saint-Rémy-lès-Chevreuse">
+    <div class="container" style="text-align:center;">
+      <h2>Une toiture ardoise à entretenir à Saint-Rémy ?</h2>
+      <p>Décrivez vos travaux par téléphone ou via le formulaire : un couvreur vient examiner la couverture et chiffre poste par poste — offert, comme le déplacement.</p>
+      <div class="hero__btns" style="justify-content:center;">
+        <a href="/devis-gratuit/" class="btn btn--red">Demander un devis gratuit</a>
+        <a href={TEL_MAGNY_HREF} class="btn btn--outline">
+          <img src="/icones/telephone.svg" alt="" width="16" height="16" class="icone icone--white" />
+          {TEL_MAGNY}
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  /* En-tête sur fond clair : le fil d'Ariane (prévu pour le hero foncé) est
+     repositionné et recoloré pour rester visible. */
+  .chantier-head { position: relative; padding-bottom: 0; }
+  .breadcrumb { position: static; color: var(--muted); left: auto; top: auto; margin-bottom: .75rem; }
+  .breadcrumb a { color: var(--blue); }
+  .breadcrumb a:hover { color: var(--red); }
+
+  .chantier-eyebrow {
+    display: inline-block;
+    color: var(--red);
+    font-weight: 700;
+    font-size: .8rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: .5rem;
+  }
+  .chantier-h1 {
+    color: var(--blue);
+    font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+    line-height: 1.2;
+    margin: 0;
+    max-width: 920px;
+  }
+  .chantier-lede {
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 760px;
+    margin: .9rem 0 0;
+  }
+
+  .chantier-meta {
+    list-style: none;
+    padding: 0;
+    margin: 1.2rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+  }
+  .chantier-meta li {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    background: #eef4fa;
+    color: var(--blue);
+    border: 1px solid var(--border);
+    padding: .35rem .8rem;
+    border-radius: 999px;
+    font-size: .82rem;
+    font-weight: 600;
+  }
+
+  .chantier-hero { margin: 1.6rem 0 0; }
+  .chantier-hero img {
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    object-fit: cover;
+    border-radius: var(--r);
+    box-shadow: var(--shadow-lg);
+    display: block;
+  }
+
+  /* Bloc texte + photo dans la section contexte */
+  .media-row {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 1.6rem;
+    align-items: center;
+    margin: 1rem 0 1.5rem;
+  }
+  .media-row p:first-child { margin-top: 0; }
+  .media-figure { margin: 0; }
+  .media-figure img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--r);
+    box-shadow: var(--shadow);
+    display: block;
+  }
+  .media-figure figcaption {
+    font-size: .82rem;
+    color: var(--muted);
+    margin-top: .5rem;
+  }
+
+  /* Badge applicateur Dalep flotté dans la section traitement */
+  .dalep-badge {
+    float: right;
+    width: 120px;
+    height: auto;
+    margin: .2rem 0 1rem 1.25rem;
+  }
+
+  .chantier-points { margin: 1rem 0 0; }
+  .chantier-points li { margin-bottom: .35rem; }
+
+  /* Encart Dalep dans la sidebar */
+  .sidebar__card--dalep {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: .9rem;
+  }
+  .sidebar__card--dalep img { flex-shrink: 0; }
+  .sidebar__card--dalep p { margin: 0; font-size: .85rem; line-height: 1.5; color: var(--text); }
+
+  @media (max-width: 780px) {
+    .media-row { grid-template-columns: 1fr; }
+    .dalep-badge { width: 92px; margin-left: 1rem; }
+  }
+</style>
