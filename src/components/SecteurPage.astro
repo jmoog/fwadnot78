@@ -3,7 +3,7 @@
 // Note : les pages services affichent les DEUX adresses (couverture départementale) ;
 // ici, chaque page n'affiche que le NAP de son établissement.
 import Layout from '../layouts/Layout.astro';
-import { SITE_URL, NOM, FONDATEURS, EMAIL, SIRET, SERVICES, SECTEURS } from '../data/site';
+import { SITE_URL, NOM, NOM_ALT, FONDATEURS, EMAIL, SIRET, SERVICES, SECTEURS } from '../data/site';
 import AvisCarrousel from './AvisCarrousel.astro';
 
 export interface Props {
@@ -95,7 +95,7 @@ const schema = {
   "@type": "RoofingContractor",
   "@id": `${SITE_URL}${canonical}#etablissement`,
   "name": `${NOM} — ${ville}`,
-  "alternateName": `${FONDATEURS}, couvreurs à ${ville}`,
+  "alternateName": [`${NOM_ALT} — ${ville}`, `${FONDATEURS}, couvreurs à ${ville}`],
   "description": description,
   "url": `${SITE_URL}${canonical}`,
   "telephone": telHref.replace('tel:', ''),
@@ -192,7 +192,10 @@ const schema = {
         />
         <div class="hero__garantie-band hero__garantie-band--progeas">
           <img src="/logo/logo-adnot-couverture-256.webp" alt="Logo Adnot Couverture" width="36" height="36" loading="eager" />
-          Francky et Warren Adnot
+          <span style="display:flex;flex-direction:column;line-height:1.25;">
+            <span>Francky et Warren Adnot</span>
+            <small style="font-weight:600;font-size:.78rem;opacity:.7;">Ent Adnot Couverture</small>
+          </span>
         </div>
       </div>
 

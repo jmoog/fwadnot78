@@ -1,6 +1,7 @@
 // ── Identité Adnot Couverture / ent-adnot-couverture.fr ──────────────────────────
 export const SITE_URL = "https://ent-adnot-couverture.fr";
 export const NOM      = "Adnot Couverture";
+export const NOM_ALT  = "Ent Adnot Couverture";
 export const FONDATEURS = "Francky et Warren Adnot";
 
 export const TEL       = "07 60 81 73 83";
@@ -59,6 +60,7 @@ export const SCHEMA_ORG = {
   "@type": "RoofingContractor",
   "@id": `${SITE_URL}/#organization`,
   "name": NOM,
+  "alternateName": NOM_ALT,
   "url": SITE_URL,
   "telephone": "+33760817383",
   "email": EMAIL,
@@ -83,6 +85,7 @@ export const SCHEMA_ORG = {
       "@type": "RoofingContractor",
       "@id": `${SITE_URL}/couvreur-montigny-le-bretonneux/#etablissement`,
       "name": `${NOM} — Montigny-le-Bretonneux`,
+      "alternateName": `${NOM_ALT} — Montigny-le-Bretonneux`,
       "url": `${SITE_URL}/couvreur-montigny-le-bretonneux/`,
       "telephone": "+33760817383",
       "address": {
@@ -99,6 +102,7 @@ export const SCHEMA_ORG = {
       "@type": "RoofingContractor",
       "@id": `${SITE_URL}/couvreur-magny-les-hameaux/#etablissement`,
       "name": `${NOM} — Magny-les-Hameaux`,
+      "alternateName": `${NOM_ALT} — Magny-les-Hameaux`,
       "url": `${SITE_URL}/couvreur-magny-les-hameaux/`,
       "telephone": "+33169016426",
       "address": {
