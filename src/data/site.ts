@@ -54,6 +54,49 @@ export const VILLES = [
   { nom: "Les Molières",           slug: "/couvreur-les-molieres/",           cp: "91470", bureau: "magny" },
 ];
 
+// ── Maillage interne : liens contextuels vers l'accueil ──────────────────
+// Le footer pointe vers la page pilier (/) avec une ancre + un contexte qui
+// varient selon la page (sélection déterministe par URL). Objectif : renforcer
+// le maillage vers l'accueil sans répéter une ancre exact-match identique sur
+// tout le site. Ancres limitées aux 4 termes métier validés (couvreur,
+// couvreur zingueur, artisan couvreur, entreprise de couverture) + géo 78 /
+// Yvelines. Contextes en voix « nous », faits utilisables uniquement.
+export const FOOTER_HOME_LINKS = [
+  {
+    anchor: "Couvreur 78",
+    context: "nous réparons, entretenons et rénovons les toitures dans tout le département des Yvelines. Devis et déplacement offerts.",
+  },
+  {
+    anchor: "Entreprise de couverture 78",
+    context: "Francky et Warren Adnot, deux frères couvreurs : couverture, charpente, ramonage et peinture, sous garantie décennale.",
+  },
+  {
+    anchor: "Couvreur zingueur dans les Yvelines",
+    context: "réfection de toiture, recherche de fuite, gouttières et solins, depuis nos bureaux de Montigny-le-Bretonneux et Magny-les-Hameaux.",
+  },
+  {
+    anchor: "Artisan couvreur dans les Yvelines",
+    context: "spécialistes de l'entretien des toitures anciennes et de la tuile pays de la vallée de Chevreuse. Dépannage en moins de 24 heures.",
+  },
+  {
+    anchor: "Entreprise de couverture dans les Yvelines",
+    context: "un seul interlocuteur du devis à la réception, avec photos avant/après et vues au drone à chaque chantier.",
+  },
+  {
+    anchor: "Couvreur dans les Yvelines",
+    context: "applicateurs agréés des solutions Dalep pour le nettoyage et l'hydrofuge de toiture. Devis et déplacement offerts.",
+  },
+];
+
+// Sélection déterministe d'un lien selon une graine (l'URL de la page) : la même
+// page renvoie toujours la même ancre, des pages différentes en renvoient de
+// variées.
+export function homeLinkFor(seed: string) {
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) h = (h + seed.charCodeAt(i)) % FOOTER_HOME_LINKS.length;
+  return FOOTER_HOME_LINKS[h];
+}
+
 // ── Schéma de base (RoofingContractor, 2 établissements) ─────────────────
 export const SCHEMA_ORG = {
   "@context": "https://schema.org",

@@ -1,6 +1,6 @@
 ---
 import '../../public/css/style.css';
-import { SITE_URL, NOM, TEL, TEL_HREF, EMAIL, ADRESSE_MONTIGNY, ADRESSE_MAGNY, SIRET, SERVICES, SECTEURS, VILLES, SCHEMA_ORG } from '../data/site';
+import { SITE_URL, NOM, TEL, TEL_HREF, EMAIL, ADRESSE_MONTIGNY, ADRESSE_MAGNY, SIRET, SERVICES, SECTEURS, VILLES, SCHEMA_ORG, homeLinkFor } from '../data/site';
 
 export interface Props {
   title       : string;
@@ -12,6 +12,8 @@ export interface Props {
   hideDevisCta ?: boolean;   // true sur /devis-gratuit/ : masque les CTA devis du header/footer
   nap ?: { tel: string; telHref: string; adresse: string };  // NAP local (pages établissements) : header/footer alignés sur la fiche
   preloadImage ?: string;    // image LCP à précharger (fetchpriority=high)
+  homeAnchor  ?: string;     // ancre du lien footer vers l'accueil (sinon variée par URL)
+  homeContext ?: string;     // phrase de contexte qui suit l'ancre
 }
 
 const {
@@ -24,7 +26,16 @@ const {
   hideDevisCta = false,
   nap,
   preloadImage,
+  homeAnchor,
+  homeContext,
 } = Astro.props;
+
+// Lien contextuel vers l'accueil (footer) : ancre + contexte variés par page.
+// Masqué sur l'accueil lui-même (pas d'auto-lien).
+const isHome = canonical === "/" || canonical === SITE_URL || canonical === `${SITE_URL}/`;
+const homeLink = homeLinkFor(canonical || Astro.url.pathname);
+const footerHomeAnchor  = homeAnchor  ?? homeLink.anchor;
+const footerHomeContext = homeContext ?? homeLink.context;
 
 // NAP affiché dans le header/footer : celui de l'établissement si fourni, sinon le NAP principal
 const NAP_TEL      = nap?.tel      ?? TEL;
@@ -206,6 +217,11 @@ const schemaData = schema ?? SCHEMA_ORG;
           <span>Notre garantie décennale</span>
         </div>
         <p class="ft__siret">SIRET&nbsp;: {SIRET}</p>
+        {!isHome && (
+          <p class="ft__home-link">
+            <a href="/">{footerHomeAnchor}</a> — {footerHomeContext}
+          </p>
+        )}
       </div>
 
       <div class="ft__col">

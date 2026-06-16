@@ -450,6 +450,9 @@ p  { line-height: 1.75; }
 .ft__col li a { color: #94A3B8; font-size: .84rem; }
 .ft__col li a:hover { color: #fff; }
 .ft__siret { font-size: .85rem; color: #94A3B8; margin-top: 1rem; }
+.ft__home-link { font-size: .8rem; line-height: 1.5; color: #94A3B8; margin-top: .85rem; max-width: 34ch; }
+.ft__home-link a { color: #CBD5E1; font-weight: 600; }
+.ft__home-link a:hover { color: #fff; }
 .ft__garantie { display: inline-flex; align-items: center; gap: .6rem; background: #fff; color: var(--dark); font-weight: 700; font-size: .82rem; padding: .55rem .9rem; border-radius: var(--r-sm); margin-top: .25rem; }
 .ft__garantie img { height: 24px; width: auto; }
 .ft__bottom { border-top: 1px solid rgba(255,255,255,0.1); padding: 1.4rem 0; font-size: .79rem; color: #64748B; }
@@ -560,6 +563,7 @@ p  { line-height: 1.75; }
     .ft__col ul           { display: inline-block; text-align: center; }
     .ft__brand          { text-align: center; }
     .ft__siret          { text-align: center !important; }
+    .ft__home-link      { text-align: center; margin-left: auto; margin-right: auto; }
     .ft__logo-center    { justify-content: center; }
     .ft__adresse        { justify-content: center; }
     .ft__google         { justify-content: center; }
