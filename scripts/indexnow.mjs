@@ -9,7 +9,7 @@ import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const KEY          = 'a3ca2fcf954c394caea37ed953106877';
-const HOST         = 'fwatoitures.fr';
+const HOST         = 'ent-adnot-couverture.fr';
 const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
 // Astro 6 + adapter node : les fichiers statiques (sitemap inclus) sont dans dist/client/
 // Fallback sur dist/ si la structure est différente (ancien build statique).

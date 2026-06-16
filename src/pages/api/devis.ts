@@ -7,7 +7,7 @@ export const prerender = false;
 // Variables d'environnement (à configurer dans Coolify) :
 //   BREVO_API_KEY      → Clé API Brevo (commence par xkeysib-...)
 //   ADMIN_EMAILS       → adnot.couvertureidf@gmail.com,jmoog27@gmail.com
-//   FROM_EMAIL         → contact@fwatoitures.fr (domaine vérifié sur Brevo)
+//   FROM_EMAIL         → contact@ent-adnot-couverture.fr (domaine vérifié sur Brevo)
 //   FROM_NAME          → Adnot Couverture (optionnel, défaut "Adnot Couverture")
 // ────────────────────────────────────────────────────────────────────────
 
@@ -168,7 +168,7 @@ function notifTemplate(d: DevisData) {
                 <div style="font-size:14px;opacity:.85;margin-top:4px;">à ${escapeHtml(d.ville)}</div>
               </td>
               <td valign="middle" align="right" width="72">
-                <img src="https://fwatoitures.fr/logo/logo-adnot-couverture-email.png" width="64" height="64" alt="Adnot Couverture" style="display:block;width:64px;height:64px;border:0;">
+                <img src="https://ent-adnot-couverture.fr/logo/logo-adnot-couverture-email.png" width="64" height="64" alt="Adnot Couverture" style="display:block;width:64px;height:64px;border:0;">
               </td>
             </tr>
           </table>
@@ -223,7 +223,7 @@ function notifTemplate(d: DevisData) {
         <!-- Footer -->
         <tr><td style="background:${COLOR_LIGHT};padding:16px 32px;border-top:1px solid ${COLOR_BORDER};font-size:12px;color:${COLOR_MUTED};text-align:center;">
           Demande reçue le ${new Date().toLocaleString('fr-FR', { dateStyle: 'long', timeStyle: 'short', timeZone: 'Europe/Paris' })}<br>
-          via <a href="https://fwatoitures.fr/devis-gratuit/" style="color:${COLOR_BLUE};text-decoration:none;">fwatoitures.fr/devis-gratuit/</a>
+          via <a href="https://ent-adnot-couverture.fr/devis-gratuit/" style="color:${COLOR_BLUE};text-decoration:none;">ent-adnot-couverture.fr/devis-gratuit/</a>
         </td></tr>
 
       </table>
@@ -258,7 +258,7 @@ function ackTemplate(d: DevisData) {
 
         <!-- Header -->
         <tr><td style="background:${COLOR_BLUE};padding:36px 32px 28px;color:#fff;text-align:center;">
-          <img src="https://fwatoitures.fr/logo/logo-adnot-couverture-email.png" width="88" height="88" alt="Adnot Couverture" style="display:block;margin:0 auto 14px;width:88px;height:88px;border:0;">
+          <img src="https://ent-adnot-couverture.fr/logo/logo-adnot-couverture-email.png" width="88" height="88" alt="Adnot Couverture" style="display:block;margin:0 auto 14px;width:88px;height:88px;border:0;">
           <div style="font-size:22px;font-weight:800;letter-spacing:.02em;">Adnot Couverture</div>
           <div style="font-size:14px;font-weight:600;margin-top:4px;">Francky et Warren Adnot</div>
           <div style="font-size:13px;opacity:.85;margin-top:2px;">Couvreurs dans les Yvelines (78)</div>
@@ -319,7 +319,7 @@ function ackTemplate(d: DevisData) {
           Francky et Warren Adnot<br>
           23 Rue Colbert, 78180 Montigny-le-Bretonneux<br>
           1 Rue Joseph Lemarchand, 78114 Magny-les-Hameaux<br>
-          <a href="https://fwatoitures.fr" style="color:#fff;text-decoration:underline;opacity:.85;">fwatoitures.fr</a> &nbsp;·&nbsp; <a href="tel:+33760817383" style="color:#fff;text-decoration:underline;opacity:.85;">07 60 81 73 83</a>
+          <a href="https://ent-adnot-couverture.fr" style="color:#fff;text-decoration:underline;opacity:.85;">ent-adnot-couverture.fr</a> &nbsp;·&nbsp; <a href="tel:+33760817383" style="color:#fff;text-decoration:underline;opacity:.85;">07 60 81 73 83</a>
         </td></tr>
 
       </table>
@@ -408,7 +408,7 @@ export const POST: APIRoute = async ({ request }) => {
     return jsonResponse(500, { ok: false, error: 'Configuration serveur incomplète.' });
   }
 
-  const fromEmail = process.env.FROM_EMAIL || 'contact@fwatoitures.fr';
+  const fromEmail = process.env.FROM_EMAIL || 'contact@ent-adnot-couverture.fr';
   const fromName = process.env.FROM_NAME || 'Adnot Couverture';
 
   // 1) Notification admins

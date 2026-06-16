@@ -5,7 +5,7 @@ import node from '@astrojs/node';
 
 export default defineConfig({
   output: 'static',
-  site: 'https://fwatoitures.fr',
+  site: 'https://ent-adnot-couverture.fr',
   trailingSlash: 'always',
   adapter: node({
     mode: 'standalone',

@@ -1,5 +1,5 @@
-// ── Identité Adnot Couverture / fwatoitures.fr ──────────────────────────
-export const SITE_URL = "https://fwatoitures.fr";
+// ── Identité Adnot Couverture / ent-adnot-couverture.fr ──────────────────────────
+export const SITE_URL = "https://ent-adnot-couverture.fr";
 export const NOM      = "Adnot Couverture";
 export const FONDATEURS = "Francky et Warren Adnot";
 
