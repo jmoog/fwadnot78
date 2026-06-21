@@ -1,0 +1,432 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import {
+  SITE_URL, NOM,
+  TEL, TEL_HREF, ADRESSE_MONTIGNY, MAPS_MONTIGNY,
+} from '../../../data/site';
+
+const canonical = "/realisations/remplacement-toiture-guyancourt/";
+const title = "Remplacement de toiture à Guyancourt (78) — Adnot Couverture";
+const description = "Dépose de la couverture, écran sous-toiture et repose à neuf : notre chantier de toiture sur une maison ancienne de Guyancourt, en vidéo (juin 2026).";
+const h1 = "Une toiture refaite à neuf sur une maison ancienne de Guyancourt";
+
+const datePublished = "2026-06-17";
+
+// Médias
+const poster = "/images/remplacement-toiture-guyancourt-poster.webp";
+const video  = "/videos/remplacement-toiture-guyancourt.mp4";
+
+const img_drone1 = "/images/chantier-couvreur-guyancourt-yvelines-001.webp";
+const img_drone3 = "/images/chantier-couvreur-guyancourt-yvelines-003.webp";
+const img_drone4 = "/images/chantier-couvreur-guyancourt-yvelines-004.webp";
+const img_drone5 = "/images/chantier-couvreur-guyancourt-yvelines-005.webp";
+const img_sol2   = "/images/chantier-couvreur-guyancourt-yvelines-002.webp";
+const img_sol6   = "/images/chantier-couvreur-guyancourt-yvelines-006.webp";
+const img_sol7   = "/images/chantier-couvreur-guyancourt-yvelines-007.webp";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": h1,
+      "description": description,
+      "image": [`${SITE_URL}${img_drone1}`, `${SITE_URL}${img_drone3}`, `${SITE_URL}${img_sol2}`],
+      "datePublished": datePublished,
+      "author": { "@id": `${SITE_URL}/#organization` },
+      "publisher": { "@id": `${SITE_URL}/#organization` },
+      "locationCreated": { "@type": "Place", "name": "Guyancourt", "address": { "@type": "PostalAddress", "addressLocality": "Guyancourt", "postalCode": "78280", "addressCountry": "FR" } },
+      "mainEntityOfPage": `${SITE_URL}${canonical}`,
+    },
+    {
+      "@type": "VideoObject",
+      "name": "Remplacement de toiture à Guyancourt — vue aérienne",
+      "description": "Vue aérienne du remplacement complet de la toiture d'une maison ancienne en centre-ville de Guyancourt par Adnot Couverture.",
+      "thumbnailUrl": [`${SITE_URL}${poster}`],
+      "uploadDate": datePublished,
+      "contentUrl": `${SITE_URL}${video}`,
+      "publisher": { "@id": `${SITE_URL}/#organization` },
+    },
+  ],
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogImage={img_drone1}
+  schema={schema}
+  nap={{ tel: TEL, telHref: TEL_HREF, adresse: ADRESSE_MONTIGNY }}
+>
+
+  <!-- ── EN-TÊTE + VIDÉO HERO ── -->
+  <section class="section chantier-head">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="/">Accueil</a>
+        <span>›</span>
+        <a href="/realisations/">Réalisations</a>
+        <span>›</span>
+        <span>Remplacement de toiture à Guyancourt</span>
+      </nav>
+
+      <span class="chantier-eyebrow">Réalisation — {NOM}</span>
+      <h1 class="chantier-h1" style="color:var(--blue);">{h1}</h1>
+      <p class="chantier-lede">
+        La couverture d'une maison ancienne arrivée en fin de vie, déposée puis
+        refaite à neuf : retour en vidéo et en photos sur un remplacement complet
+        de toiture mené en juin 2026, en centre-ville de Guyancourt.
+      </p>
+
+      <ul class="chantier-meta">
+        <li><img src="/icones/pin-map.svg" alt="" width="14" height="14" class="icone" /> Guyancourt (78280)</li>
+        <li>Remplacement complet de couverture</li>
+        <li>Écran sous-toiture</li>
+        <li>Performances retrouvées</li>
+      </ul>
+
+      <figure class="chantier-video">
+        <video
+          class="hero__video"
+          muted loop playsinline
+          preload="none"
+          width="1280" height="720"
+          poster={poster}
+          aria-label="Vue aérienne du remplacement de toiture Adnot Couverture à Guyancourt"
+        >
+          <source src={video} type="video/mp4" />
+        </video>
+        <figcaption>Vue aérienne du remplacement de toiture, en centre-ville de Guyancourt (juin 2026).</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ── CONTENU + SIDEBAR ── -->
+  <section class="content-wrap section--light">
+    <div class="container">
+      <div class="content-grid">
+        <article class="content-body">
+
+          <h2>Le contexte : une maison ancienne du centre de Guyancourt</h2>
+          <div class="media-row">
+            <div>
+              <p>
+                Le chantier se situe en <strong>centre-ville de Guyancourt</strong>,
+                sur une <strong>maison ancienne</strong>. Sa couverture, marquée
+                par les années, était arrivée en fin de vie : il ne s'agissait
+                plus de réparer ponctuellement mais de
+                <strong>remplacer l'ensemble de la toiture</strong>.
+              </p>
+              <p>
+                Nous sommes intervenus en <strong>juin 2026</strong> : état complet
+                établi par photos et vues aériennes, puis remplacement chiffré
+                poste par poste avant l'ouverture du chantier.
+              </p>
+            </div>
+            <figure class="media-figure">
+              <img
+                src={img_sol2}
+                srcset={`/images/chantier-couvreur-guyancourt-yvelines-002-800.webp 800w, ${img_sol2} 1200w`}
+                sizes="(min-width: 780px) 360px, 100vw"
+                alt="Toiture d'une maison ancienne avant remplacement à Guyancourt"
+                width="1200" height="1600" loading="lazy"
+              />
+              <figcaption>La couverture d'origine, avant intervention.</figcaption>
+            </figure>
+          </div>
+
+          <h2>La dépose et la repose complète de la couverture</h2>
+          <p>
+            Un remplacement de toiture ne se résume pas aux tuiles visibles.
+            Nous avons <strong>déposé l'ancienne couverture</strong>, contrôlé le
+            support, posé un <strong>écran sous-toiture</strong> pour la
+            protection contre les infiltrations et la ventilation, puis
+            <strong>reposé une couverture neuve</strong> avec reprise du faîtage,
+            des rives et des points singuliers. Le détail de cette prestation
+            figure sur notre page
+            <a href="/refection-de-toiture-78/">réfection et remplacement de toiture</a>.
+          </p>
+          <ul class="chantier-points">
+            <li>dépose de l'ancienne couverture et contrôle du support ;</li>
+            <li>pose d'un écran sous-toiture HPV sous le liteaunage ;</li>
+            <li>repose d'une couverture neuve, faîtage et rives compris ;</li>
+            <li>reprise de la zinguerie aux raccords et pénétrations ;</li>
+            <li>évacuation des gravats et nettoyage du chantier.</li>
+          </ul>
+
+          <div class="gallery">
+            <figure>
+              <img src={img_drone3} srcset={`/images/chantier-couvreur-guyancourt-yvelines-003-800.webp 800w, ${img_drone3} 1600w`} sizes="(min-width: 640px) 360px, 100vw" alt="Vue aérienne de la toiture en cours de remplacement à Guyancourt" width="1600" height="900" loading="lazy" />
+            </figure>
+            <figure>
+              <img src={img_drone4} srcset={`/images/chantier-couvreur-guyancourt-yvelines-004-800.webp 800w, ${img_drone4} 1600w`} sizes="(min-width: 640px) 360px, 100vw" alt="Couverture neuve posée sur la maison à Guyancourt" width="1600" height="900" loading="lazy" />
+            </figure>
+            <figure>
+              <img src={img_sol6} srcset={`/images/chantier-couvreur-guyancourt-yvelines-006-800.webp 800w, ${img_sol6} 1200w`} sizes="(min-width: 640px) 360px, 100vw" alt="Détail de la couverture refaite à Guyancourt" width="1200" height="1600" loading="lazy" />
+            </figure>
+            <figure>
+              <img src={img_sol7} srcset={`/images/chantier-couvreur-guyancourt-yvelines-007-800.webp 800w, ${img_sol7} 1200w`} sizes="(min-width: 640px) 360px, 100vw" alt="Travaux de couverture sur la maison ancienne de Guyancourt" width="1200" height="1600" loading="lazy" />
+            </figure>
+          </div>
+
+          <h2>Une toiture refaite, des performances retrouvées</h2>
+          <div class="media-row">
+            <div>
+              <p>
+                Sur une maison ancienne, refaire la couverture ne se voit pas
+                qu'en surface : la toiture <strong>retrouve son étanchéité</strong>,
+                l'écran sous-toiture HPV protège désormais le bois de charpente, et
+                la ventilation de la couverture limite la condensation sous les
+                combles. L'enveloppe redevient saine et durable, et le confort de
+                la maison s'en ressent — moins d'infiltrations, moins de
+                déperditions.
+              </p>
+              <p>
+                En cas de fuite qui s'aggrave avant des travaux de cette ampleur,
+                nous intervenons en
+                <a href="/couvreur-guyancourt/">dépannage en moins de 24 heures</a>
+                à Guyancourt.
+              </p>
+            </div>
+            <figure class="media-figure">
+              <img
+                src={img_drone5}
+                srcset={`/images/chantier-couvreur-guyancourt-yvelines-005-800.webp 800w, ${img_drone5} 1600w`}
+                sizes="(min-width: 780px) 360px, 100vw"
+                alt="La toiture neuve de la maison ancienne, à Guyancourt"
+                width="1600" height="900" loading="lazy"
+              />
+              <figcaption>La couverture refaite à neuf, à Guyancourt.</figcaption>
+            </figure>
+          </div>
+
+          <h2>Nous remplaçons les toitures à Guyancourt</h2>
+          <p>
+            Remplacement complet de couverture, écran sous-toiture et reprise de
+            la zinguerie : ce chantier illustre le travail de votre
+            <a href="/couvreur-guyancourt/">couvreur à Guyancourt</a>, aussi bien
+            sur une maison ancienne du centre que sur une construction plus
+            récente. Au-delà du remplacement, nous intervenons aussi en
+            réparation, démoussage, zinguerie, Velux et isolation de combles.
+          </p>
+          <p>
+            Pour faire remplacer ou expertiser votre couverture, appelez-nous ou
+            décrivez vos travaux dans le formulaire de devis : l'estimation et le
+            déplacement sont offerts, et les travaux sont couverts par la garantie
+            décennale.
+          </p>
+
+        </article>
+
+        <aside>
+          <div class="sidebar__card">
+            <h3>Devis gratuit à Guyancourt</h3>
+            <p>Devis et déplacement offerts — sans engagement</p>
+            <hr class="sidebar__sep" />
+            <div class="sidebar__tels">
+              <div>
+                <small>Téléphone</small>
+                <a href={TEL_HREF}>
+                  <img src="/icones/telephone.svg" alt="" width="14" height="14" class="icone" />
+                  {TEL}
+                </a>
+              </div>
+            </div>
+            <hr class="sidebar__sep" />
+            <a href="/devis-gratuit/" class="btn btn--red btn--full" style="margin-top:.5rem;">
+              Demander un devis
+            </a>
+            <div class="sidebar__addr">
+              <img src="/icones/pin-map.svg" alt="" width="13" height="13" class="icone" />
+              {ADRESSE_MONTIGNY}
+            </div>
+            <div style="margin-top:.8rem;">
+              <a href={MAPS_MONTIGNY} target="_blank" rel="noopener" style="font-size:.85rem;font-weight:600;">Notre fiche Google ↗</a>
+            </div>
+          </div>
+
+          <div class="sidebar__card" style="margin-top:1.5rem;">
+            <h3 style="font-size:1rem;">À voir aussi</h3>
+            <ul class="sidebar__links">
+              <li><a href="/couvreur-guyancourt/">Couvreur zingueur à Guyancourt</a></li>
+              <li><a href="/refection-de-toiture-78/">Réfection de toiture</a></li>
+              <li><a href="/realisations/">Toutes nos réalisations</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA — texte gauche + image droite ── -->
+  <section class="cta-split" aria-labelledby="sec-cta-guyancourt">
+    <div class="container">
+      <div class="cta-split__grid">
+        <div class="cta-split__text">
+          <h2 id="sec-cta-guyancourt" style="color:#fff;margin-bottom:1rem;">
+            Une toiture à remplacer à Guyancourt ?
+          </h2>
+          <p style="color:rgba(255,255,255,.88);font-size:1.05rem;line-height:1.65;text-align:left;margin-bottom:1.8rem;">
+            Décrivez-nous votre toiture par téléphone : un couvreur vient
+            l'examiner, puis chiffre les travaux poste par poste — de la simple
+            reprise au remplacement complet. <strong>Le devis et le déplacement
+            sont offerts</strong>, et les travaux sont couverts par la garantie
+            décennale.
+          </p>
+          <div class="hero__btns" style="margin-bottom:0;">
+            <a href={TEL_HREF} class="btn btn--red">
+              <svg class="icone" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.45 2 2 0 0 1 3.59 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+              {TEL}
+            </a>
+            <a href="/devis-gratuit/" class="btn btn--outline">
+              <svg class="icone" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+              Demander un devis gratuit
+            </a>
+          </div>
+        </div>
+        <div class="cta-split__img">
+          <img
+            src={img_drone4}
+            srcset={`/images/chantier-couvreur-guyancourt-yvelines-004-800.webp 800w, ${img_drone4} 1600w`}
+            sizes="(min-width: 900px) 520px, 100vw"
+            alt="Couverture neuve après remplacement de toiture à Guyancourt"
+            width="520" height="380"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<script is:inline>
+  // Lance la vidéo du chantier après le chargement, sauf reduced-motion.
+  (function () {
+    var v = document.querySelector('.chantier-video .hero__video');
+    if (!v) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var start = function () { v.load(); v.play().catch(function () {}); };
+    if (document.readyState === 'complete') start();
+    else window.addEventListener('load', start);
+  })();
+</script>
+
+<style>
+  .chantier-head { position: relative; padding-bottom: 0; }
+  .breadcrumb { position: static; color: var(--muted); left: auto; top: auto; margin-bottom: .75rem; }
+  .breadcrumb a { color: var(--blue); }
+  .breadcrumb a:hover { color: var(--red); }
+
+  .chantier-eyebrow {
+    display: inline-block;
+    color: var(--red);
+    font-weight: 700;
+    font-size: .8rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: .5rem;
+  }
+  .chantier-h1 {
+    color: var(--blue);
+    font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+    line-height: 1.2;
+    margin: 0;
+    max-width: 920px;
+  }
+  .chantier-lede {
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 760px;
+    margin: .9rem 0 0;
+  }
+
+  .chantier-meta {
+    list-style: none;
+    padding: 0;
+    margin: 1.2rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+  }
+  .chantier-meta li {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    background: #eef4fa;
+    color: var(--blue);
+    border: 1px solid var(--border);
+    padding: .35rem .8rem;
+    border-radius: 999px;
+    font-size: .82rem;
+    font-weight: 600;
+  }
+
+  /* Vidéo hero */
+  .chantier-video { margin: 1.6rem 0 0; }
+  .chantier-video .hero__video {
+    width: 100%;
+    height: auto;
+    max-height: 560px;
+    object-fit: cover;
+    border-radius: var(--r);
+    box-shadow: var(--shadow-lg);
+    display: block;
+    background: #000;
+  }
+  .chantier-video figcaption {
+    font-size: .82rem;
+    color: var(--muted);
+    margin-top: .5rem;
+  }
+
+  /* Bloc texte + photo */
+  .media-row {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 1.6rem;
+    align-items: center;
+    margin: 1rem 0 1.5rem;
+  }
+  .media-row p:first-child { margin-top: 0; }
+  .media-figure { margin: 0; }
+  .media-figure img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--r);
+    box-shadow: var(--shadow);
+    display: block;
+  }
+  .media-figure figcaption {
+    font-size: .82rem;
+    color: var(--muted);
+    margin-top: .5rem;
+  }
+
+  /* Galerie */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: .8rem;
+    margin: 1.4rem 0 1.6rem;
+  }
+  .gallery figure { margin: 0; }
+  .gallery img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: var(--r);
+    box-shadow: var(--shadow);
+    display: block;
+  }
+
+  .chantier-points { margin: 1rem 0 0; }
+  .chantier-points li { margin-bottom: .35rem; }
+
+  @media (max-width: 780px) {
+    .media-row { grid-template-columns: 1fr; }
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

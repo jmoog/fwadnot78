@@ -11,6 +11,7 @@ export interface Props {
   noindex    ?: boolean;
   hideDevisCta ?: boolean;   // true sur /devis-gratuit/ : masque les CTA devis du header/footer
   nap ?: { tel: string; telHref: string; adresse: string };  // NAP local (pages établissements) : header/footer alignés sur la fiche
+  etablissement ?: boolean;  // true UNIQUEMENT sur les pages siège Montigny et Magny : footer = adresse unique. Sinon : les deux adresses.
   preloadImage ?: string;    // image LCP à précharger (fetchpriority=high)
   homeAnchor  ?: string;     // ancre du lien footer vers l'accueil (sinon variée par URL)
   homeContext ?: string;     // phrase de contexte qui suit l'ancre
@@ -25,6 +26,7 @@ const {
   noindex    = false,
   hideDevisCta = false,
   nap,
+  etablissement = false,
   preloadImage,
   homeAnchor,
   homeContext,
@@ -196,8 +198,23 @@ const schemaData = schema ?? SCHEMA_ORG;
           <img src="/logo/logo-adnot-couverture-256.webp" alt={NOM} class="logo--img-ft" width="128" height="128" loading="lazy" />
         </a>
         <div class="ft__adresse">
-          <img src="/icones/pin-map.svg" alt="" width="13" height="13" class="icone icone--ft" />
-          {NAP_ADRESSE}
+          {etablissement ? (
+            <span style="display:flex;align-items:center;justify-content:center;gap:.4rem;">
+              <img src="/icones/pin-map.svg" alt="" width="13" height="13" class="icone icone--ft" />
+              {NAP_ADRESSE}
+            </span>
+          ) : (
+            <span style="display:flex;flex-direction:column;align-items:center;gap:.4rem;">
+              <span style="display:flex;align-items:center;justify-content:center;gap:.4rem;">
+                <img src="/icones/pin-map.svg" alt="" width="13" height="13" class="icone icone--ft" />
+                {ADRESSE_MONTIGNY}
+              </span>
+              <span style="display:flex;align-items:center;justify-content:center;gap:.4rem;">
+                <img src="/icones/pin-map.svg" alt="" width="13" height="13" class="icone icone--ft" />
+                {ADRESSE_MAGNY}
+              </span>
+            </span>
+          )}
         </div>
         <div class="ft__cta">
           {!hideDevisCta && (
@@ -250,7 +267,7 @@ const schemaData = schema ?? SCHEMA_ORG;
               {EMAIL}
             </a>
           </li>
-          {nap ? (
+          {etablissement ? (
             <li style="display:flex;align-items:flex-start;gap:.4rem;color:#94A3B8;font-size:.84rem;margin-top:.25rem;">
               <img src="/icones/pin-map.svg" alt="" width="13" height="13" class="icone icone--ft" style="margin-top:.2rem;flex-shrink:0;" />
               {NAP_ADRESSE}

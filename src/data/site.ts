@@ -39,6 +39,7 @@ export const SECTEURS = [
 
 // ── Villes desservies (zone des fiches Google, une page chacune) ─────────
 export const VILLES = [
+  { nom: "Guyancourt",             slug: "/couvreur-guyancourt/",             cp: "78280", bureau: "montigny" },
   { nom: "Voisins-le-Bretonneux",  slug: "/couvreur-voisins-le-bretonneux/",  cp: "78960", bureau: "montigny" },
   { nom: "Versailles",             slug: "/couvreur-versailles/",             cp: "78000", bureau: "montigny" },
   { nom: "Châteaufort",            slug: "/couvreur-chateaufort/",            cp: "78117", bureau: "magny" },

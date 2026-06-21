@@ -34,14 +34,22 @@ export interface Props {
   galerieTitle: string;
   portraitTitle: string;
   ctaTitle    : string;
+  ctaImg     ?: { src: string; alt: string }; // photo affichée à droite du CTA (optionnelle)
+  etablissement ?: boolean; // true uniquement sur les pages siège Montigny et Magny (footer = adresse unique)
 }
 
 const {
   title, description, canonical, ville, h1, h1Sub, heroDesc, heroImg,
   adresse, rue, cp, tel, telHref, telFixe, geo, sameAs,
   servicesTitle, servicesIntro, cardsTexts, avisTitle, avisAfficheTotal, avisPosition, villesProches,
-  galerie, galerieTitle, portraitTitle, ctaTitle,
+  galerie, galerieTitle, portraitTitle, ctaTitle, ctaImg, etablissement,
 } = Astro.props;
+
+// Photo du CTA (texte à gauche, image à droite) — défaut générique si non fournie
+const ctaImage = ctaImg ?? {
+  src: "/images/adnot-couvreur-yvelines-020.webp",
+  alt: `Couvreur Adnot Couverture sur une toiture à ${ville}`,
+};
 
 const secServicesTitle = servicesTitle ?? `Nos prestations à ${ville}`;
 const secServicesIntro = servicesIntro ?? `Réfection, réparation, démoussage, zinguerie, Velux et isolation : six prestations réalisées à ${ville} et dans les communes voisines, détaillées sur leurs pages dédiées.`;
@@ -135,7 +143,7 @@ const schema = {
 };
 ---
 
-<Layout title={title} description={description} canonical={canonical} ogImage={heroImg.src} schema={schema} nap={{ tel, telHref, adresse }}>
+<Layout title={title} description={description} canonical={canonical} ogImage={heroImg.src} schema={schema} nap={{ tel, telHref, adresse }} etablissement={etablissement}>
 
   <!-- ── HERO (même structure que la home, photo à la place de la vidéo) ── -->
   <section class="hero" aria-label={`Couvreur ${ville}`}>
@@ -364,22 +372,29 @@ const schema = {
     </div>
   </section>
 
-  <!-- ── CTA ── -->
-  <section class="cta" aria-label={ctaTitle}>
-    <div class="container" style="text-align:center;">
-      <h2>{ctaTitle}</h2>
-      <p>Un toit qui prend de l'âge, des tuiles à remplacer, une couverture à entretenir : décrivez vos travaux par téléphone ou via le formulaire, un couvreur vient examiner la toiture et chiffre poste par poste.</p>
-      <div class="hero__btns" style="justify-content:center;">
-        <a href="/devis-gratuit/" class="btn btn--red">Demander un devis gratuit</a>
-        <a href={telHref} class="btn btn--outline">
-          <img src="/icones/telephone.svg" alt="" width="16" height="16" class="icone icone--white" />
-          {tel}
-        </a>
+  <!-- ── CTA (texte gauche + photo droite) ── -->
+  <section class="cta-split" aria-label={ctaTitle}>
+    <div class="container">
+      <div class="cta-split__grid">
+        <div class="cta-split__text">
+          <h2 style="color:#fff;margin-bottom:1rem;">{ctaTitle}</h2>
+          <p style="color:rgba(255,255,255,.88);line-height:1.65;text-align:left;margin-bottom:1.6rem;">Un toit qui prend de l'âge, des tuiles à remplacer, une couverture à entretenir : décrivez vos travaux par téléphone ou via le formulaire, un couvreur vient examiner la toiture et chiffre poste par poste.</p>
+          <div class="hero__btns" style="margin-bottom:1.3rem;">
+            <a href="/devis-gratuit/" class="btn btn--red">Demander un devis gratuit</a>
+            <a href={telHref} class="btn btn--outline">
+              <img src="/icones/telephone.svg" alt="" width="16" height="16" class="icone icone--white" />
+              {tel}
+            </a>
+          </div>
+          <p style="display:flex;align-items:center;gap:.6rem;font-size:.98rem;color:rgba(255,255,255,.9);margin:0;">
+            <img src="/icones/pin-map.svg" alt="" width="18" height="18" class="icone icone--white" style="flex-shrink:0;" />
+            Notre bureau&nbsp;: {adresse}
+          </p>
+        </div>
+        <div class="cta-split__img">
+          <img src={ctaImage.src} alt={ctaImage.alt} width="520" height="380" loading="lazy" />
+        </div>
       </div>
-      <p style="margin:1.4rem 0 0;display:flex;align-items:center;justify-content:center;gap:.6rem;font-size:.98rem;opacity:.92;">
-        <img src="/icones/pin-map.svg" alt="" width="18" height="18" class="icone icone--white" style="flex-shrink:0;" />
-        Notre bureau&nbsp;: {adresse}
-      </p>
     </div>
   </section>
 

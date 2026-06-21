@@ -1,0 +1,114 @@
+---
+import VillePage from '../../components/VillePage.astro';
+---
+
+<VillePage
+  title="Artisan couvreur à Guyancourt (78280)"
+  description="Entreprise de couverture à Guyancourt ✓ Réfection, réparation ou nettoyage de toiture ✓ devis gratuit ✓ Adnot Couverture, 07 60 81 73 83."
+  canonical="/couvreur-guyancourt/"
+  ville="Guyancourt"
+  cp="78280"
+  dept="Yvelines"
+  bureau="montigny"
+  h1="Couvreur zingueur à Guyancourt"
+  heroDesc="Une couverture qui blanchit, des tuiles béton fendues, un faîtage qui s'ouvre ou une isolation d'origine qui laisse filer le chauffage ? Le réflexe, c'est un <strong>couvreur</strong>. Nous réparons, nettoyons et rénovons les <strong>toitures de Guyancourt</strong>, quartier par quartier."
+  heroImg={{ src: "/images/couvreur-guyancourt-78-ent-adnot-couverture.webp", alt: "Réfection de toiture par Adnot Couverture sur un pavillon de Guyancourt (78)" }}
+  servicesTitle="Nos services de couvreur à Guyancourt"
+  cards={[
+    { signal: "Une couverture de pavillon en fin de cycle ?",
+      desc: "Quand la dépose s'impose, nous chiffrons sur devis la",
+      anchor: "réfection complète de toiture",
+      alt: "Pavillon dont la couverture est refaite à neuf" },
+    { signal: "Un closoir envolé, des tuiles béton fendues ?",
+      desc: "Les pièces des années 80 se remplacent encore ; nous les trouvons. La",
+      anchor: "réparation et l'entretien de toiture",
+      alt: "Remplacement de tuiles béton sur un pavillon" },
+    { signal: "Des tuiles béton qui blanchissent et verdissent ?",
+      desc: "Le traitement redonne au toit sa teinte et son étanchéité de surface. Le",
+      anchor: "nettoyage de toiture (78)",
+      alt: "Toiture de pavillon nettoyée à moitié, contraste visible" },
+    { signal: "Des gouttières d'origine sur une maison de lotissement ?",
+      desc: "Remplacement coordonné sur les rives partagées. Les",
+      anchor: "gouttières et la zinguerie",
+      alt: "Pose de gouttières neuves sur une maison à étage" },
+    { signal: "Un bureau à créer sous les combles ?",
+      desc: "Fenêtre de toit posée en une journée dans la plupart des cas. La",
+      anchor: "pose de Velux",
+      alt: "Pose d'un Velux sur un pavillon des années 80" },
+    { signal: "Une isolation d'origine encore en service ?",
+      desc: "Les normes ont changé plusieurs fois depuis ; remettez le toit au niveau. L'",
+      anchor: "isolation de toiture et de combles (78)",
+      alt: "Remplacement d'une isolation de combles datée" },
+  ]}
+  avisNoms={["Ashak Paul", "Stéphane Shalaby", "Marina Bedrous", "Dayaf 75"]}
+  avisTitle="Les avis de nos clients à Guyancourt"
+>
+  <figure class="chantier-photos">
+    <img
+      src="/images/chantier-couvreur-guyancourt-yvelines-001.webp"
+      srcset="/images/chantier-couvreur-guyancourt-yvelines-001-800.webp 800w, /images/chantier-couvreur-guyancourt-yvelines-001.webp 1600w"
+      sizes="(min-width: 780px) 440px, 100vw"
+      alt="Vue par drone d'une réfection de toiture menée par Adnot Couverture à Guyancourt (78)"
+      width="1600" height="900" loading="lazy"
+    />
+    <img
+      src="/images/chantier-couvreur-guyancourt-yvelines-002.webp"
+      srcset="/images/chantier-couvreur-guyancourt-yvelines-002-800.webp 800w, /images/chantier-couvreur-guyancourt-yvelines-002.webp 1200w"
+      sizes="(min-width: 780px) 300px, 100vw"
+      alt="Couvreur Adnot Couverture au travail sur une toiture à Guyancourt"
+      width="1200" height="1600" loading="lazy"
+    />
+    <figcaption>Réfection de toiture menée par nos équipes à Guyancourt (78280).</figcaption>
+  </figure>
+
+  <h2>Rénovation des toitures de pavillons à Guyancourt</h2>
+  <p>
+    Nous rénovons les pavillons de Villaroy, du Pont du Routoir, des Saules et
+    du Village, bâtis avec Saint-Quentin-en-Yvelines et dont les couvertures,
+    posées sur quelques décennies, vieillissent au même rythme. Tuiles béton
+    poreuses, closoirs fatigués, gouttières d'origine : nous établissons un
+    état précis par photos, puis chiffrons la
+    <a href="/reparation-de-toiture-78/">remise en état de la couverture</a>
+    ou son remplacement, au choix documenté. Nous sommes d'ailleurs récemment
+    intervenus à Guyancourt pour un
+    <a href="/realisations/remplacement-toiture-guyancourt/"><strong>remplacement
+    complet de toiture</strong></a>, vidéo et photos à l'appui.
+  </p>
+
+  <h2>Isolation de la toiture des pavillons mitoyens</h2>
+  <p>
+    Sur les pavillons mitoyens de Guyancourt, une
+    <a href="/isolation-de-toiture-78/">isolation posée côté toiture</a> règle
+    en une intervention le confort d'été et les déperditions d'hiver,
+    ventilation de la couverture préservée. L'échafaudage se monte en limite
+    de propriété et les raccords de rive partagée se règlent avant l'ouverture
+    du chantier, accord écrit du voisin à l'appui.
+  </p>
+</VillePage>
+
+<style>
+  .chantier-photos {
+    margin: 0 0 1.6rem;
+    display: grid;
+    grid-template-columns: 1.45fr 1fr;
+    gap: .9rem;
+  }
+  .chantier-photos img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: var(--r);
+    box-shadow: var(--shadow);
+    display: block;
+  }
+  .chantier-photos figcaption {
+    grid-column: 1 / -1;
+    font-size: .82rem;
+    color: var(--muted);
+    margin-top: -.1rem;
+  }
+  @media (max-width: 780px) {
+    .chantier-photos { grid-template-columns: 1fr; }
+    .chantier-photos img { height: auto; }
+  }
+</style>
