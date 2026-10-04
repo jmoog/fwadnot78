@@ -68,6 +68,14 @@ const SERVICES_HOME = [
     desc  : "Isolation par sarking ou entre chevrons, écran de sous-toiture posé dans le même temps, ventilation de la couverture préservée. Plus d'infos sur l'",
     anchor: "isolation de toiture dans les Yvelines (78)",
   },
+  {
+    titre : "Ramonage de cheminée",
+    slug  : "/ramonage-cheminee-78/",
+    photo : { src: "/images/ramonage-cheminee-montigny-le-bretonneux-78-02.webp", alt: "Ramonage d'un insert par Adnot Couverture dans les Yvelines" },
+    signal: "Une cheminée qui fume dans la pièce, une vitre d'insert qui noircit vite ?",
+    desc  : "Foyer ouvert, insert ou poêle à bois : conduit ramoné au hérisson, foyer nettoyé et certificat de ramonage remis pour votre assureur. Plus d'infos sur le",
+    anchor: "ramonage de cheminée dans les Yvelines (78)",
+  },
 ];
 
 const schema = {
@@ -196,11 +204,11 @@ const schema = {
       <p style="text-align:left;max-width:720px;margin:.8rem auto 0;">
         <strong>De la tuile à remplacer à la réfection complète</strong>, nous
         prenons en charge l'ensemble de la toiture&nbsp;: couverture, faîtage,
-        solins, gouttières, fenêtres de toit et isolation des combles. Six
-        prestations détaillées, du diagnostic à la réception du chantier.
+        solins, gouttières, fenêtres de toit, isolation des combles et ramonage.
+        Sept prestations détaillées, du diagnostic à la réception du chantier.
       </p>
     </div>
-    <div class="silos silos--3">
+    <div class="silos silos--3 silos--services">
       {SERVICES_HOME.map(s => (
         <div class="silo-card silo-card--photo" style="text-align:left;">
           <img class="silo-card__photo" src={s.photo.src.replace('.webp', '-800.webp')} srcset={`${s.photo.src.replace('.webp', '-800.webp')} 800w, ${s.photo.src} 1600w`} sizes="(min-width: 900px) 756px, 100vw" alt={s.photo.alt} width="800" height="600" loading="lazy" />
@@ -400,3 +408,17 @@ const schema = {
 </section>
 
 </Layout>
+
+<style>
+  /* 7 prestations : la carte seule sur sa ligne est centrée */
+  @media (min-width: 901px) {
+    .silos--services > .silo-card:last-child:nth-child(3n+1) { grid-column: 2; }
+  }
+  @media (min-width: 561px) and (max-width: 900px) {
+    .silos--services > .silo-card:last-child:nth-child(2n+1) {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: calc(50% - .75rem);
+    }
+  }
+</style>
