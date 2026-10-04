@@ -1,0 +1,109 @@
+---
+import RealisationPage from '../../../components/RealisationPage.astro';
+
+const ph = (nom: string, alt: string, w: number, h: number, caption?: string) => ({
+  src: `/images/${nom}.webp`, src800: `/images/${nom}-800.webp`, alt, w, h, caption,
+});
+
+const hero   = ph("zinguerie-magny-les-hameaux-78-01", "Presbytère de Magny-les-Hameaux avant le remplacement de la noue", 1600, 1200);
+const ouvert = ph("zinguerie-magny-les-hameaux-78-08", "Noue ouverte : support, écran sous-toiture et liteaux", 1200, 1600);
+const neuve  = ph("zinguerie-magny-les-hameaux-78-04", "Noue neuve en zinc posée entre deux pans de toiture", 1200, 1600);
+
+const galerie = [
+  ph("zinguerie-magny-les-hameaux-78-09", "Tuiles recoupées et reposées le long de la noue neuve", 1200, 1600, "Les tuiles recoupées au plus près de la noue."),
+  ph("zinguerie-magny-les-hameaux-78-06", "Noue terminée vue depuis le haut de la toiture", 1600, 1200, "La noue terminée."),
+  ph("zinguerie-magny-les-hameaux-78-05", "Chantier Adnot Couverture au presbytère de Magny-les-Hameaux", 1600, 1200, "Le chantier, au presbytère."),
+];
+---
+
+<RealisationPage
+  title="Noue remplacée à Magny-les-Hameaux — Adnot Couverture"
+  description="Au presbytère de Magny-les-Hameaux, une noue usée remplacée par une noue neuve en zinc, tuiles recoupées et reposées. Chantier de juillet 2024."
+  canonical="/realisations/remplacement-noue-magny-les-hameaux/"
+  h1="Une noue remplacée à Magny-les-Hameaux"
+  lede="En juillet 2024, nous sommes intervenus sur le presbytère de Magny-les-Hameaux, à deux pas de notre bureau. Sa noue, usée, ne garantissait plus l'étanchéité de la toiture."
+  breadcrumb="Noue remplacée à Magny-les-Hameaux"
+  datePublished="2026-10-04"
+  lieu={{ nom: "Magny-les-Hameaux", cp: "78114" }}
+  chips={["Presbytère", "Noue en zinc", "Tuiles recoupées et reposées", "Juillet 2024"]}
+  bureau="magny"
+  hero={hero}
+  video={{
+    src: "/videos/remplacement-noue-magny-les-hameaux.mp4",
+    poster: "/images/remplacement-noue-magny-les-hameaux-poster.webp",
+    name: "Le chantier de la noue du presbytère de Magny-les-Hameaux, en vidéo",
+    description: "Remplacement de la noue du presbytère de Magny-les-Hameaux par Adnot Couverture, juillet 2024.",
+  }}
+  galerie={galerie}
+  galerieTitle="Le chantier du presbytère en images"
+  sidebarTitle="Devis gratuit à Magny"
+  liens={[
+    { href: "/couvreur-magny-les-hameaux/", label: "Couvreur à Magny-les-Hameaux" },
+    { href: "/gouttieres-zinguerie-78/", label: "Gouttières et zinguerie" },
+    { href: "/reparation-de-toiture-78/", label: "Réparation de toiture" },
+  ]}
+  ctaTitle="Faites intervenir un couvreur à Magny-les-Hameaux"
+  ctaDesc="Une tache au plafond près d'un angle de toiture, une noue rouillée ou encombrée de mousse ? Francky et Warren vérifient votre noue et la remplacent si besoin. <strong>Le devis est gratuit et sans engagement.</strong>"
+  ctaImg={galerie[1]}
+>
+  <h2>La noue, point sensible d'une toiture</h2>
+  <div class="media-row">
+    <div>
+      <p>
+        La noue est le canal qui recueille l'eau à la jonction de deux pans.
+        Toute l'eau de ces deux versants y converge : c'est le point le plus
+        sollicité de la couverture.
+      </p>
+      <p>
+        Quand le métal s'use ou que les tuiles qui la bordent se décalent,
+        l'eau passe sous la couverture, souvent sans que rien ne se voie de
+        l'extérieur.
+      </p>
+    </div>
+    <figure class="media-figure">
+      <img
+        src={ouvert.src800}
+        srcset={`${ouvert.src800} 800w, ${ouvert.src} 1200w`}
+        sizes="(min-width: 780px) 360px, 100vw"
+        alt={ouvert.alt}
+        width="1200" height="1600" loading="lazy"
+      />
+      <figcaption>La noue ouverte, support et liteaux repris.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Les travaux</h2>
+  <div class="media-row">
+    <div>
+      <ul class="chantier-points">
+        <li>dépose des tuiles de part et d'autre de la noue ;</li>
+        <li>dépose de l'ancienne noue ;</li>
+        <li>reprise du support : planche de noue, écran sous-toiture et liteaux ;</li>
+        <li>pose d'une <strong>noue neuve en zinc</strong>, façonnée sur mesure ;</li>
+        <li>tuiles recoupées au plus près de la noue, puis reposées.</li>
+      </ul>
+    </div>
+    <figure class="media-figure">
+      <img
+        src={neuve.src800}
+        srcset={`${neuve.src800} 800w, ${neuve.src} 1200w`}
+        sizes="(min-width: 780px) 360px, 100vw"
+        alt={neuve.alt}
+        width="1200" height="1600" loading="lazy"
+      />
+      <figcaption>La noue neuve en zinc.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Une toiture de nouveau étanche</h2>
+  <p>
+    L'eau des deux pans s'écoule à nouveau librement jusqu'à la gouttière. Ce
+    type d'intervention fait partie de nos travaux de
+    <a href="/gouttieres-zinguerie-78/">zinguerie</a> : quelques mètres de zinc
+    bien posés suffisent à protéger toute une toiture.
+  </p>
+  <p>
+    Francky et Warren, <a href="/couvreur-magny-les-hameaux/">couvreurs à
+    Magny-les-Hameaux</a>, vérifient votre noue et la remplacent si besoin.
+  </p>
+</RealisationPage>

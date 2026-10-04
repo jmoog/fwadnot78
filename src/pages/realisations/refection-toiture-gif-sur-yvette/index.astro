@@ -1,0 +1,109 @@
+---
+import RealisationPage from '../../../components/RealisationPage.astro';
+
+const ph = (nom: string, alt: string, w: number, h: number, caption?: string) => ({
+  src: `/images/${nom}.webp`, src800: `/images/${nom}-800.webp`, alt, w, h, caption,
+});
+
+const hero  = ph("refection-toiture-gif-sur-yvette-91-01", "Maison sous échafaudage pendant la réfection de sa toiture à Gif-sur-Yvette", 1600, 1200);
+const avant = ph("refection-toiture-gif-sur-yvette-91-19-avant", "Anciennes tuiles usées avant la réfection de la toiture à Gif-sur-Yvette", 1600, 1200);
+const apres = ph("refection-toiture-gif-sur-yvette-91-29-apres", "Toiture terminée en tuiles neuves à Gif-sur-Yvette", 1200, 1600);
+
+const galerie = [
+  ph("refection-toiture-gif-sur-yvette-91-02", "Ancienne couverture déposée jusqu'aux liteaux à Gif-sur-Yvette", 1200, 1600, "L'ancienne couverture déposée."),
+  ph("refection-toiture-gif-sur-yvette-91-03", "Isolant posé entre les chevrons sur la toiture ouverte", 1600, 1200, "L'isolation reprise, toiture ouverte."),
+  ph("refection-toiture-gif-sur-yvette-91-07", "Camion-grue livrant les palettes de tuiles neuves à Gif-sur-Yvette", 1600, 1200, "Les tuiles livrées à la grue."),
+  ph("refection-toiture-gif-sur-yvette-91-09", "Écran sous-toiture, liteaux et tuiles neuves répartis sur le pan", 1600, 1200, "Écran, liteaux et tuiles répartis."),
+  ph("refection-toiture-gif-sur-yvette-91-12", "Pose des tuiles neuves sur la toiture de Gif-sur-Yvette", 1600, 1200, "Pose des tuiles neuves."),
+  ph("refection-toiture-gif-sur-yvette-91-23", "Faîtage neuf sur la toiture refaite à Gif-sur-Yvette", 1600, 1200, "Le faîtage neuf."),
+];
+---
+
+<RealisationPage
+  title="Réfection de toiture à Gif-sur-Yvette — Adnot Couverture"
+  description="Anciennes tuiles déposées, écran sous-toiture, liteaux et tuiles neuves livrées à la grue : une toiture refaite à Gif-sur-Yvette au printemps 2025."
+  canonical="/realisations/refection-toiture-gif-sur-yvette/"
+  h1="Une toiture refaite à neuf à Gif-sur-Yvette"
+  lede="Tuiles usées, déformées par les années, mousse installée entre les rangs : la couverture de cette maison de Gif-sur-Yvette était en fin de vie. Au printemps 2025, nous l'avons déposée et entièrement refaite."
+  breadcrumb="Réfection de toiture à Gif-sur-Yvette"
+  datePublished="2026-10-04"
+  lieu={{ nom: "Gif-sur-Yvette", cp: "91190" }}
+  chips={["Réfection complète", "Isolation reprise", "Tuiles livrées à la grue", "Printemps 2025"]}
+  bureau="magny"
+  hero={hero}
+  galerie={galerie}
+  galerieTitle="Le chantier de Gif-sur-Yvette en images"
+  sidebarTitle="Devis gratuit à Gif-sur-Yvette"
+  liens={[
+    { href: "/couvreur-gif-sur-yvette/", label: "Couvreur à Gif-sur-Yvette" },
+    { href: "/refection-de-toiture-78/", label: "Réfection de toiture" },
+    { href: "/isolation-de-toiture-78/", label: "Isolation de toiture" },
+  ]}
+  ctaTitle="Faites appel à votre couvreur à Gif-sur-Yvette"
+  ctaDesc="Vous habitez Gif-sur-Yvette et votre toiture vieillit ? Francky et Warren étudient avec vous la réfection de votre couverture. <strong>Le devis est gratuit et sans engagement.</strong>"
+  ctaImg={galerie[5]}
+>
+  <h2>Une couverture arrivée en bout de course</h2>
+  <div class="media-row">
+    <div>
+      <p>
+        Quand les tuiles se déforment et se fendent, l'eau finit par trouver
+        son chemin jusqu'aux liteaux, puis jusqu'à la charpente. Sur cette
+        maison, remplacer les tuiles une à une n'avait plus de sens.
+      </p>
+      <p>
+        La <a href="/refection-de-toiture-78/">réfection de la toiture</a>
+        était la solution durable : tout déposer, refaire le support et poser
+        une couverture neuve.
+      </p>
+    </div>
+    <figure class="media-figure">
+      <img
+        src={avant.src800}
+        srcset={`${avant.src800} 800w, ${avant.src} 1600w`}
+        sizes="(min-width: 780px) 360px, 100vw"
+        alt={avant.alt}
+        width="1600" height="1200" loading="lazy"
+      />
+      <figcaption>Les anciennes tuiles, avant la réfection.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Les travaux</h2>
+  <ul class="chantier-points">
+    <li>montage d'un échafaudage en façade, avec garde-corps ;</li>
+    <li>dépose des anciennes tuiles et des liteaux ;</li>
+    <li>isolant posé entre les chevrons pendant que la toiture était ouverte ;</li>
+    <li>pose de l'<strong>écran sous-toiture</strong> et des liteaux neufs ;</li>
+    <li>livraison des tuiles neuves par camion-grue, directement à hauteur de toit ;</li>
+    <li>pose des <strong>tuiles neuves</strong> rang à rang, puis du faîtage.</li>
+  </ul>
+
+  <h2>Une maison protégée pour longtemps</h2>
+  <div class="media-row">
+    <div>
+      <p>
+        La toiture est neuve, régulière et étanche. L'écran sous-toiture
+        protège la charpente, et
+        <a href="/isolation-de-toiture-78/">l'isolation de la toiture</a>
+        a été reprise pendant que tout était ouvert : un confort gagné en
+        hiver comme en été.
+      </p>
+      <p>
+        Francky et Warren, vos
+        <a href="/couvreur-gif-sur-yvette/">couvreurs à Gif-sur-Yvette</a>,
+        interviennent depuis leur bureau de Magny-les-Hameaux, tout proche.
+      </p>
+    </div>
+    <figure class="media-figure">
+      <img
+        src={apres.src800}
+        srcset={`${apres.src800} 800w, ${apres.src} 1200w`}
+        sizes="(min-width: 780px) 360px, 100vw"
+        alt={apres.alt}
+        width="1200" height="1600" loading="lazy"
+      />
+      <figcaption>La toiture terminée.</figcaption>
+    </figure>
+  </div>
+</RealisationPage>

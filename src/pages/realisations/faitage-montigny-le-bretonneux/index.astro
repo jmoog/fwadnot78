@@ -1,0 +1,97 @@
+---
+import RealisationPage from '../../../components/RealisationPage.astro';
+
+const ph = (nom: string, alt: string, w: number, h: number, caption?: string) => ({
+  src: `/images/${nom}.webp`, src800: `/images/${nom}-800.webp`, alt, w, h, caption,
+});
+
+const hero  = ph("reparation-faitage-montigny-le-bretonneux-78-15", "Arêtier en cours de réfection sur une maison de Montigny-le-Bretonneux", 1600, 1200);
+const avant = ph("reparation-faitage-montigny-le-bretonneux-78-17", "Ancien faîtage déposé, restes de mortier sur la toiture à Montigny-le-Bretonneux", 1200, 1600);
+
+const galerie = [
+  ph("reparation-faitage-montigny-le-bretonneux-78-18", "Pose de la lisse de faîtage et du closoir ventilé", 1200, 1600, "Lisse de faîtage et closoir ventilé."),
+  ph("reparation-faitage-montigny-le-bretonneux-78-12", "Closoir ventilé posé sur le faîtage à Montigny-le-Bretonneux", 1200, 1600, "Le closoir posé sur toute la longueur."),
+  ph("reparation-faitage-montigny-le-bretonneux-78-19", "Faîtières neuves fixées sur le faîtage", 1200, 1600, "Les faîtières neuves, fixées une à une."),
+  ph("reparation-faitage-montigny-le-bretonneux-78-20", "Pose de l'about de faîtage en bout de toiture", 1200, 1600, "L'about de faîtage."),
+  ph("reparation-faitage-montigny-le-bretonneux-78-23", "Pose des faîtières neuves sur un arêtier", 1200, 1600, "Un arêtier repris de la même manière."),
+  ph("reparation-toiture-montigny-le-bretonneux-78-01", "Auvent en tuiles repris au-dessus d'une porte-fenêtre à Montigny-le-Bretonneux", 1600, 1200, "L'auvent, repris sur l'une des maisons."),
+];
+---
+
+<RealisationPage
+  title="Faîtages refaits à Montigny-le-Bretonneux — Adnot Couverture"
+  description="Faîtières scellées au mortier remplacées par un faîtage à sec avec closoir ventilé : nos chantiers de faîtage à Montigny-le-Bretonneux, printemps 2024."
+  canonical="/realisations/faitage-montigny-le-bretonneux/"
+  h1="Des faîtages refaits à Montigny-le-Bretonneux"
+  lede="Au printemps 2024, nous avons refait les faîtages de plusieurs maisons de Montigny-le-Bretonneux. Sur chacune, le mortier qui tenait les faîtières s'était fissuré avec les années."
+  breadcrumb="Faîtages à Montigny-le-Bretonneux"
+  datePublished="2026-10-04"
+  lieu={{ nom: "Montigny-le-Bretonneux", cp: "78180" }}
+  chips={["Faîtage à sec", "Closoir ventilé", "Arêtiers repris", "Printemps 2024"]}
+  bureau="montigny"
+  hero={hero}
+  galerie={galerie}
+  galerieTitle="Les faîtages de Montigny en images"
+  sidebarTitle="Devis gratuit à Montigny"
+  liens={[
+    { href: "/couvreur-montigny-le-bretonneux/", label: "Couvreur à Montigny-le-Bretonneux" },
+    { href: "/reparation-de-toiture-78/", label: "Réparation de toiture" },
+    { href: "/demoussage-de-toiture-78/", label: "Démoussage et nettoyage" },
+  ]}
+  ctaTitle="Contactez votre couvreur à Montigny-le-Bretonneux"
+  ctaDesc="Des faîtières décalées, du mortier dans vos gouttières ? Francky et Warren vérifient votre faîtage et vous proposent la solution adaptée. <strong>Le devis est gratuit et sans engagement.</strong>"
+  ctaImg={galerie[2]}
+>
+  <h2>Quand le sommet du toit n'est plus étanche</h2>
+  <div class="media-row">
+    <div>
+      <p>
+        Le faîtage ferme le haut de la toiture, là où les pans se rejoignent.
+        Scellées au mortier, les faîtières finissent par bouger : le mortier se
+        fend, des morceaux tombent dans les gouttières, des faîtières se
+        décalent.
+      </p>
+      <p>
+        Le sommet du toit n'est alors plus protégé, et l'eau peut s'infiltrer
+        jusqu'aux combles sans que rien ne se voie depuis la rue.
+      </p>
+    </div>
+    <figure class="media-figure">
+      <img
+        src={avant.src800}
+        srcset={`${avant.src800} 800w, ${avant.src} 1200w`}
+        sizes="(min-width: 780px) 360px, 100vw"
+        alt={avant.alt}
+        width="1200" height="1600" loading="lazy"
+      />
+      <figcaption>L'ancien faîtage déposé, avec ses restes de mortier.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Les travaux : un faîtage à sec</h2>
+  <ul class="chantier-points">
+    <li>dépose des anciennes faîtières et purge du mortier ;</li>
+    <li>pose d'une lisse de faîtage en bois pour porter les faîtières ;</li>
+    <li>pose d'un <strong>closoir ventilé</strong> souple, qui suit la forme des tuiles et laisse circuler l'air sous la couverture ;</li>
+    <li>pose des faîtières neuves, fixées mécaniquement une à une ;</li>
+    <li>arêtiers et abouts de faîtage repris de la même manière.</li>
+  </ul>
+  <p>
+    Sur l'une des maisons, nous avons aussi repris la couverture du petit
+    auvent au-dessus de la porte-fenêtre.
+  </p>
+
+  <h2>Un faîtage qui ne craint plus le temps</h2>
+  <p>
+    Un <strong>faîtage à sec</strong> ne dépend plus d'un mortier qui
+    travaille : les faîtières restent en place, et le closoir assure à la
+    fois l'étanchéité et la ventilation de la toiture. C'est l'une des
+    <a href="/reparation-de-toiture-78/">réparations de toiture</a> qui
+    prolongent le plus la vie d'une couverture.
+  </p>
+  <p>
+    Francky et Warren, <a href="/couvreur-montigny-le-bretonneux/">couvreurs
+    à Montigny-le-Bretonneux</a>, interviennent depuis leur bureau de la rue
+    Colbert.
+  </p>
+</RealisationPage>

@@ -14,6 +14,7 @@ const SERVICES_PHOTOS: Record<string, { src: string; alt: string }> = {
   "/gouttieres-zinguerie-78/":  { src: "/heroe/zinguerie-gouttiere-yvelines-001.webp",  alt: "Travaux de zinguerie et gouttières sur une maison des Yvelines" },
   "/velux-fenetre-de-toit-78/": { src: "/heroe/pose-velux-yvelines-019.webp",           alt: "Francky et Warren Adnot remplaçant une fenêtre de toit dans les Yvelines" },
   "/isolation-de-toiture-78/":  { src: "/images/refection-toiture-yvelines-037.webp",   alt: "Écran de sous-toiture et liteaux posés lors d'une isolation dans les Yvelines" },
+  "/ramonage-cheminee-78/":     { src: "/images/ramonage-cheminee-montigny-le-bretonneux-78-02-800.webp", alt: "Ramonage d'un insert par Adnot Couverture dans les Yvelines" },
 };
 
 // Descriptions courtes des cards services
@@ -24,6 +25,7 @@ const SERVICES_DESCS: Record<string, string> = {
   "/gouttieres-zinguerie-78/":  "Pose et remplacement en zinc, aluminium ou PVC, descentes comprises.",
   "/velux-fenetre-de-toit-78/": "Création d'ouverture ou remplacement, raccords d'étanchéité compris.",
   "/isolation-de-toiture-78/":  "Sarking, entre chevrons ou soufflage, selon l'usage de vos combles.",
+  "/ramonage-cheminee-78/":     "Foyer ouvert, insert ou poêle à bois, certificat de ramonage remis.",
 };
 
 const FAQ = [
@@ -236,6 +238,7 @@ const schema = {
                   <option value="gouttieres">Gouttières et zinguerie</option>
                   <option value="velux">Pose ou remplacement de Velux</option>
                   <option value="isolation">Isolation de toiture</option>
+                  <option value="ramonage">Ramonage de cheminée</option>
                   <option value="autre">Je ne sais pas encore, j'aimerais en discuter</option>
                 </select>
               </div>
@@ -348,7 +351,7 @@ const schema = {
       <div class="sec-head">
         <h2>Pour quels travaux demander un devis&nbsp;?</h2>
         <p style="text-align:left;max-width:780px;margin:.8rem auto 0;">
-          Les six prestations ci-dessous couvrent l'essentiel des travaux de couverture. Un doute sur la catégorie ? Choisissez « j'aimerais en discuter » dans le formulaire, nous trancherons ensemble.
+          Les prestations ci-dessous couvrent l'essentiel des travaux de couverture. Un doute sur la catégorie ? Choisissez « j'aimerais en discuter » dans le formulaire, nous trancherons ensemble.
         </p>
       </div>
 

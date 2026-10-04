@@ -20,6 +20,7 @@ const PRESTATION_LABELS: Record<string, string> = {
   gouttieres: 'Gouttières & zinguerie',
   velux: 'Velux & fenêtres de toit',
   isolation: 'Isolation de toiture',
+  ramonage: 'Ramonage de cheminée',
   autre: 'Autre / à préciser',
 };
 

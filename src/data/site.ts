@@ -29,6 +29,7 @@ export const SERVICES = [
   { titre: "Gouttières & zinguerie",    slug: "/gouttieres-zinguerie-78/"   },
   { titre: "Velux & fenêtres de toit",  slug: "/velux-fenetre-de-toit-78/"  },
   { titre: "Isolation de toiture",      slug: "/isolation-de-toiture-78/"   },
+  { titre: "Ramonage",                  slug: "/ramonage-cheminee-78/"      },
 ];
 
 // ── Secteurs (2 établissements, une page chacun) ─────────────────────────
@@ -69,7 +70,7 @@ export const FOOTER_HOME_LINKS = [
   },
   {
     anchor: "Entreprise de couverture 78",
-    context: "Francky et Warren Adnot, deux frères couvreurs : couverture, charpente, ramonage et peinture, sous garantie décennale.",
+    context: "Francky et Warren Adnot, deux frères couvreurs : couverture, charpente et ramonage, sous garantie décennale.",
   },
   {
     anchor: "Couvreur zingueur dans les Yvelines",

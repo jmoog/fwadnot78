@@ -19,6 +19,34 @@ const REALISATIONS = [
     img: "/images/toiture-ardoise-saint-remy-yvelines-001-800.webp",
     alt: "Toiture en ardoise sous échafaudage à Saint-Rémy-lès-Chevreuse",
   },
+  {
+    titre: "Réfection de toiture à Gif-sur-Yvette",
+    slug: "/realisations/refection-toiture-gif-sur-yvette/",
+    desc: "Anciennes tuiles déposées, isolation reprise, écran sous-toiture, liteaux et tuiles neuves livrées à la grue. Printemps 2025.",
+    img: "/images/refection-toiture-gif-sur-yvette-91-01-800.webp",
+    alt: "Maison sous échafaudage pendant la réfection de sa toiture à Gif-sur-Yvette",
+  },
+  {
+    titre: "Une toiture à plusieurs pans refaite au Pecq",
+    slug: "/realisations/refection-toiture-le-pecq/",
+    desc: "Dépose complète, écran sous-toiture HPV, tuiles neuves en terre cuite Terreal, noue, arêtiers et faîtages repris. Été 2024.",
+    img: "/images/refection-toiture-le-pecq-78-34-800.webp",
+    alt: "Toiture à plusieurs pans refaite à neuf au Pecq",
+  },
+  {
+    titre: "Noue remplacée au presbytère de Magny-les-Hameaux",
+    slug: "/realisations/remplacement-noue-magny-les-hameaux/",
+    desc: "Ancienne noue déposée, support repris, noue neuve en zinc et tuiles recoupées et reposées. Juillet 2024, en vidéo.",
+    img: "/images/zinguerie-magny-les-hameaux-78-06-800.webp",
+    alt: "Noue neuve en zinc au presbytère de Magny-les-Hameaux",
+  },
+  {
+    titre: "Faîtages refaits à sec à Montigny-le-Bretonneux",
+    slug: "/realisations/faitage-montigny-le-bretonneux/",
+    desc: "Faîtières scellées au mortier remplacées par un faîtage à sec avec closoir ventilé, sur plusieurs maisons. Printemps 2024.",
+    img: "/images/reparation-faitage-montigny-le-bretonneux-78-15-800.webp",
+    alt: "Arêtier en cours de réfection à Montigny-le-Bretonneux",
+  },
 ];
 
 const schema = {
@@ -42,21 +70,29 @@ const schema = {
         <h1 style="color:var(--blue);">Nos réalisations</h1>
         <p style="margin-top:.6rem;color:var(--muted);max-width:760px;">
           Quelques chantiers menés dans les Yvelines et la vallée de Chevreuse,
-          photos à l'appui. Couverture, traitement, étanchéité et zinguerie.
+          photos à l'appui : réfection, faîtage, traitement et zinguerie.
         </p>
       </div>
 
       <div class="silos silos--3">
         {REALISATIONS.map(r => (
-          <a href={r.slug} class="silo-card silo-card--photo" style="text-align:left;text-decoration:none;">
+          <article class="silo-card silo-card--photo realisation-card">
             <img class="silo-card__photo" src={r.img} alt={r.alt} width="800" height="600" loading="lazy" />
             <div class="silo-card__body">
-              <h3 style="text-align:left;">{r.titre}</h3>
+              <h3 style="text-align:left;"><a href={r.slug}>{r.titre}</a></h3>
               <p style="text-align:left;line-height:1.65;margin-bottom:0;">{r.desc}</p>
             </div>
-          </a>
+          </article>
         ))}
       </div>
     </div>
   </section>
 </Layout>
+
+<style>
+  /* Carte cliquable : le lien porte sur le titre, étendu à toute la carte */
+  .realisation-card { position: relative; text-align: left; }
+  .realisation-card h3 a { color: inherit; text-decoration: none; font-size: inherit; font-weight: inherit; }
+  .realisation-card h3 a::after { content: ""; position: absolute; inset: 0; }
+  .realisation-card h3 a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+</style>

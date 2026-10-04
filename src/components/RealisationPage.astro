@@ -1,0 +1,354 @@
+---
+// ── Gabarit commun des pages réalisations (en-tête + photo/vidéo, contenu + sidebar, galerie, CTA) ──
+import Layout from '../layouts/Layout.astro';
+import {
+  SITE_URL, TEL, TEL_HREF, TEL_MAGNY, TEL_MAGNY_HREF,
+  ADRESSE_MONTIGNY, ADRESSE_MAGNY, MAPS_MONTIGNY, MAPS_MAGNY,
+} from '../data/site';
+
+export interface Photo { src: string; src800: string; alt: string; w: number; h: number; caption?: string }
+
+export interface Props {
+  title        : string;
+  description  : string;
+  canonical    : string;
+  h1           : string;
+  lede         : string;
+  breadcrumb   : string;
+  datePublished: string;              // AAAA-MM-JJ
+  lieu         : { nom: string; cp: string };
+  chips        : string[];
+  bureau       : 'montigny' | 'magny';
+  hero         : Photo;
+  video       ?: { src: string; poster: string; name: string; description: string };
+  galerie      : Photo[];
+  galerieTitle : string;
+  sidebarTitle : string;
+  liens        : { href: string; label: string }[];
+  ctaTitle     : string;
+  ctaDesc      : string;
+  ctaImg       : Photo;
+}
+
+const {
+  title, description, canonical, h1, lede, breadcrumb, datePublished, lieu, chips,
+  bureau, hero, video, galerie, galerieTitle, sidebarTitle, liens, ctaTitle, ctaDesc, ctaImg,
+} = Astro.props;
+
+// Le bureau de Montigny répond sur le mobile (07), celui de Magny sur le fixe (01)
+const isMagny  = bureau === 'magny';
+const tel      = isMagny ? TEL_MAGNY : TEL;
+const telHref  = isMagny ? TEL_MAGNY_HREF : TEL_HREF;
+const telIcone = isMagny ? '/icones/telephone.svg' : '/icones/mobile.svg';
+const adresse  = isMagny ? ADRESSE_MAGNY : ADRESSE_MONTIGNY;
+const maps     = isMagny ? MAPS_MAGNY : MAPS_MONTIGNY;
+
+const article = {
+  "@type": "Article",
+  "headline": h1,
+  "description": description,
+  "image": [hero, ...galerie.slice(0, 2)].map(p => `${SITE_URL}${p.src}`),
+  "datePublished": datePublished,
+  "author": { "@id": `${SITE_URL}/#organization` },
+  "publisher": { "@id": `${SITE_URL}/#organization` },
+  "locationCreated": {
+    "@type": "Place",
+    "name": lieu.nom,
+    "address": { "@type": "PostalAddress", "addressLocality": lieu.nom, "postalCode": lieu.cp, "addressCountry": "FR" },
+  },
+  "mainEntityOfPage": `${SITE_URL}${canonical}`,
+};
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": video ? [article, {
+    "@type": "VideoObject",
+    "name": video.name,
+    "description": video.description,
+    "thumbnailUrl": [`${SITE_URL}${video.poster}`],
+    "uploadDate": datePublished,
+    "contentUrl": `${SITE_URL}${video.src}`,
+    "publisher": { "@id": `${SITE_URL}/#organization` },
+  }] : [article],
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogImage={hero.src}
+  schema={schema}
+  nap={{ tel, telHref, adresse }}
+>
+
+  <!-- ── EN-TÊTE + PHOTO PRINCIPALE ── -->
+  <section class="section chantier-head">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="/">Accueil</a>
+        <span>›</span>
+        <a href="/realisations/">Réalisations</a>
+        <span>›</span>
+        <span>{breadcrumb}</span>
+      </nav>
+
+      <h1 class="chantier-h1">{h1}</h1>
+      <p class="chantier-lede">{lede}</p>
+
+      <ul class="chantier-meta">
+        <li><img src="/icones/pin-map.svg" alt="" width="14" height="14" class="icone" /> {lieu.nom} ({lieu.cp})</li>
+        {chips.map(c => <li>{c}</li>)}
+      </ul>
+
+      <figure class="chantier-hero">
+        <img
+          src={hero.src}
+          srcset={`${hero.src800} 800w, ${hero.src} ${hero.w}w`}
+          sizes="(min-width: 1160px) 1100px, 100vw"
+          alt={hero.alt}
+          width={hero.w} height={hero.h}
+          loading="eager" fetchpriority="high"
+        />
+      </figure>
+    </div>
+  </section>
+
+  <!-- ── CONTENU + SIDEBAR ── -->
+  <section class="content-wrap section--light">
+    <div class="container">
+      <div class="content-grid">
+        <article class="content-body">
+          <slot />
+
+          {video && (
+            <figure class="chantier-video">
+              <video
+                controls muted playsinline
+                preload="none"
+                poster={video.poster}
+                aria-label={video.name}
+              >
+                <source src={video.src} type="video/mp4" />
+              </video>
+              <figcaption>{video.name}</figcaption>
+            </figure>
+          )}
+        </article>
+
+        <aside>
+          <div class="sidebar__card">
+            <h3>{sidebarTitle}</h3>
+            <p>Le devis est gratuit et sans engagement.</p>
+            <hr class="sidebar__sep" />
+            <div class="sidebar__tels">
+              <div>
+                <small>Téléphone</small>
+                <a href={telHref}>
+                  <img src={telIcone} alt="" width="14" height="14" class="icone" />
+                  {tel}
+                </a>
+              </div>
+            </div>
+            <hr class="sidebar__sep" />
+            <div class="sidebar__btn">
+              <a href="/devis-gratuit/" class="btn btn--red">Demander un devis</a>
+            </div>
+            <div class="sidebar__addr">
+              <img src="/icones/pin-map.svg" alt="" width="13" height="13" class="icone" />
+              {adresse}
+            </div>
+            <div style="margin-top:.8rem;">
+              <a href={maps} target="_blank" rel="noopener" style="font-size:.85rem;font-weight:600;">Notre fiche Google ↗</a>
+            </div>
+          </div>
+
+          <div class="sidebar__card" style="margin-top:1.5rem;">
+            <h3 style="font-size:1rem;">À voir aussi</h3>
+            <ul class="sidebar__links">
+              {liens.map(l => <li><a href={l.href}>{l.label}</a></li>)}
+              <li><a href="/realisations/">Toutes nos réalisations</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GALERIE ── -->
+  <section class="section" aria-labelledby="sec-galerie-chantier">
+    <div class="container">
+      <h2 id="sec-galerie-chantier" class="galerie-chantier__titre">{galerieTitle}</h2>
+      <div class="galerie-chantier">
+        {galerie.map(p => (
+          <figure>
+            <img
+              src={p.src800}
+              srcset={`${p.src800} 800w, ${p.src} ${p.w}w`}
+              sizes="(min-width: 900px) 360px, 50vw"
+              alt={p.alt}
+              width={p.w} height={p.h}
+              loading="lazy"
+            />
+            {p.caption && <figcaption>{p.caption}</figcaption>}
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA — texte gauche + image droite ── -->
+  <section class="cta-split" aria-labelledby="sec-cta-chantier">
+    <div class="container">
+      <div class="cta-split__grid">
+        <div class="cta-split__text">
+          <h2 id="sec-cta-chantier" style="color:#fff;margin-bottom:1rem;">{ctaTitle}</h2>
+          <p style="color:rgba(255,255,255,.88);font-size:1.05rem;line-height:1.65;text-align:left;margin-bottom:1.8rem;" set:html={ctaDesc} />
+          <div class="hero__btns" style="margin-bottom:0;">
+            <a href={telHref} class="btn btn--red">
+              <img src={telIcone} alt="" width="16" height="16" class="icone icone--white" />
+              {tel}
+            </a>
+            <a href="/devis-gratuit/" class="btn btn--outline">
+              <svg class="icone" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+              Demander un devis gratuit
+            </a>
+          </div>
+        </div>
+        <div class="cta-split__img">
+          <img
+            src={ctaImg.src800}
+            srcset={`${ctaImg.src800} 800w, ${ctaImg.src} ${ctaImg.w}w`}
+            sizes="(min-width: 900px) 520px, 100vw"
+            alt={ctaImg.alt}
+            width="520" height="380"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .chantier-head { position: relative; padding-bottom: 0; }
+  .breadcrumb { position: static; color: var(--muted); left: auto; top: auto; margin-bottom: .75rem; }
+  .breadcrumb a { color: var(--blue); }
+  .breadcrumb a:hover { color: var(--red); }
+
+  .chantier-h1 {
+    color: var(--blue);
+    font-size: clamp(1.4rem, 3.2vw, 2.1rem);
+    line-height: 1.2;
+    margin: 0;
+    max-width: 820px;
+    text-wrap: balance;
+  }
+  .chantier-lede {
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 760px;
+    margin: .9rem 0 0;
+  }
+
+  .chantier-meta {
+    list-style: none;
+    padding: 0;
+    margin: 1.2rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+  }
+  .chantier-meta li {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    background: var(--light);
+    color: var(--blue);
+    padding: .35rem .8rem;
+    border-radius: 999px;
+    font-size: .82rem;
+    font-weight: 600;
+  }
+
+  .chantier-hero { margin: 1.6rem 0 0; }
+  .chantier-hero img {
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    object-fit: cover;
+    border-radius: var(--r);
+    box-shadow: var(--shadow-lg);
+    display: block;
+  }
+
+  /* Contenu de la page (slot) : listes et photos intégrées */
+  .content-body :global(.chantier-points) { margin: 1rem 0 0; padding-left: 1.2rem; list-style: disc; }
+  .content-body :global(.chantier-points li) { margin-bottom: .35rem; }
+  .content-body :global(.media-row) {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 1.6rem;
+    align-items: center;
+    margin: 1rem 0 1.5rem;
+  }
+  .content-body :global(.media-row p:first-child) { margin-top: 0; }
+  .content-body :global(.media-figure) { margin: 0; }
+  .content-body :global(.media-figure img) {
+    width: 100%;
+    height: auto;
+    border-radius: var(--r);
+    box-shadow: var(--shadow);
+    display: block;
+  }
+  .content-body :global(.media-figure figcaption) {
+    font-size: .82rem;
+    color: var(--muted);
+    margin-top: .5rem;
+  }
+
+  .chantier-video { margin: 2rem 0 0; max-width: 360px; }
+  .chantier-video video {
+    width: 100%;
+    height: auto;
+    border-radius: var(--r);
+    box-shadow: var(--shadow);
+    display: block;
+    background: #000;
+  }
+  .chantier-video figcaption { font-size: .82rem; color: var(--muted); margin-top: .5rem; }
+
+  .sidebar__btn { text-align: center; margin-top: .5rem; }
+
+  .galerie-chantier__titre { color: var(--blue); margin-bottom: 1.4rem; }
+  .galerie-chantier {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .galerie-chantier figure { margin: 0; }
+  .galerie-chantier img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    height: auto;
+    object-fit: cover;
+    border-radius: var(--r);
+    box-shadow: var(--shadow);
+    display: block;
+  }
+  .galerie-chantier figcaption { font-size: .82rem; color: var(--muted); margin-top: .45rem; }
+
+  @media (max-width: 780px) {
+    /* Mobile : la photo vient juste sous le H1, puis le texte */
+    .chantier-head .container { display: flex; flex-direction: column; }
+    .breadcrumb { order: 0; }
+    .chantier-h1 { order: 1; }
+    .chantier-hero { order: 2; margin-top: 1rem; }
+    .chantier-lede { order: 3; }
+    .chantier-meta { order: 4; }
+    .content-body :global(.media-row) { grid-template-columns: 1fr; }
+    .galerie-chantier { grid-template-columns: repeat(2, 1fr); gap: .7rem; }
+    .chantier-video { max-width: 100%; }
+  }
+</style>

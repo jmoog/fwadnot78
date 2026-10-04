@@ -50,7 +50,7 @@ const CARD_PHOTOS = [
   "/images/pose-velux-yvelines-004.webp",
   "/images/refection-toiture-yvelines-021.webp",
 ];
-const SERVICES_CARDS = SERVICES.map((s, i) => ({
+const SERVICES_CARDS = SERVICES.slice(0, CARD_PHOTOS.length).map((s, i) => ({
   ...s,
   photo: CARD_PHOTOS[i],
   ...cards[i],
