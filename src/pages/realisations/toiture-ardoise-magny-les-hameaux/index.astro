@@ -1,0 +1,108 @@
+---
+import RealisationPage from '../../../components/RealisationPage.astro';
+
+const ph = (nom: string, alt: string, w: number, h: number, caption?: string) => ({
+  src: `/images/${nom}.webp`, src800: `/images/${nom}-800.webp`, alt, w, h, caption,
+});
+
+const hero    = ph("reparation-faitage-magny-les-hameaux-78-04", "Faîtages des lucarnes rescellés sur une toiture en ardoise à Magny-les-Hameaux", 1600, 1200);
+const mousse  = ph("demoussage-toiture-magny-les-hameaux-78-03", "Toiture en ardoise couverte de mousse à Magny-les-Hameaux", 1200, 1600);
+const faitage = ph("reparation-faitage-magny-les-hameaux-78-03", "Faîtières en terre cuite rescellées au mortier sur la toiture en ardoise", 1200, 1600);
+
+const galerie = [
+  ph("chantier-couverture-magny-les-hameaux-78-03", "Maison de Magny-les-Hameaux sous échafaudage pendant les travaux de toiture", 1200, 1600, "Le chantier, échafaudage en façade."),
+  ph("demoussage-toiture-magny-les-hameaux-78-01", "Pulvérisateur et bidon de Dalep 2100 au pied de la maison", 1200, 1600, "Le Dalep 2100, prêt à l'emploi."),
+  ph("demoussage-toiture-magny-les-hameaux-78-02", "Application du traitement au pulvérisateur sur l'ardoise", 1200, 1600, "Le traitement appliqué au pulvérisateur."),
+  ph("reparation-faitage-magny-les-hameaux-78-03", "Faîtage rescellé, joints de mortier refaits", 1200, 1600, "Le faîtage rescellé."),
+];
+---
+
+<RealisationPage
+  title="Toiture en ardoise traitée à Magny-les-Hameaux — Adnot Couverture"
+  description="À Magny-les-Hameaux, une toiture en ardoise gagnée par la mousse : faîtières rescellées au mortier et traitement Dalep 2100 sur toute la couverture. Mars 2026."
+  canonical="/realisations/toiture-ardoise-magny-les-hameaux/"
+  h1="Une toiture en ardoise remise en état à Magny-les-Hameaux"
+  lede="Sur cette maison de Magny-les-Hameaux, l'ardoise disparaissait sous la mousse et les joints du faîtage s'effritaient. En mars 2026, à deux pas de notre bureau, nous avons repris le faîtage puis traité toute la couverture."
+  breadcrumb="Toiture en ardoise à Magny-les-Hameaux"
+  datePublished="2026-10-04"
+  lieu={{ nom: "Magny-les-Hameaux", cp: "78114" }}
+  chips={["Toiture en ardoise", "Faîtage rescellé", "Traitement Dalep 2100", "Mars 2026"]}
+  bureau="magny"
+  hero={hero}
+  galerie={galerie}
+  galerieTitle="Le chantier de Magny-les-Hameaux en images"
+  sidebarTitle="Devis gratuit à Magny"
+  liens={[
+    { href: "/couvreur-magny-les-hameaux/", label: "Couvreur à Magny-les-Hameaux" },
+    { href: "/demoussage-de-toiture-78/", label: "Démoussage et traitement" },
+    { href: "/realisations/traitement-ardoise-saint-remy-les-chevreuse/", label: "Ardoise traitée à Saint-Rémy" },
+  ]}
+  ctaTitle="Faites appel à votre couvreur à Magny-les-Hameaux"
+  ctaDesc="Votre ardoise verdit, les joints de votre faîtage s'effritent ? Francky et Warren vérifient votre toiture et vous proposent le traitement adapté. <strong>Le devis est gratuit et sans engagement.</strong>"
+  ctaImg={galerie[0]}
+>
+  <h2>Le besoin : protéger l'ardoise et refermer le faîtage</h2>
+  <div class="media-row">
+    <div>
+      <p>
+        L'ardoise est une couverture qui dure, à condition qu'on ne la
+        laisse pas sous la mousse. Mousses et lichens gardent l'humidité
+        contre les ardoises et finissent par les abîmer.
+      </p>
+      <p>
+        Au sommet, les faîtières en terre cuite étaient scellées au mortier,
+        et ce mortier s'effritait. Des joints ouverts au faîtage, c'est
+        l'eau qui passe là où elle fait le plus de dégâts : directement dans
+        les combles.
+      </p>
+    </div>
+    <figure class="media-figure">
+      <img
+        src={mousse.src800}
+        srcset={`${mousse.src800} 800w, ${mousse.src} 1200w`}
+        sizes="(min-width: 780px) 360px, 100vw"
+        alt={mousse.alt}
+        width="1200" height="1600" loading="lazy"
+      />
+      <figcaption>Une ardoise gagnée par la mousse.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Notre réponse : le faîtage d'abord, le traitement ensuite</h2>
+  <div class="media-row">
+    <div>
+      <ul class="chantier-points">
+        <li>échafaudage monté en façade ;</li>
+        <li>faîtières du toit et des lucarnes déposées, ancien mortier purgé ;</li>
+        <li>faîtières <strong>rescellées au mortier</strong>, joints refaits ;</li>
+        <li>application au pulvérisateur du <strong>Dalep 2100</strong> sur toute la couverture, sans haute pression qui abîmerait l'ardoise.</li>
+      </ul>
+    </div>
+    <figure class="media-figure">
+      <img
+        src={faitage.src800}
+        srcset={`${faitage.src800} 800w, ${faitage.src} 1200w`}
+        sizes="(min-width: 780px) 360px, 100vw"
+        alt={faitage.alt}
+        width="1200" height="1600" loading="lazy"
+      />
+      <figcaption>Le faîtage rescellé, joints refaits.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Le résultat : une toiture fermée et protégée</h2>
+  <p>
+    Le faîtage est de nouveau étanche. Le Dalep 2100 agit dans les
+    semaines qui suivent : mousses et lichens meurent, puis la pluie les
+    évacue peu à peu, sans brossage agressif de l'ardoise.
+  </p>
+  <p>
+    Nous avons traité une
+    <a href="/realisations/traitement-ardoise-saint-remy-les-chevreuse/">autre
+    toiture en ardoise à Saint-Rémy-lès-Chevreuse</a> selon le même principe.
+    Le <a href="/demoussage-de-toiture-78/">démoussage et le traitement</a>
+    font partie des interventions que Francky et Warren,
+    <a href="/couvreur-magny-les-hameaux/">couvreurs à Magny-les-Hameaux</a>,
+    réalisent le plus souvent dans la vallée de Chevreuse.
+  </p>
+</RealisationPage>

@@ -1,0 +1,105 @@
+---
+import RealisationPage from '../../../components/RealisationPage.astro';
+
+const ph = (nom: string, alt: string, w: number, h: number, caption?: string) => ({
+  src: `/images/${nom}.webp`, src800: `/images/${nom}-800.webp`, alt, w, h, caption,
+});
+
+const hero    = ph("refection-toiture-villebon-sur-yvette-91-06-apres", "Maison de Villebon-sur-Yvette après travaux, toiture rouge uniforme", 1600, 1200);
+const avant   = ph("refection-toiture-villebon-sur-yvette-91-03-avant", "Toiture brune et moussue avant nettoyage à Villebon-sur-Yvette", 1600, 1200);
+const pendant = ph("refection-toiture-villebon-sur-yvette-91-05", "Faîtage refixé, pan nettoyé à gauche et pan coloré en rouge à droite", 1600, 1200);
+
+const galerie = [
+  ph("refection-toiture-villebon-sur-yvette-91-03-avant", "Toiture ternie avant travaux à Villebon-sur-Yvette", 1600, 1200, "Avant : des tuiles brunies par la mousse."),
+  ph("refection-toiture-villebon-sur-yvette-91-04", "Toiture en cours de coloration, camionnettes Adnot Couverture devant la maison", 1600, 1200, "Le chantier, mené en deux jours."),
+  ph("refection-toiture-villebon-sur-yvette-91-05", "Vue depuis le faîtage : un pan nettoyé, l'autre déjà coloré", 1600, 1200, "Un pan nettoyé, l'autre déjà coloré."),
+  ph("refection-toiture-villebon-sur-yvette-91-06-apres", "Toiture rouge uniforme après coloration à Villebon-sur-Yvette", 1600, 1200, "Après : un rouge franc et uniforme."),
+];
+---
+
+<RealisationPage
+  title="Toiture recolorée à Villebon-sur-Yvette — Adnot Couverture"
+  description="À Villebon-sur-Yvette, une toiture ternie et moussue nettoyée puis protégée par un hydrofuge coloré : l'aspect du neuf sans changer de tuiles. Octobre 2025."
+  canonical="/realisations/toiture-recoloree-villebon-sur-yvette/"
+  h1="Une toiture qui retrouve sa couleur à Villebon-sur-Yvette"
+  lede="Les tuiles de cette maison de Villebon-sur-Yvette avaient viré au brun sous la mousse et les salissures. Elles restaient pourtant saines : pas besoin de refaire la toiture pour lui rendre son aspect. En octobre 2025, nous l'avons nettoyée, puis protégée par un hydrofuge coloré."
+  breadcrumb="Toiture recolorée à Villebon-sur-Yvette"
+  datePublished="2026-10-04"
+  lieu={{ nom: "Villebon-sur-Yvette", cp: "91140" }}
+  chips={["Nettoyage de toiture", "Hydrofuge coloré", "Faîtières refixées", "Octobre 2025"]}
+  bureau="magny"
+  hero={hero}
+  galerie={galerie}
+  galerieTitle="Le chantier de Villebon-sur-Yvette en images"
+  sidebarTitle="Devis gratuit à Villebon"
+  liens={[
+    { href: "/demoussage-de-toiture-78/", label: "Démoussage et nettoyage" },
+    { href: "/refection-de-toiture-78/", label: "Réfection de toiture" },
+    { href: "/couvreur-magny-les-hameaux/", label: "Couvreur à Magny-les-Hameaux" },
+  ]}
+  ctaTitle="Faites intervenir un couvreur à Villebon-sur-Yvette"
+  ctaDesc="Votre toiture a terni mais vos tuiles tiennent bon ? Francky et Warren vous disent si un nettoyage et une coloration suffisent. <strong>Le devis est gratuit et sans engagement.</strong>"
+  ctaImg={galerie[1]}
+>
+  <h2>Le besoin : rendre son aspect à une toiture encore saine</h2>
+  <div class="media-row">
+    <div>
+      <p>
+        Une toiture brune et moussue donne à toute la maison un air
+        négligé. Et la mousse ne se contente pas de salir : elle retient
+        l'humidité contre les tuiles et les use plus vite.
+      </p>
+      <p>
+        Ici, la couverture restait étanche et les tuiles n'étaient ni
+        cassées ni déformées. La refaire aurait été une dépense inutile. Ce
+        qu'il fallait : nettoyer, protéger, et rendre aux tuiles leur
+        couleur.
+      </p>
+    </div>
+    <figure class="media-figure">
+      <img
+        src={avant.src800}
+        srcset={`${avant.src800} 800w, ${avant.src} 1600w`}
+        sizes="(min-width: 780px) 360px, 100vw"
+        alt={avant.alt}
+        width="1600" height="1200" loading="lazy"
+      />
+      <figcaption>Avant : des tuiles brunies par la mousse.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Notre réponse : nettoyer, puis colorer et protéger</h2>
+  <div class="media-row">
+    <div>
+      <ul class="chantier-points">
+        <li>nettoyage complet de la couverture : mousse, lichens et salissures retirés ;</li>
+        <li>contrôle des tuiles et du faîtage, faîtières refixées une à une ;</li>
+        <li>application d'un <strong>hydrofuge coloré</strong> rouge, qui imperméabilise les tuiles et leur rend une teinte uniforme.</li>
+      </ul>
+    </div>
+    <figure class="media-figure">
+      <img
+        src={pendant.src800}
+        srcset={`${pendant.src800} 800w, ${pendant.src} 1600w`}
+        sizes="(min-width: 780px) 360px, 100vw"
+        alt={pendant.alt}
+        width="1600" height="1200" loading="lazy"
+      />
+      <figcaption>À gauche le pan nettoyé, à droite le pan coloré.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Le résultat : l'aspect du neuf, sans changer une tuile</h2>
+  <p>
+    En deux jours, la toiture a retrouvé un rouge franc et uniforme.
+    L'hydrofuge limite l'absorption d'eau par les tuiles : la mousse a plus
+    de mal à revenir, et la couverture vieillit moins vite.
+  </p>
+  <p>
+    Quand les tuiles sont encore saines, un
+    <a href="/demoussage-de-toiture-78/">nettoyage suivi d'un traitement</a>
+    coûte bien moins cher qu'une
+    <a href="/refection-de-toiture-78/">réfection de toiture</a>. Francky et
+    Warren vous disent franchement laquelle des deux votre toit demande.
+  </p>
+</RealisationPage>

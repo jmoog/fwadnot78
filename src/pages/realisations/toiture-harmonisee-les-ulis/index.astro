@@ -1,0 +1,111 @@
+---
+import RealisationPage from '../../../components/RealisationPage.astro';
+
+const ph = (nom: string, alt: string, w: number, h: number, caption?: string) => ({
+  src: `/images/${nom}.webp`, src800: `/images/${nom}-800.webp`, alt, w, h, caption,
+});
+
+const hero  = ph("refection-toiture-les-ulis-91-07-apres", "Vue de drone d'une maison des Ulis après travaux, toiture et extension en anthracite", 1600, 900);
+const avant = ph("refection-toiture-les-ulis-91-01-avant", "Vue de drone avant travaux : tuiles délavées et extension à la couverture usée aux Ulis", 1600, 900);
+const ouvert = ph("refection-toiture-les-ulis-91-04", "Extension découverte jusqu'aux chevrons, écran sous-toiture HPV en cours de pose", 1200, 1600);
+
+const galerie = [
+  ph("refection-toiture-les-ulis-91-02", "Façade de la maison des Ulis avant travaux, tuiles ternies", 1600, 900, "Avant : des tuiles ternies et moussues."),
+  ph("refection-toiture-les-ulis-91-03", "Extension découverte, anciens liteaux et vieil isolant apparents", 1200, 1600, "L'extension découverte jusqu'aux chevrons."),
+  ph("refection-toiture-les-ulis-91-05", "Remorque chargée des anciens bois et échafaudage devant la maison aux Ulis", 1600, 1200, "Les déchets de dépose évacués au fil du chantier."),
+  ph("refection-toiture-les-ulis-91-06", "Coloration anthracite en cours sur les tuiles nettoyées de la toiture principale", 1200, 1600, "La coloration anthracite, appliquée sur les tuiles nettoyées."),
+  ph("refection-toiture-les-ulis-91-08", "Vue de drone après travaux, toiture anthracite uniforme aux Ulis", 1600, 900, "Après : une seule teinte, du faîtage à l'égout."),
+  ph("refection-toiture-les-ulis-91-09", "Maison des Ulis après travaux, extension et toiture principale harmonisées", 1600, 900, "La maison et son extension, enfin assorties."),
+];
+---
+
+<RealisationPage
+  title="Toiture refaite et harmonisée aux Ulis — Adnot Couverture"
+  description="Aux Ulis, une extension refaite à neuf et une toiture principale nettoyée puis colorée anthracite : une maison d'une seule teinte. Septembre 2026."
+  canonical="/realisations/toiture-harmonisee-les-ulis/"
+  h1="Une extension refaite et une toiture harmonisée aux Ulis"
+  lede="Deux toitures, deux états, deux couleurs : sur cette maison des Ulis, la couverture de l'extension était usée et celle de la maison avait terni. Il fallait une toiture saine partout et une maison d'une seule teinte. En septembre 2026, nous avons refait l'extension à neuf et harmonisé l'ensemble en anthracite."
+  breadcrumb="Toiture harmonisée aux Ulis"
+  datePublished="2026-10-04"
+  lieu={{ nom: "Les Ulis", cp: "91940" }}
+  chips={["Extension refaite à neuf", "Écran sous-toiture HPV", "Coloration anthracite", "Septembre 2026"]}
+  bureau="magny"
+  hero={hero}
+  galerie={galerie}
+  galerieTitle="Le chantier des Ulis en images"
+  sidebarTitle="Devis gratuit aux Ulis"
+  liens={[
+    { href: "/refection-de-toiture-78/", label: "Réfection de toiture" },
+    { href: "/demoussage-de-toiture-78/", label: "Démoussage et nettoyage" },
+    { href: "/couvreur-gif-sur-yvette/", label: "Couvreur à Gif-sur-Yvette" },
+  ]}
+  ctaTitle="Faites intervenir un couvreur aux Ulis"
+  ctaDesc="Une partie de votre toit est usée, l'autre a seulement terni ? Francky et Warren vous disent ce que demande chaque partie de votre couverture. <strong>Le devis est gratuit et sans engagement.</strong>"
+  ctaImg={galerie[5]}
+>
+  <h2>Le besoin : une toiture saine et une maison d'une seule couleur</h2>
+  <div class="media-row">
+    <div>
+      <p>
+        Sur l'extension, la couverture arrivait en fin de vie : tuiles
+        fatiguées, liteaux usés, isolant ancien. Là, plus question de
+        rafistoler, il fallait tout reprendre.
+      </p>
+      <p>
+        La toiture principale, elle, restait étanche. Ses tuiles avaient
+        simplement perdu leur teinte, délavées et gagnées par la mousse. La
+        refaire entièrement aurait été une dépense inutile ; la laisser en
+        l'état, à côté d'une extension neuve, aurait donné une maison
+        dépareillée.
+      </p>
+    </div>
+    <figure class="media-figure">
+      <img
+        src={avant.src800}
+        srcset={`${avant.src800} 800w, ${avant.src} 1600w`}
+        sizes="(min-width: 780px) 360px, 100vw"
+        alt={avant.alt}
+        width="1600" height="900" loading="lazy"
+      />
+      <figcaption>Avant les travaux : deux toitures, deux teintes.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Notre réponse : refaire l'extension, harmoniser le reste</h2>
+  <div class="media-row">
+    <div>
+      <ul class="chantier-points">
+        <li>échafaudage en façade et remorque pour évacuer les déchets au fil du chantier ;</li>
+        <li>extension découverte jusqu'aux chevrons : dépose des tuiles et des anciens liteaux ;</li>
+        <li>pose d'un <strong>écran sous-toiture HPV</strong> et de liteaux neufs ;</li>
+        <li>couverture de l'extension refaite en <strong>tuiles neuves anthracite</strong> ;</li>
+        <li>toiture principale nettoyée, puis colorée en anthracite pour s'accorder à l'extension.</li>
+      </ul>
+    </div>
+    <figure class="media-figure">
+      <img
+        src={ouvert.src800}
+        srcset={`${ouvert.src800} 800w, ${ouvert.src} 1200w`}
+        sizes="(min-width: 780px) 360px, 100vw"
+        alt={ouvert.alt}
+        width="1200" height="1600" loading="lazy"
+      />
+      <figcaption>L'extension découverte, l'écran sous-toiture en place.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Le résultat : une seule toiture, vue du ciel</h2>
+  <p>
+    La maison n'affiche plus qu'une teinte, du faîtage de la maison à celui
+    de l'extension. L'extension est étanche pour de longues années, et la
+    toiture principale, nettoyée et protégée, gagne du temps avant d'avoir
+    besoin d'une <a href="/refection-de-toiture-78/">réfection complète</a>.
+  </p>
+  <p>
+    Refaire à neuf ce qui doit l'être et
+    <a href="/demoussage-de-toiture-78/">nettoyer et protéger</a> ce qui peut
+    l'être : c'est souvent la solution la plus juste pour votre budget.
+    Francky et Warren interviennent aux Ulis depuis leur bureau de
+    <a href="/couvreur-magny-les-hameaux/">Magny-les-Hameaux</a>.
+  </p>
+</RealisationPage>

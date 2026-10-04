@@ -1,0 +1,110 @@
+---
+import RealisationPage from '../../../components/RealisationPage.astro';
+
+const ph = (nom: string, alt: string, w: number, h: number, caption?: string) => ({
+  src: `/images/${nom}.webp`, src800: `/images/${nom}-800.webp`, alt, w, h, caption,
+});
+
+const hero  = ph("pose-velux-voisins-le-bretonneux-78-06", "Pan de toiture refait avec sa fenêtre de toit neuve à Voisins-le-Bretonneux", 1200, 1600);
+const avant = ph("pose-velux-voisins-le-bretonneux-78-01", "Ouverture créée dans une toiture enneigée pour une fenêtre de toit", 1200, 1600);
+const cadre = ph("pose-velux-voisins-le-bretonneux-78-04", "Fenêtre de toit posée sur l'écran sous-toiture HPV et les liteaux neufs", 1200, 1600);
+
+const galerie = [
+  ph("pose-velux-voisins-le-bretonneux-78-03", "Pan découvert, écran sous-toiture HPV et liteaux neufs posés", 1200, 1600, "Le pan sous écran HPV, liteaux neufs."),
+  ph("pose-velux-voisins-le-bretonneux-78-05", "Tuiles reposées rang par rang sur les liteaux neufs", 1200, 1600, "Les tuiles reposées rang par rang."),
+  ph("pose-velux-voisins-le-bretonneux-78-07", "Tuiles reposées au plus près du cadre de la fenêtre de toit", 1200, 1600, "Les tuiles au plus près du cadre."),
+  ph("pose-velux-voisins-le-bretonneux-78-06", "Pan terminé avec sa fenêtre de toit", 1200, 1600, "Le pan terminé."),
+];
+---
+
+<RealisationPage
+  title="Fenêtre de toit posée à Voisins-le-Bretonneux — Adnot Couverture"
+  description="Plus de lumière sous les combles à Voisins-le-Bretonneux : pan découvert, écran sous-toiture HPV, liteaux neufs, fenêtre de toit posée et tuiles reposées. Janvier 2024."
+  canonical="/realisations/fenetre-de-toit-voisins-le-bretonneux/"
+  h1="Une fenêtre de toit et un pan refait à Voisins-le-Bretonneux"
+  lede="Faire entrer la lumière sous les combles, sans risquer une fuite autour de la fenêtre : c'était l'enjeu de ce chantier à Voisins-le-Bretonneux. En janvier 2024, entre deux chutes de neige, nous avons repris tout le pan concerné avant de poser la fenêtre de toit."
+  breadcrumb="Fenêtre de toit à Voisins"
+  datePublished="2026-10-04"
+  lieu={{ nom: "Voisins-le-Bretonneux", cp: "78960" }}
+  chips={["Fenêtre de toit", "Écran sous-toiture HPV", "Liteaux neufs", "Janvier 2024"]}
+  bureau="montigny"
+  hero={hero}
+  galerie={galerie}
+  galerieTitle="La pose de la fenêtre de toit en images"
+  sidebarTitle="Devis gratuit à Voisins"
+  liens={[
+    { href: "/velux-fenetre-de-toit-78/", label: "Velux et fenêtres de toit" },
+    { href: "/couvreur-voisins-le-bretonneux/", label: "Couvreur à Voisins-le-Bretonneux" },
+    { href: "/refection-de-toiture-78/", label: "Réfection de toiture" },
+  ]}
+  ctaTitle="Faites appel à votre couvreur à Voisins-le-Bretonneux"
+  ctaDesc="Vous voulez éclairer vos combles ou remplacer une vieille fenêtre de toit ? Francky et Warren étudient avec vous la pose et son raccord. <strong>Le devis est gratuit et sans engagement.</strong>"
+  ctaImg={galerie[2]}
+>
+  <h2>Le besoin : de la lumière, sans risque de fuite</h2>
+  <div class="media-row">
+    <div>
+      <p>
+        Une fenêtre de toit change une pièce sous les combles : plus de
+        lumière, plus d'air. Mais c'est aussi une ouverture dans la
+        couverture, et une fenêtre mal raccordée est l'une des premières
+        causes d'infiltration.
+      </p>
+      <p>
+        Sur cette toiture, les tuiles avaient vieilli. Plutôt que d'ouvrir
+        une couverture fatiguée et de raccorder la fenêtre à des tuiles
+        anciennes, nous avons repris tout le pan.
+      </p>
+    </div>
+    <figure class="media-figure">
+      <img
+        src={avant.src800}
+        srcset={`${avant.src800} 800w, ${avant.src} 1200w`}
+        sizes="(min-width: 780px) 360px, 100vw"
+        alt={avant.alt}
+        width="1200" height="1600" loading="lazy"
+      />
+      <figcaption>L'ouverture créée, en plein hiver.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Les travaux : le pan d'abord, la fenêtre ensuite</h2>
+  <div class="media-row">
+    <div>
+      <ul class="chantier-points">
+        <li>dépose des tuiles et des anciens liteaux sur tout le pan ;</li>
+        <li>ouverture encadrée dans la charpente, aux dimensions de la fenêtre ;</li>
+        <li>pose d'un <strong>écran sous-toiture HPV</strong> et de liteaux neufs ;</li>
+        <li>pose de la <strong>fenêtre de toit</strong> et de son raccord d'étanchéité ;</li>
+        <li>tuiles reposées rang par rang, au plus près du cadre.</li>
+      </ul>
+    </div>
+    <figure class="media-figure">
+      <img
+        src={cadre.src800}
+        srcset={`${cadre.src800} 800w, ${cadre.src} 1200w`}
+        sizes="(min-width: 780px) 360px, 100vw"
+        alt={cadre.alt}
+        width="1200" height="1600" loading="lazy"
+      />
+      <figcaption>La fenêtre posée sur l'écran et les liteaux neufs.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Le résultat : une pièce plus claire, un pan étanche</h2>
+  <p>
+    La pièce sous les combles profite de la lumière du jour, et la fenêtre
+    est raccordée à un pan entièrement repris, protégé par un écran
+    sous-toiture neuf. Aucun point faible autour du cadre.
+  </p>
+  <p>
+    La <a href="/velux-fenetre-de-toit-78/">pose d'une fenêtre de toit</a>
+    est souvent l'occasion de faire le point sur l'état du pan : quand la
+    couverture a vieilli, une
+    <a href="/refection-de-toiture-78/">réfection partielle</a> évite de
+    raccorder du neuf à de l'usé. Francky et Warren,
+    <a href="/couvreur-voisins-le-bretonneux/">couvreurs à
+    Voisins-le-Bretonneux</a>, interviennent depuis leur bureau de
+    Montigny-le-Bretonneux.
+  </p>
+</RealisationPage>
