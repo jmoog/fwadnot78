@@ -1,0 +1,92 @@
+---
+import RealisationPage from '../../../components/RealisationPage.astro';
+
+const ph = (nom: string, alt: string, w: number, h: number, caption?: string) => ({
+  src: `/images/${nom}.webp`, src800: `/images/${nom}-800.webp`, alt, w, h, caption,
+});
+
+const avant = ph("remplacement-toiture-chateaufort-78-01-avant", "Ancienne toiture en tuiles de terre cuite couverte de lichens à Châteaufort", 1200, 1600, "Avant : des tuiles poreuses, gagnées par les lichens.");
+const depose = ph("remplacement-toiture-chateaufort-78-02-depose", "Dépose des anciennes tuiles et des liteaux sur une toiture de Châteaufort", 1200, 1600, "La dépose de l'ancienne couverture, pan par pan.");
+const apres = ph("remplacement-toiture-chateaufort-78-03-apres", "Tuiles à emboîtement neuves en terre cuite rouge sur une toiture de Châteaufort", 1200, 1600, "Les tuiles neuves en terre cuite rouge, posées sur l'écran sous-toiture.");
+const facade = ph("remplacement-toiture-chateaufort-78-04", "Maison de Châteaufort sous échafaudage pendant le remplacement de sa toiture", 1200, 1600, "L'échafaudage en façade, protégé par un filet.");
+
+const galerie = [avant, depose, apres, facade];
+---
+
+<RealisationPage
+  title="Remplacement de toiture à Châteaufort (78) — Adnot Couverture"
+  description="À Châteaufort, une toiture ancienne en terre cuite déposée et remplacée : écran sous-toiture, liteaux et tuiles à emboîtement neuves. Novembre 2026."
+  canonical="/realisations/remplacement-toiture-chateaufort/"
+  h1="Une toiture ancienne remplacée à neuf à Châteaufort"
+  lede="Tuiles poreuses, lichens, faîtage fatigué : sur cette maison de Châteaufort, la couverture en terre cuite avait fait son temps. Plutôt que de multiplier les réparations, les propriétaires ont choisi de la remplacer. Un chantier réalisé début novembre 2026."
+  breadcrumb="Remplacement de toiture à Châteaufort"
+  datePublished="2026-11-17"
+  lieu={{ nom: "Châteaufort", cp: "78117" }}
+  chips={["Remplacement complet de toiture", "Écran sous-toiture", "Tuiles terre cuite à emboîtement", "Début novembre 2026"]}
+  bureau="magny"
+  hero={apres}
+  galerie={galerie}
+  galerieTitle="Le chantier de Châteaufort en images"
+  sidebarTitle="Devis gratuit à Châteaufort"
+  liens={[
+    { href: "/couvreur-chateaufort/", label: "Couvreur à Châteaufort" },
+    { href: "/refection-de-toiture-78/", label: "Réfection de toiture" },
+    { href: "/velux-fenetre-de-toit-78/", label: "Fenêtres de toit" },
+  ]}
+  ctaTitle="Faites appel à votre couvreur à Châteaufort"
+  ctaDesc="Des tuiles qui s'effritent, une mousse qui revient chaque hiver ? Francky et Warren vous disent si votre toiture peut encore se réparer ou s'il vaut mieux la remplacer. <strong>Le devis est gratuit et sans engagement.</strong>"
+  ctaImg={facade}
+>
+  <h2>L'état de la toiture avant les travaux</h2>
+  <div class="media-row">
+    <div>
+      <p>
+        Les tuiles d'origine, en terre cuite, ne protégeaient plus la maison.
+        Devenues poreuses, elles retenaient l'humidité et se couvraient de
+        lichens et de mousse. Les tuiles faîtières, scellées au mortier,
+        se dégradaient elles aussi.
+      </p>
+      <p>
+        À ce stade, un démoussage n'aurait fait que gagner un peu de temps.
+        Il fallait reprendre la toiture entière, du support jusqu'aux tuiles.
+      </p>
+    </div>
+    <figure class="media-figure">
+      <img
+        src={avant.src800}
+        srcset={`${avant.src800} 800w, ${avant.src} 1200w`}
+        sizes="(min-width: 780px) 360px, 100vw"
+        alt={avant.alt}
+        width="1200" height="1600" loading="lazy"
+      />
+      <figcaption>Avant les travaux : une couverture en fin de vie.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Notre réponse : une couverture entièrement refaite</h2>
+  <ul class="chantier-points">
+    <li>échafaudage en façade, protégé par un filet du côté de la rue ;</li>
+    <li>dépose des anciennes tuiles et des liteaux, pan par pan, pour garder la maison à l'abri ;</li>
+    <li>pose d'un <strong>écran sous-toiture</strong> sur la charpente, puis de liteaux neufs ;</li>
+    <li>couverture refaite en <strong>tuiles à emboîtement en terre cuite rouge</strong> ;</li>
+    <li>fenêtres de toit raccordées à la nouvelle couverture.</li>
+  </ul>
+
+  <h2>Le résultat : une toiture saine pour de longues années</h2>
+  <p>
+    La maison retrouve une toiture étanche, posée sur un écran sous-toiture
+    qui protège la charpente des infiltrations. La terre cuite rouge garde
+    l'esprit des toits du village, et le raccord soigné des
+    <a href="/velux-fenetre-de-toit-78/">fenêtres de toit</a> supprime l'un
+    des points faibles des couvertures anciennes.
+  </p>
+  <p>
+    Quand les réparations ne suffisent plus, une
+    <a href="/refection-de-toiture-78/">réfection complète de la toiture</a>
+    redonne à la maison un toit sain. C'est le travail de votre
+    <a href="/couvreur-chateaufort/">couvreur à Châteaufort</a> : Francky et
+    Warren interviennent dans tout le village et la vallée de Chevreuse
+    depuis leur bureau de
+    <a href="/couvreur-magny-les-hameaux/">Magny-les-Hameaux</a>.
+  </p>
+</RealisationPage>

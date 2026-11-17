@@ -27,13 +27,27 @@ export interface Props {
   servicesTitle: string;           // H2 de la section prestations (unique par page)
   cards       : { signal: string; desc: string; anchor: string; alt: string }[]; // 6 cards, textes uniques
   ctaImg     ?: { src: string; alt: string }; // photo affichée à droite du CTA (optionnelle)
+  ctaTitle   ?: string;            // H2 du CTA (sinon formule d'appel à l'action choisie selon la ville)
+  mairie     ?: { adresse: string; url: string }; // encadré mairie en fin de contenu (optionnel)
 }
 
 const {
   title, description, canonical, ville, cp, dept,
   h1, heroDesc, heroImg, bureau, avisNoms, avisTitle,
-  servicesTitle, cards, ctaImg,
+  servicesTitle, cards, ctaImg, ctaTitle, mairie,
 } = Astro.props;
+
+// Contractions devant les communes en « Le / Les » : aux Molières, des Molières
+const aVille  = ville.startsWith('Les ') ? `aux ${ville.slice(4)}` : ville.startsWith('Le ') ? `au ${ville.slice(3)}` : `à ${ville}`;
+const deVille = ville.startsWith('Les ') ? `des ${ville.slice(4)}` : ville.startsWith('Le ') ? `du ${ville.slice(3)}` : `de ${ville}`;
+
+// H2 du CTA : toujours un appel à l'action, formule variée d'une ville à l'autre
+const CTA_TITRES = [
+  `Contactez votre couvreur ${aVille}`,
+  `Faites appel à votre couvreur ${aVille}`,
+  `Faites intervenir un couvreur ${aVille}`,
+];
+const ctaH2 = ctaTitle ?? CTA_TITRES[[...ville].reduce((n, c) => n + c.charCodeAt(0), 0) % CTA_TITRES.length];
 
 // Photo du CTA (texte à gauche, image à droite) — défaut générique si non fournie
 const ctaImage = ctaImg ?? {
@@ -60,10 +74,12 @@ const BUREAUX = {
   magny: {
     nom: 'Magny-les-Hameaux', slug: '/couvreur-magny-les-hameaux/',
     tel: TEL_MAGNY, telHref: TEL_MAGNY_HREF, adresse: ADRESSE_MAGNY, maps: MAPS_MAGNY,
+    telIcone: '/icones/telephone.svg', // fixe (01)
   },
   montigny: {
     nom: 'Montigny-le-Bretonneux', slug: '/couvreur-montigny-le-bretonneux/',
     tel: TEL, telHref: TEL_HREF, adresse: ADRESSE_MONTIGNY, maps: MAPS_MONTIGNY,
+    telIcone: '/icones/mobile.svg', // mobile (07)
   },
 };
 const b = BUREAUX[bureau];
@@ -180,18 +196,28 @@ const schema = {
 
         <article class="content-body">
           <slot />
+          {mairie && (
+            <div class="mairie-box">
+              <h3>Mairie {deVille}</h3>
+              <p>
+                <img src="/icones/pin-map.svg" alt="" width="14" height="14" class="icone" />
+                {mairie.adresse}
+              </p>
+              <p><a href={mairie.url} target="_blank" rel="noopener">Site officiel de la mairie ↗</a></p>
+            </div>
+          )}
         </article>
 
         <aside>
           <div class="sidebar__card">
-            <h3>Devis gratuit à {ville}</h3>
-            <p>Devis et déplacement offerts — sans engagement</p>
+            <h3>Devis gratuit {aVille}</h3>
+            <p>Le devis est gratuit et sans engagement.</p>
             <hr class="sidebar__sep" />
             <div class="sidebar__tels">
               <div>
                 <small>Téléphone</small>
                 <a href={b.telHref}>
-                  <img src="/icones/telephone.svg" alt="" width="14" height="14" class="icone" />
+                  <img src={b.telIcone} alt="" width="14" height="14" class="icone" />
                   {b.tel}
                 </a>
               </div>
@@ -228,12 +254,12 @@ const schema = {
     <div class="container">
       <div class="cta-split__grid">
         <div class="cta-split__text">
-          <h2 style="color:#fff;margin-bottom:1rem;">Besoin d'un couvreur à {ville} ?</h2>
-          <p style="color:rgba(255,255,255,.88);line-height:1.65;text-align:left;margin-bottom:1.6rem;">Décrivez vos travaux par téléphone ou via le formulaire : un couvreur vient examiner la toiture et remet un devis poste par poste — offert, comme le déplacement.</p>
+          <h2 style="color:#fff;margin-bottom:1rem;">{ctaH2}</h2>
+          <p style="color:rgba(255,255,255,.88);line-height:1.65;text-align:left;margin-bottom:1.6rem;">Décrivez vos travaux par téléphone ou via le formulaire : Francky et Warren vous répondent et chiffrent les travaux poste par poste. <strong>Le devis est gratuit et sans engagement.</strong></p>
           <div class="hero__btns" style="margin-bottom:1.3rem;">
             <a href="/devis-gratuit/" class="btn btn--red">Demander un devis gratuit</a>
             <a href={b.telHref} class="btn btn--outline">
-              <img src="/icones/telephone.svg" alt="" width="16" height="16" class="icone icone--white" />
+              <img src={b.telIcone} alt="" width="16" height="16" class="icone icone--white" />
               {b.tel}
             </a>
           </div>
@@ -250,3 +276,17 @@ const schema = {
   </section>
 
 </Layout>
+
+<style>
+  /* Encadré mairie en fin de contenu — fond blanc, sans bordure colorée */
+  .mairie-box {
+    background: #fff;
+    border-radius: var(--r);
+    box-shadow: var(--shadow);
+    padding: 1.2rem 1.4rem;
+    margin-top: 1.6rem;
+  }
+  .mairie-box h3 { margin: 0 0 .6rem; color: var(--blue); font-size: 1.05rem; }
+  .mairie-box p { display: flex; align-items: center; gap: .5rem; margin: .3rem 0; text-align: left; }
+  .mairie-box a { font-weight: 600; }
+</style>
